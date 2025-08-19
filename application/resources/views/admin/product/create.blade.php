@@ -238,7 +238,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="meta_description" class="form-label">@lang('Meta Description')</label>
-                                    <textarea class="form-control trumEdit" name="meta_description" id="meta_description" rows="3"
+                                    <textarea class="form-control" name="meta_description" id="meta_description" rows="10"
                                         placeholder="@lang('Meta Description')">{{ old('shipping_returns') }}</textarea>
                                 </div>
                             </div>

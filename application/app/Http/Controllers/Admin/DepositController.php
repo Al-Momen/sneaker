@@ -91,24 +91,43 @@ class DepositController extends Controller
             'id' => 'required|integer',
             'message' => 'required|string|max:255'
         ]);
-        $deposit = Deposit::where('id', $request->id)->where('status', Status::PAYMENT_PENDING)->firstOrFail();
+        $deposit = Deposit::with('order')->where('id', $request->id)->where('status', Status::PAYMENT_PENDING)->firstOrFail();
 
         $deposit->admin_feedback = $request->message;
         $deposit->status = Status::PAYMENT_REJECT;
         $deposit->save();
 
-        notify($deposit->user, 'DEPOSIT_REJECT', [
+
+        if ($deposit->order_id && $deposit->order) {
+            $deposit->order->status = Status::ORDER_PAYMENT_REJECT; // Order payment reject
+            $deposit->order->save();
+        }
+
+        $type = $deposit->order_id ? 'Payment' : 'Deposit';
+
+        $notifyData = [
             'method_name' => $deposit->gatewayCurrency()->name,
             'method_currency' => $deposit->method_currency,
             'method_amount' => showAmount($deposit->final_amo),
             'amount' => showAmount($deposit->amount),
             'charge' => showAmount($deposit->charge),
             'rate' => showAmount($deposit->rate),
-            'trx' => $deposit->trx,
             'rejection_message' => $request->message
-        ]);
+        ];
 
-        $notify[] = ['success', 'Deposit request rejected successfully'];
+
+        if ($deposit->order_id && $deposit->order) {
+            $notifyData['order_number'] = $deposit->order->order_number;
+            notify($deposit->user, 'ORDER_REJECT', $notifyData);
+        } else {
+            $notifyData['trx'] = $deposit->trx;
+            notify($deposit->user, 'DEPOSIT_REJECT', $notifyData);
+        }
+
+
+
+
+        $notify[] = ['success', "{$type} request rejected successfully"];
         return  to_route('admin.deposit.log')->withNotify($notify);
     }
 }

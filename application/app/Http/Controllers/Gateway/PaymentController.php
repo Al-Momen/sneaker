@@ -179,7 +179,6 @@ class PaymentController extends Controller
             $order->status = Status::ORDER_SUCCESS; //its Success
             $order->save();
 
-
             $adminNotification = new AdminNotification();
             $adminNotification->user_id = $order->user_id;
             $adminNotification->title = 'Order request from ' . $order->firstname . $order->lastname;
@@ -188,7 +187,7 @@ class PaymentController extends Controller
 
             notify($user, 'ORDER_PLACE', [
                 'order_number' => $order->order_number,
-                'amount' => showAmount($order->service_price),
+                'amount' => showAmount($order->total_price),
                 'post_balance' => showAmount($user->balance)
             ]);
 
@@ -220,7 +219,12 @@ class PaymentController extends Controller
 
         notify($user, 'ORDER_REQUEST', [
             'order_number' => $order->order_number,
-            'amount' => showAmount($order->total_price)
+            'method_name'     => $data->gatewayCurrency()->name,
+            'method_currency' => $data->method_currency,
+            'method_amount'   => showAmount($data->final_amo),
+            'amount'          => showAmount($data->amount),
+            'charge'          => showAmount($data->charge),
+            'rate'            => showAmount($data->rate)
         ]);
 
         $adminNotification = new AdminNotification();
@@ -321,15 +325,22 @@ class PaymentController extends Controller
         $adminNotification->click_url = urlPath('admin.deposit.details', $data->id);
         $adminNotification->save();
 
-        notify($data->user, "DEPOSIT_REQUEST", [
+        $notifyData = [
             'method_name'     => $data->gatewayCurrency()->name,
             'method_currency' => $data->method_currency,
             'method_amount'   => showAmount($data->final_amo),
             'amount'          => showAmount($data->amount),
             'charge'          => showAmount($data->charge),
             'rate'            => showAmount($data->rate),
-            'trx'             => $data->trx,
-        ]);
+        ];
+
+        if ($data->order_id && $data->order) {
+            $notifyData['order_number'] = $data->order->order_number;
+            notify($data->user, "ORDER_PENDING", $notifyData);
+        } else {
+            $notifyData['trx'] = $data->trx;
+            notify($data->user, "DEPOSIT_REQUEST", $notifyData);
+        }
 
         $type = $data->order_id ? 'Payment' : 'Deposit';
         $notify[] = ['success', "Your {$type} request has been taken"];
@@ -346,9 +357,6 @@ class PaymentController extends Controller
                 $deposit->order = $deposit->order;
                 $deposit->order->status = Status::ORDER_SUCCESS; // Order Approved
                 $deposit->order->save();
-
-                // Author/User balance distribution
-                // self::distributeAuthorUserBalance($deposit->order_id);
             } else {
                 $user->balance += $deposit->amount;
                 $user->save();
@@ -374,16 +382,23 @@ class PaymentController extends Controller
                 $adminNotification->save();
             }
 
-            notify($user, $isManual ? 'DEPOSIT_APPROVE' : 'DEPOSIT_COMPLETE', [
+            // ✅ User notification
+            $notifyData = [
                 'method_name' => $deposit->gatewayCurrency()->name,
                 'method_currency' => $deposit->method_currency,
                 'method_amount' => showAmount($deposit->final_amo),
-                'amount' => showAmount($deposit->amount),
-                'charge' => showAmount($deposit->charge),
-                'rate' => showAmount($deposit->rate),
-                'trx' => $deposit->trx,
-                'post_balance' => showAmount($user->balance)
-            ]);
+                'charge'          => showAmount($deposit->charge),
+                'rate'            => showAmount($deposit->rate),
+                'post_balance'    => showAmount($user->balance),
+            ];
+
+            if ($deposit->order_id && $deposit->order) {
+                $notifyData['order_number'] = $deposit->order->order_number;
+                notify($user, 'ORDER_APPROVE', $notifyData);
+            } else {
+                $notifyData['trx'] = $deposit->trx;
+                notify($user, $isManual ? 'DEPOSIT_APPROVE' : 'DEPOSIT_COMPLETE', $notifyData);
+            }
         }
     }
 
@@ -399,20 +414,5 @@ class PaymentController extends Controller
         auth()->login($user);
         session()->put('Track', $data->trx);
         return to_route('user.deposit.confirm');
-    }
-
-    public static function distributeAuthorUserBalance($orderId)
-    {
-        $order = Order::with('products')->find($orderId);
-        foreach ($order->products as $product) {
-            if ($product->author_type == 2) {
-                // Product author user
-                $pivotData = $product->pivot;
-                $amount = $pivotData->price * $pivotData->quantity;
-                $author = User::where('id', $product->author_id)->first();
-                $author->increment('balance', $amount);
-            }
-        }
-        return 0;
     }
 }

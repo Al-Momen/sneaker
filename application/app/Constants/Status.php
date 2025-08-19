@@ -34,6 +34,7 @@ class Status{
     const ORDER_PROCESSING = 4;
     const ORDER_DELIVERED = 5;
     const ORDER_COMPLETED = 6;
+    const ORDER_PAYMENT_REJECT = 7;
 
     CONST TICKET_OPEN = 0;
     CONST TICKET_ANSWER = 1;
