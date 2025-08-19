@@ -15,6 +15,7 @@
                                             <th>@lang('Bidding Price')</th>
                                             <th>@lang('Email')</th>
                                             <th>@lang('Phone')</th>
+                                            <th>@lang('Bidder')</th>
                                             <th>@lang('Address')</th>
                                         </tr>
                                     </thead>

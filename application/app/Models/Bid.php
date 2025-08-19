@@ -15,4 +15,9 @@ class Bid extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function bidWinner()
+    {
+        return $this->hasOne(BidWinner::class);
+    }
 }

@@ -18,10 +18,28 @@
             {{ $item?->user?->mobile ?? '' }}
         </td>
 
+        <td data-label="@lang('Bidder')">
+            @if ($item->bidWinner)
+                <span class="badge badge--success">
+                    @lang('Winner')
+                </span>
+            @else
+                <span class="badge badge--warning">
+                    @lang('Bidder')
+                </span>
+            @endif
+        </td>
+
         <td data-label="@lang('Address')">
             @php
-                $address =  $item->user?->address;
-                $fullAddress = collect([$address?->address, $address?->state, $address?->zip, $address?->city,$address?->country])
+                $address = $item->user?->address;
+                $fullAddress = collect([
+                    $address?->address,
+                    $address?->state,
+                    $address?->zip,
+                    $address?->city,
+                    $address?->country,
+                ])
                     ->filter()
                     ->implode(', ');
             @endphp

@@ -52,7 +52,7 @@ class BidController extends Controller
     public function list($id)
     {
         $pageTitle = 'Auction Bid list';
-        $bids = Bid::with('product', 'user')->where('id', $id)
+        $bids = Bid::with('product', 'user','bidWinner')->where('product_id', $id)
             ->whereHas('product', function ($q) {
                 $q->where('author_id', auth()->id())
                     ->where('author_type', 2);
