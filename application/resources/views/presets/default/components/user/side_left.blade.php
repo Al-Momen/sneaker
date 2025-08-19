@@ -22,16 +22,16 @@
         </li>
 
         <li
-            class="sidebar-menu-list__item has-dropdown {{ Route::is('user.product.index') || Route::is('user.auction.product.index') || Route::is('user.bid.list') ? 'active' : '' }}">
+            class="sidebar-menu-list__item has-dropdown {{ Route::is('user.product.index') || Route::is('user.auction.product.index') || Route::is('user.bid.list') || Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
             <a href="javascript:void(0)"
-                class="sidebar-menu-list__link {{ Route::is('user.product.index') || Route::is('user.auction.product.index') || Route::is('user.bid.list') ? 'active' : '' }}">
+                class="sidebar-menu-list__link {{ Route::is('user.product.index') || Route::is('user.auction.product.index') || Route::is('user.bid.list') || Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
                 <span class="icon">
-                    <i class="fa-brands fa-product-hunt"></i>
+                    <i class="fa-solid fa-shop"></i>
                 </span>
-                <span class="text">@lang('Products')</span>
+                <span class="text">@lang('Vendor Options')</span>
             </a>
             <div
-                class="sidebar-submenu {{ Route::is('user.product.index') || Route::is('user.auction.product.index') || Route::is('user.bid.list') ? 'd-block' : '' }} ">
+                class="sidebar-submenu {{ Route::is('user.product.index') || Route::is('user.auction.product.index') || Route::is('user.bid.list') || Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'd-block' : '' }} ">
                 <ul class="sidebar-submenu-list">
                     <li class="sidebar-submenu-list__item {{ Route::is('user.product.index') ? 'active' : '' }}">
                         <a href="{{ route('user.product.index') }}"
@@ -42,20 +42,24 @@
                         <a href="{{ route('user.auction.product.index') }}"
                             class="sidebar-submenu-list__link">@lang('Auction')</a>
                     </li>
+                    <li
+                        class="sidebar-submenu-list__item {{ Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
+                        <a href="{{ route('user.orders.get') }}"
+                            class="sidebar-submenu-list__link">@lang('Orders List')</a>
+                    </li>
                 </ul>
             </div>
         </li>
 
         <li class="sidebar-menu-list__item">
-            <a href="{{ route('user.get.wishlist') }}"
-                class="sidebar-menu-list__link {{ Route::is('user.get.wishlist') ? 'active' : '' }}">
+            <a href="{{ route('user.orders.index') }}"
+                class="sidebar-menu-list__link {{ Route::is('user.orders.index') || Route::is('user.orders.details') ? 'active' : '' }}">
                 <span class="icon">
-                    <i class="fa-solid fa-bookmark"></i>
+                    <i class="fa-solid fa-clipboard-list"></i>
                 </span>
-                <span class="text">@lang('Bookmarks')</span>
+                <span class="text">@lang('My Orders List')</span>
             </a>
         </li>
-        
 
         <li class="sidebar-menu-list__item">
             <a href="{{ route('user.bid.winning.history') }}"
@@ -67,32 +71,6 @@
             </a>
         </li>
 
-
-        <li
-            class="sidebar-menu-list__item has-dropdown {{ Route::is('user.orders.index') || Route::is('user.orders.details') || Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
-            <a href="javascript:void(0)"
-                class="sidebar-menu-list__link {{ Route::is('user.orders.index') || Route::is('user.orders.details') || Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
-                <span class="icon">
-                    <i class="fa-solid fa-cart-arrow-down"></i>
-                </span>
-                <span class="text">@lang('Vendor Orders')</span>
-            </a>
-            <div
-                class="sidebar-submenu {{ Route::is('user.orders.index') || Route::is('user.orders.details') || Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'd-block' : '' }} ">
-                <ul class="sidebar-submenu-list">
-                    <li
-                        class="sidebar-submenu-list__item {{ Route::is('user.orders.index') || Route::is('user.orders.details') ? 'active' : '' }}">
-                        <a href="{{ route('user.orders.index') }}"
-                            class="sidebar-submenu-list__link">@lang('My Orders')</a>
-                    </li>
-                    <li
-                        class="sidebar-submenu-list__item {{ Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
-                        <a href="{{ route('user.orders.get') }}"
-                            class="sidebar-submenu-list__link">@lang('Get Orders')</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
 
         <li
             class="sidebar-menu-list__item has-dropdown {{ Route::is('user.deposit.history') || Route::is('user.deposit') ? 'active' : '' }}">
@@ -164,6 +142,16 @@
                     </li>
                 </ul>
             </div>
+        </li>
+
+        <li class="sidebar-menu-list__item">
+            <a href="{{ route('user.get.wishlist') }}"
+                class="sidebar-menu-list__link {{ Route::is('user.get.wishlist') ? 'active' : '' }}">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark"></i>
+                </span>
+                <span class="text">@lang('Bookmarks')</span>
+            </a>
         </li>
 
         <li class="sidebar-menu-list__item">

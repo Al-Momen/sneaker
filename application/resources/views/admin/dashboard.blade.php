@@ -1,8 +1,6 @@
 @extends('admin.layouts.app')
 @section('panel')
-
     @adminHas('dashboard')
-
         @if (isset($general->system_info) && !empty(json_decode($general->system_info)->message))
             @if(json_decode($general->system_info)->message)
             <div class="row">

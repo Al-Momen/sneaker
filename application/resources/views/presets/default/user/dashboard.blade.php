@@ -2,7 +2,7 @@
 @section('content')
     <div class="row gy-4 pb-4">
         <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6">
-            <a class="d-block" href="#">
+            <a class="d-block" href="{{route('user.deposit')}}">
                 <div class="wizard-card d-flex flex-column">
                     <div class="content-wrap d-flex align-items-center justify-content-between gap--12">
                         <h6 class="title fw--600 fs--20 mb-0 text--black">
