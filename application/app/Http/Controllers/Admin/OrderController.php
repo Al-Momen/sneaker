@@ -14,7 +14,7 @@ class OrderController extends Controller
 {
     public function index($status = 'all')
     {
-     
+        
         $user = auth()->user();
         $query = Order::with(['product', 'deposit'])
             ->searchable(['order_number'])

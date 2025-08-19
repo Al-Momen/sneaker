@@ -15,30 +15,118 @@
                     </a>
                 </li>
 
-                @adminHas('website-menu-management')
+
+                @adminHas('user-management')
                     <li class="sidebar-menu-item sidebar-dropdown">
-                        <a href="javascript:void(0)" class="{{ menuActive(['admin.menu.*', 'admin.menuitem.*'], 3) }}">
-                            <i class="menu-icon fa-solid fa-bars"></i>
-                            <span class="menu-title">@lang('Website Menus')</span>
+                        <a href="javascript:void(0)" class="{{ menuActive('admin.users.*', 3) }}">
+                            <i class="menu-icon fa-regular fa-user"></i>
+                            <span class="menu-title">@lang('All Users')</span>
+                            @if (
+                                $bannedUsersCount > 0 ||
+                                    $emailUnverifiedUsersCount > 0 ||
+                                    $mobileUnverifiedUsersCount > 0 ||
+                                    $kycPendingUsersCount > 0 ||
+                                    $kycUnverifiedUsersCount > 0)
+                                <div class="blob white"></div>
+                            @endif
                         </a>
-                        <div class="sidebar-submenu {{ menuActive(['admin.menu.*', 'admin.menuitem.*'], 2) }} ">
+                        <div class="sidebar-submenu {{ menuActive('admin.users.*', 2) }} ">
                             <ul>
-                                <li class="sidebar-menu-item {{ menuActive('admin.menu.*') }}">
-                                    <a class="nav-link" href="{{ route('admin.menu.index') }}">
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.all']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.all') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Menus')</span>
+                                        <span class="menu-title"> @lang('All')</span>
                                     </a>
                                 </li>
-
-                                <li class="sidebar-menu-item {{ menuActive('admin.menuitem.*') }}">
-                                    <a class="nav-link" href="{{ route('admin.menuitem.index') }}">
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.active']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.active') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Menu Items')</span>
+                                        <span class="menu-title"> @lang('Active')</span>
                                     </a>
                                 </li>
-
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.banned']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.banned') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title">@lang('Banned')</span>
+                                        @if ($bannedUsersCount)
+                                            <span
+                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $bannedUsersCount }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.email.unverified']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.email.unverified') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title"> @lang('Email Unverified')</span>
+                                        @if ($emailUnverifiedUsersCount)
+                                            <span
+                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $emailUnverifiedUsersCount }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.mobile.unverified']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.mobile.unverified') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title"> @lang('Mobile Unverified')</span>
+                                        @if ($mobileUnverifiedUsersCount)
+                                            <span
+                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $mobileUnverifiedUsersCount }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.kyc.unverified']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.kyc.unverified') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title"> @lang('KYC Unverified')</span>
+                                        @if ($kycUnverifiedUsersCount)
+                                            <span
+                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $kycUnverifiedUsersCount }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.kyc.pending']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.kyc.pending') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title"> @lang('KYC Pending')</span>
+                                        @if ($kycPendingUsersCount)
+                                            <span
+                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $kycPendingUsersCount }}</span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.with.balance']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.with.balance') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title"> @lang('With Balance')</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item {{ menuActive(['admin.users.notification.all']) }}">
+                                    <a class="nav-link" href="{{ route('admin.users.notification.all') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title"> @lang('Notification to Users')</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
+                    </li>
+                @endadminHas
+
+
+                @adminHas('role')
+                    <li class="sidebar-menu-item {{ menuActive('admin.role.*') }}">
+                        <a href="{{ route('admin.role.index') }}" class="nav-link ">
+                            <i class="menu-icon fa-solid fa-file-shield"></i>
+                            <span class="menu-title">@lang('Role')</span>
+                        </a>
+                    </li>
+                @endadminHas
+
+                @adminHas('staff')
+                    <li class="sidebar-menu-item {{ menuActive('admin.staff.*') }}">
+                        <a href="{{ route('admin.staff.index') }}" class="nav-link ">
+                            <i class="menu-icon fa-solid fa-users"></i>
+                            <span class="menu-title">@lang('Staff')</span>
+                        </a>
                     </li>
                 @endadminHas
 
@@ -147,24 +235,35 @@
                     </li>
                 @endadminHas
 
-
-                @adminHas('role')
-                    <li class="sidebar-menu-item {{ menuActive('admin.role.*') }}">
-                        <a href="{{ route('admin.role.index') }}" class="nav-link ">
-                            <i class="menu-icon fa-solid fa-file-shield"></i>
-                            <span class="menu-title">@lang('Role')</span>
+                @adminHas('website-menu-management')
+                    <li class="sidebar-menu-item sidebar-dropdown">
+                        <a href="javascript:void(0)" class="{{ menuActive(['admin.menu.*', 'admin.menuitem.*'], 3) }}">
+                            <i class="menu-icon fa-solid fa-bars"></i>
+                            <span class="menu-title">@lang('Website Menus')</span>
                         </a>
+                        <div class="sidebar-submenu {{ menuActive(['admin.menu.*', 'admin.menuitem.*'], 2) }} ">
+                            <ul>
+                                <li class="sidebar-menu-item {{ menuActive('admin.menu.*') }}">
+                                    <a class="nav-link" href="{{ route('admin.menu.index') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title"> @lang('Menus')</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-menu-item {{ menuActive('admin.menuitem.*') }}">
+                                    <a class="nav-link" href="{{ route('admin.menuitem.index') }}">
+                                        <i class="menu-icon fa-solid fa-circle"></i>
+                                        <span class="menu-title"> @lang('Menu Items')</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
                     </li>
                 @endadminHas
 
-                @adminHas('staff')
-                    <li class="sidebar-menu-item {{ menuActive('admin.staff.*') }}">
-                        <a href="{{ route('admin.staff.index') }}" class="nav-link ">
-                            <i class="menu-icon fa-solid fa-users"></i>
-                            <span class="menu-title">@lang('Staff')</span>
-                        </a>
-                    </li>
-                @endadminHas
+
+
 
                 @adminHas('kyc')
                     <li class="sidebar-menu-item {{ menuActive('admin.kyc.setting') }}">
@@ -175,100 +274,6 @@
                     </li>
                 @endadminHas
 
-                @adminHas('user-management')
-                    <li class="sidebar-menu-item sidebar-dropdown">
-                        <a href="javascript:void(0)" class="{{ menuActive('admin.users.*', 3) }}">
-                            <i class="menu-icon fa-regular fa-user"></i>
-                            <span class="menu-title">@lang('All Users')</span>
-                            @if (
-                                $bannedUsersCount > 0 ||
-                                    $emailUnverifiedUsersCount > 0 ||
-                                    $mobileUnverifiedUsersCount > 0 ||
-                                    $kycPendingUsersCount > 0 ||
-                                    $kycUnverifiedUsersCount > 0)
-                                <div class="blob white"></div>
-                            @endif
-                        </a>
-                        <div class="sidebar-submenu {{ menuActive('admin.users.*', 2) }} ">
-                            <ul>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.all']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.all') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('All')</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.active']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.active') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Active')</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.banned']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.banned') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title">@lang('Banned')</span>
-                                        @if ($bannedUsersCount)
-                                            <span
-                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $bannedUsersCount }}</span>
-                                        @endif
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.email.unverified']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.email.unverified') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Email Unverified')</span>
-                                        @if ($emailUnverifiedUsersCount)
-                                            <span
-                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $emailUnverifiedUsersCount }}</span>
-                                        @endif
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.mobile.unverified']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.mobile.unverified') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Mobile Unverified')</span>
-                                        @if ($mobileUnverifiedUsersCount)
-                                            <span
-                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $mobileUnverifiedUsersCount }}</span>
-                                        @endif
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.kyc.unverified']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.kyc.unverified') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('KYC Unverified')</span>
-                                        @if ($kycUnverifiedUsersCount)
-                                            <span
-                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $kycUnverifiedUsersCount }}</span>
-                                        @endif
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.kyc.pending']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.kyc.pending') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('KYC Pending')</span>
-                                        @if ($kycPendingUsersCount)
-                                            <span
-                                                class="badge rounded-pill bg--primary text-white ms-2">{{ $kycPendingUsersCount }}</span>
-                                        @endif
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.with.balance']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.with.balance') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('With Balance')</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item {{ menuActive(['admin.users.notification.all']) }}">
-                                    <a class="nav-link" href="{{ route('admin.users.notification.all') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Notification to Users')</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                @endadminHas
 
                 @adminHas('subscriber-management')
                     <li class="sidebar-menu-item  {{ menuActive('admin.subscriber.*') }}">
