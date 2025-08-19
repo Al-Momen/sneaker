@@ -369,7 +369,7 @@ class PaymentController extends Controller
             $transaction->post_balance = $user->balance;
             $transaction->charge = $deposit->charge;
             $transaction->trx_type = '+';
-            $transaction->details = $type . 'Via' . $deposit->gatewayCurrency()->name;
+            $transaction->details = $type . ' Via ' . $deposit->gatewayCurrency()->name;
             $transaction->remark = strtolower($type);
             $transaction->trx = $deposit->trx;
             $transaction->save();

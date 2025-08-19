@@ -217,6 +217,7 @@ class SiteController extends Controller
                     "id"          => $product->id,
                     "author_id"   => $product->author_id,
                     "author_type" => $product->author_type,
+                    "author_type" => $product->author_type,
                     "name"        => $product->name,
                     "category"    => $product->category->name,
                     "quantity"    => $quantity,

@@ -9,9 +9,12 @@ use App\Models\Deposit;
 use App\Models\Product;
 use App\Models\Wishlist;
 use App\Constants\Status;
+use App\Models\BidWinner;
 use App\Lib\FormProcessor;
+use App\Models\Withdrawal;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\SupportTicket;
 use App\Lib\GoogleAuthenticator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -20,13 +23,24 @@ class UserController extends Controller
 {
     public function home()
     {
-        $pageTitle = 'Dashboard';
-        $user                      = auth()->user();
+        $pageTitle                     = 'Dashboard';
+        $user                          = auth()->user();
+        $productQuery                  = Product::where('author_id', $user->id)->where('author_type', 2);
+        $transactionQuery              = Transaction::where('user_id', $user->id);
+        $data['totalWithdrawalsMoney'] = Withdrawal::where('user_id', $user->id)->sum('final_amount');
+        $data['totalTickets']          = SupportTicket::where('user_id', $user->id)->count();
+        $data['total_products']        = (clone $productQuery)->where('type', 1)->count();
+        $data['total_auctions']        = (clone $productQuery)->where('type', 2)->count();
+        $data['total_winner_bids']     = BidWinner::where('user_id', $user->id)->count();
+        $data['bookmarks']             = Wishlist::where('user_id', $user->id)->count();
+        $data['totalDepositMoney']     = (clone $transactionQuery)->where('remark', 'balance_add')->sum('amount');
+        $latestTransaction             = (clone $transactionQuery)->take(5)->latest()->get();
+
 
         // order graph
         $monthlyData = Order::selectRaw('MONTH(created_at) as month, COUNT(*) as total_orders')
             ->where('user_id', $user->id)
-            ->where('status', 2)
+            ->whereIn('status', [1, 2])
             ->whereYear('created_at', date('Y'))
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->orderBy('month')
@@ -40,17 +54,44 @@ class UserController extends Controller
             $quantities[] = $monthlyData[$i] ?? 0;
         }
 
-        $monthlyBooking = [
+        $monthlyMyOrders = [
             'months'     => $months,
             'quantities' => $quantities
         ];
 
-        return view('UserTemplate::dashboard', compact('pageTitle', 'monthlyBooking'));
+
+        $monthlyOrderVendorData = Order::query()
+            ->whereHas('products', function ($q) use ($user) {
+                $q->where('author_id', $user->id)
+                    ->where('author_type', 2);
+            })
+            ->where('status', '!=', 0)
+            ->whereYear('created_at', date('Y'))
+            ->selectRaw('MONTH(created_at) as month, COUNT(*) as total_orders')
+            ->groupByRaw('MONTH(created_at)')
+            ->orderBy('month')
+            ->pluck('total_orders', 'month');
+
+           
+
+        $months     = [];
+        $quantities = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $months[]     = date('M', mktime(0, 0, 0, $i, 1));
+            $quantities[] = $monthlyOrderVendorData[$i] ?? 0;
+        }
+
+        $monthlyVendorOrders = [
+            'months'     => $months,
+            'quantities' => $quantities
+        ];
+
+        return view('UserTemplate::dashboard', compact('pageTitle', 'monthlyMyOrders', 'monthlyVendorOrders', 'user', 'data', 'latestTransaction'));
     }
 
     public function depositHistory($status = 'all')
     {
-
         $query = Deposit::where('user_id', auth()->id())
             ->with(['gateway'])
             ->searchable(['trx'])

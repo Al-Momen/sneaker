@@ -90,7 +90,6 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::controller('ProductController')->name('auction.product.')->prefix('auction/product')->group(function () {
                     Route::get('auction/{status?}', 'auctionProduct')->name('index');
                     Route::post('auction/status/{id}', 'statusUpdate')->name('status');
-                    
                 });
 
                 //kyc

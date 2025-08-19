@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CronController;
+use App\Http\Controllers\WinnerBidCronController;
 
 
 // Cron Job
-Route::get('select/winners', [CronController::class, 'winners'])->name('auction.product.winners');
+Route::get('select/winners', [WinnerBidCronController::class, 'winners'])->name('auction.product.winners');
 
 
 // User Support Ticket

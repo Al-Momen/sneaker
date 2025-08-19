@@ -3,11 +3,10 @@
         $metaTitle = $general->siteName(__($pageTitle));
         $metaDescription = $seo->description;
         $metaImage = getImage(getFilePath('seo') . '/' . $seo->image);
-        if (isset($product)) {
+        if (isset($product) && is_object($product)) {
             $metaTitle = $product->meta_title ?? '';
             $metaDescription = $product->meta_description ?? '';
-            $metaImage =  getImage(getFilePath('product') . '/' . $product->firstImage?->image ?? '');
-            
+            $metaImage =  getImage(getFilePath('product') . '/' . $product?->firstImage?->image ?? $product['image']);
         }
     @endphp
     <meta name="title" Content="{{ $metaTitle }}">
@@ -26,8 +25,8 @@
     <meta itemprop="image" content="{{ $metaImage }}">
     {{-- <!-- Facebook Meta Tags --> --}}
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ isset($product) ? $product->meta_title: $seo->social_title }}">
-    <meta property="og:description" content="{{ isset($product) ? $product->meta_description: $seo->social_description }}">
+    <meta property="og:title" content="{{ isset($product) && is_object($product) ? $product->meta_title: $seo->social_title }}">
+    <meta property="og:description" content="{{ isset($product) && is_object($product) ? $product->meta_description: $seo->social_description }}">
     <meta property="og:image" content="{{ $metaImage }}" />
     <meta property="og:image:type"
         content="image/{{ pathinfo(getImage(getFilePath('seo')) . '/' . $seo->image)['extension'] }}" />

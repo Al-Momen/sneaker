@@ -29,7 +29,7 @@
         <td data-label="@lang('Action')">
             <div class="button--group align-items-center">
                 <a href="{{route('user.orders.details',$item->id)}}"
-                    class="btn btn--base btn-md action--btn ">
+                    class="btn btn--base btn-md action--btn">
                     <i class="fa fa-eye"></i>
                 </a>
             </div>

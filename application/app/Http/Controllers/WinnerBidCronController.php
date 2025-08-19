@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Str;
 
-class CronController extends Controller
+class WinnerBidCronController extends Controller
 {
     public function winners()
     {

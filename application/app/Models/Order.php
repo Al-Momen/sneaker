@@ -51,8 +51,11 @@ class Order extends Model
             $html = '<span><span class="badge badge--info">' . trans('Processing') . '</span></span>';
         } elseif ($this->status == 5) {
             $html = '<span><span class="badge badge--violet">' . trans('Delivered') . '</span></span>';
-        } else {
+        }
+         elseif ($this->status == 6) {
             $html = '<span><span class="badge badge--success">' . trans('Completed') . '</span></span>';
+        } else {
+            $html = '<span><span class="badge badge--danger">' . trans('Payment Reject') . '</span></span>';
         }
         return $html;
     }
