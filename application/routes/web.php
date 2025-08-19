@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+// Cron Job
+Route::get('select/winners', [CronController::class, 'winners'])->name('auction.product.winners');
+Route::get('run-price-reduction', [CronController::class, 'reducePrice'])->name('reduce.price.product');
+
 // User Support Ticket
 Route::controller('TicketController')->prefix('ticket')->group(function () {
     Route::get('/', 'supportTicket')->name('ticket');
