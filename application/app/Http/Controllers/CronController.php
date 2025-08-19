@@ -65,7 +65,6 @@ class CronController extends Controller
             $winnerData->user_id = $winner->id;
             $winnerData->product_id = $product->id;
             $winnerData->bid_id = $highestBid->id;
-            $winnerData->status = 0;
             $winnerData->save();
 
             $product->status = 2; // ========================= auction expired ======================================

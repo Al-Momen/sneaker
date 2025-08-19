@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Constants\Status;
 use App\Models\Deposit;
-use App\Models\Gateway;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Gateway\PaymentController;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DepositController extends Controller
