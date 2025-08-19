@@ -83,7 +83,7 @@
     <script>
         (function($) {
             "use strict";
-            let baseUrl = `{{ route('admin.orders.index', ':status') }}`;
+            let baseUrl = `{{ route('admin.orders.vendor', ':status') }}`;
 
             $('#status-filter').on('change', function() {
                 let status = $(this).val();

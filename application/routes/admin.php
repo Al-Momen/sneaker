@@ -181,6 +181,7 @@ Route::middleware('admin')->group(function () {
     Route::controller('OrderController')->name('orders.')->prefix('orders')->group(function () {
         Route::get('order-detail/{id}', 'orderDetail')->name('details');
         Route::post('order-status-update/{id}', 'orderStatusUpdate')->name('status.update');
+        Route::get('vendor-orders/{status?}', 'vendorOrder')->name('vendor');
         Route::get('get-orders/{status?}', 'getOrder')->name('get');
         Route::get('get-order-details/{id}', 'getOrderDetails')->name('get.details');
         Route::post('vendor-status-change/{status}/{id}', 'vendorStatusChange')->name('vendor.status.change');

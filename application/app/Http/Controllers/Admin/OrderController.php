@@ -14,6 +14,7 @@ class OrderController extends Controller
 {
     public function index($status = 'all')
     {
+     
         $user = auth()->user();
         $query = Order::with(['product', 'deposit'])
             ->searchable(['order_number'])
@@ -41,8 +42,11 @@ class OrderController extends Controller
             case 'reject':
                 $query->where('status', Status::ORDER_REJECT);
                 break;
+            case 'payment_reject':
+                $query->where('status', Status::ORDER_PAYMENT_REJECT);
+                break;
             case 'all':
-                $query->whereIn('status', [Status::ORDER_SUCCESS, Status::ORDER_REJECT, Status::ORDER_PROCESSING, Status::ORDER_DELIVERED, Status::ORDER_COMPLETED, Status::ORDER_REJECT, Status::ORDER_INITIATE, Status::ORDER_PENDING]);
+                $query->whereIn('status', [Status::ORDER_SUCCESS, Status::ORDER_REJECT, Status::ORDER_PROCESSING, Status::ORDER_DELIVERED, Status::ORDER_COMPLETED, Status::ORDER_REJECT, Status::ORDER_INITIATE, Status::ORDER_PENDING, Status::ORDER_PAYMENT_REJECT]);
                 break;
             default:
                 break;
@@ -57,6 +61,62 @@ class OrderController extends Controller
         }
         $pageTitle = 'All Orders';
         return view('Admin::orders.index', compact('orders', 'pageTitle'));
+    }
+
+    public function vendorOrder($status = 'all')
+    {
+        $user = auth()->user();
+        $query = Order::whereHas('products', function ($q) {
+            $q->where('author_type', 2);
+        })
+            ->with(['products' => function ($q) {
+                $q->where('author_type', 2)
+                    ->with('userAuthor'); // nested relation
+            }])
+            ->searchable(['order_number'])
+            ->latest();
+
+        switch ($status) {
+            case 'initial':
+                $query->where('status', Status::ORDER_INITIATE);
+                break;
+            case 'pending':
+                $query->where('status', Status::ORDER_PENDING);
+                break;
+            case 'approved':
+                $query->where('status', Status::ORDER_SUCCESS);
+                break;
+            case 'processing':
+                $query->where('status', Status::ORDER_PROCESSING);
+                break;
+            case 'delivered':
+                $query->where('status', Status::ORDER_DELIVERED);
+                break;
+            case 'completed':
+                $query->where('status', Status::ORDER_COMPLETED);
+                break;
+            case 'reject':
+                $query->where('status', Status::ORDER_REJECT);
+                break;
+            case 'payment_reject':
+                $query->where('status', Status::ORDER_PAYMENT_REJECT);
+                break;
+            case 'all':
+                $query->whereIn('status', [Status::ORDER_SUCCESS, Status::ORDER_REJECT, Status::ORDER_PROCESSING, Status::ORDER_DELIVERED, Status::ORDER_COMPLETED, Status::ORDER_REJECT, Status::ORDER_INITIATE, Status::ORDER_PENDING, Status::ORDER_PAYMENT_REJECT]);
+                break;
+            default:
+                break;
+        }
+
+        $orders = $query->paginate(getPaginate());
+        if (request()->ajax()) {
+            return response()->json([
+                'html' => view('Admin::components.tables.order_data', compact('orders'))->render(),
+                'pagination' => $orders->hasPages() ? view('Admin::components.tables.pagination', ['items' => $orders])->render() : '',
+            ]);
+        }
+        $pageTitle = 'Vendor Orders';
+        return view('Admin::orders.vendor', compact('orders', 'pageTitle'));
     }
 
     public function orderDetail($id)
@@ -111,7 +171,7 @@ class OrderController extends Controller
         }
 
         $orders = $query->paginate(getPaginate());
-         if (request()->ajax()) {
+        if (request()->ajax()) {
             return response()->json([
                 'html' => view('Admin::components.tables.order_data', compact('orders'))->render(),
                 'pagination' => $orders->hasPages() ? view('Admin::components.tables.pagination', ['items' => $orders])->render() : '',
@@ -130,7 +190,7 @@ class OrderController extends Controller
             ->searchable(['product:title', 'order_number'])
             ->findOrFail($id);
 
-         return view('Admin::orders.get_order_details', compact('order', 'pageTitle'));
+        return view('Admin::orders.get_order_details', compact('order', 'pageTitle'));
     }
 
     public function vendorStatusChange($status, $id)
@@ -147,7 +207,7 @@ class OrderController extends Controller
         if ($status == 3) {
             $this->priceRefund($status, $order);
         }
-      
+
 
 
         $order->status = $status;
