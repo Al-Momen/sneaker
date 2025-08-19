@@ -73,11 +73,11 @@
                 @adminHas('product')
                     <li class="sidebar-menu-item sidebar-dropdown">
                         <a href="javascript:void(0)"
-                            class="{{ menuActive(['admin.product.*', 'admin.auction.product.*'], 3) }}">
+                            class="{{ menuActive(['admin.product.*', 'admin.auction.product.*','admin.bid.list'], 3) }}">
                             <i class="menu-icon fa-brands fa-product-hunt"></i>
                             <span class="menu-title">@lang('Products')</span>
                         </a>
-                        <div class="sidebar-submenu {{ menuActive(['admin.product.*', 'admin.auction.product.*'], 2) }} ">
+                        <div class="sidebar-submenu {{ menuActive(['admin.product.*', 'admin.auction.product.*','admin.bid.list'], 2) }} ">
                             <ul>
                                 <li class="sidebar-menu-item {{ menuActive('admin.product.*') }}">
                                     <a class="nav-link" href="{{ route('admin.product.index') }}">
@@ -86,7 +86,7 @@
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item {{ menuActive('admin.auction.product.*') }}">
+                                <li class="sidebar-menu-item {{ menuActive(['admin.auction.product.*','admin.bid.list']) }}">
                                     <a class="nav-link" href="{{ route('admin.auction.product.index') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('Auctions')</span>
@@ -132,6 +132,15 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                @endadminHas
+
+                  @adminHas('winningBid')
+                    <li class="sidebar-menu-item {{ menuActive('admin.bid.winner*') }}">
+                        <a href="{{ route('admin.bid.winner') }}" class="nav-link ">
+                               <i class="menu-icon fa-solid fa-hammer"></i>
+                            <span class="menu-title">@lang('Winner Bid List')</span>
+                        </a>
                     </li>
                 @endadminHas
 

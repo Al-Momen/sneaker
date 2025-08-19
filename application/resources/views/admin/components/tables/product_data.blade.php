@@ -44,7 +44,7 @@
             <div class="button--group align-items-center">
 
                 @if ($item->type == 2)
-                    <a href="{{ route('user.bid.list', $item->id) }}" title="@lang('Biding List')"
+                    <a href="{{ route('admin.bid.list', $item->id) }}" title="@lang('Biding List')"
                         class="btn btn--base text--white">
                         <i class="fa-solid fa-list"></i>
                     </a>

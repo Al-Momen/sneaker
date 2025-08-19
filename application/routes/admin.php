@@ -170,8 +170,7 @@ Route::middleware('admin')->group(function () {
 
     Route::controller('BidController')->name('bid.')->prefix('bid')->group(function () {
         Route::get('{id}/bids', 'productBids')->name('list');
-        Route::post('bid/winner', 'bidWinner')->name('winner');
-        Route::get('winners', 'winners')->name('winners');
+        Route::get('winner', 'bidWinner')->name('winner');
         Route::get('purchase', 'purchase')->name('purchase');
         Route::post('winners', 'deliveredProduct')->name('product.delivered');
         Route::post('product/re-action', 'reAction')->name('reaction');
