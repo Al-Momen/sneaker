@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Models\Bid;
 use App\Models\Product;
 use App\Constants\Status;
+use App\Models\BidWinner;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\AdminNotification;
@@ -52,13 +53,22 @@ class BidController extends Controller
     public function list($id)
     {
         $pageTitle = 'Auction Bid list';
-        $bids = Bid::with('product', 'user','bidWinner')->where('product_id', $id)
+        $bids = Bid::with('product', 'user', 'bidWinner')->where('product_id', $id)
             ->whereHas('product', function ($q) {
                 $q->where('author_id', auth()->id())
                     ->where('author_type', 2);
             })
             ->latest()->paginate(getPaginate());
         return view('UserTemplate::bid.list', compact('bids', 'pageTitle'));
+    }
+
+
+    public function winningHistory()
+    {
+        $pageTitle = 'Winning Bid list';
+        $winningBids = BidWinner::with('bid.product')->where('user_id',auth()->id())
+            ->latest()->paginate(getPaginate());
+        return view('UserTemplate::bid.winning_bid', compact('winningBids', 'pageTitle'));
     }
 
     public function bid(Request $request)

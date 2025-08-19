@@ -46,11 +46,6 @@
             </div>
         </li>
 
-
-
-
-
-
         <li class="sidebar-menu-list__item">
             <a href="{{ route('user.get.wishlist') }}"
                 class="sidebar-menu-list__link {{ Route::is('user.get.wishlist') ? 'active' : '' }}">
@@ -58,6 +53,17 @@
                     <i class="fa-solid fa-bookmark"></i>
                 </span>
                 <span class="text">@lang('Bookmarks')</span>
+            </a>
+        </li>
+        
+
+        <li class="sidebar-menu-list__item">
+            <a href="{{ route('user.bid.winning.history') }}"
+                class="sidebar-menu-list__link {{ Route::is('user.bid.winning.history') ? 'active' : '' }}">
+                <span class="icon">
+                    <i class="fa-solid fa-hammer"></i>
+                </span>
+                <span class="text">@lang('Winning Bids')</span>
             </a>
         </li>
 
@@ -74,12 +80,13 @@
             <div
                 class="sidebar-submenu {{ Route::is('user.orders.index') || Route::is('user.orders.details') || Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'd-block' : '' }} ">
                 <ul class="sidebar-submenu-list">
-                    <li class="sidebar-submenu-list__item {{ Route::is('user.orders.index') || Route::is('user.orders.details') ? 'active' : '' }}">
+                    <li
+                        class="sidebar-submenu-list__item {{ Route::is('user.orders.index') || Route::is('user.orders.details') ? 'active' : '' }}">
                         <a href="{{ route('user.orders.index') }}"
                             class="sidebar-submenu-list__link">@lang('My Orders')</a>
                     </li>
                     <li
-                        class="sidebar-submenu-list__item {{ Route::is('user.orders.get') || Route::is('user.orders.get.details')  ? 'active' : '' }}">
+                        class="sidebar-submenu-list__item {{ Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
                         <a href="{{ route('user.orders.get') }}"
                             class="sidebar-submenu-list__link">@lang('Get Orders')</a>
                     </li>

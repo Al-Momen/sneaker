@@ -90,6 +90,7 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::controller('ProductController')->name('auction.product.')->prefix('auction/product')->group(function () {
                     Route::get('auction/{status?}', 'auctionProduct')->name('index');
                     Route::post('auction/status/{id}', 'statusUpdate')->name('status');
+                    
                 });
 
                 //kyc
@@ -103,12 +104,13 @@ Route::middleware('auth')->name('user.')->group(function () {
             Route::controller('BidController')->group(function () {
                 Route::post('bid', 'bid')->name('bid');
                 Route::get('biding/list/{id}', 'list')->name('bid.list');
+                Route::get('winning/history', 'winningHistory')->name('bid.winning.history');
             });
 
 
             //orders
             Route::controller('OrderController')->name('orders.')->prefix('orders')->group(function () {
-             
+
                 Route::get('order-detail/{id}', 'orderDetails')->name('details');
                 Route::get('get-orders/{status?}', 'getOrder')->name('get');
                 Route::get('get-order-details/{id}', 'getOrderDetails')->name('get.details');
