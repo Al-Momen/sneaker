@@ -142,14 +142,14 @@
                 }
             });
             let mobileElement = $('.mobile-code');
-            $('select[name=country]').change(function() {
+            $('select[name=country]').on('change',function() {
                 mobileElement.text(`+${$('select[name=country] :selected').data('mobile_code')}`);
             });
 
             $('select[name=country]').trigger('change');
 
 
-            $('select[name=country]').change(function(){
+            $('select[name=country]').on('change',function(){
                 $('input[name=mobile_code]').val($('select[name=country] :selected').data('mobile_code'));
                 $('input[name=country_code]').val($('select[name=country] :selected').data('code'));
                 $('.mobile-code').text('+'+$('select[name=country] :selected').data('mobile_code'));

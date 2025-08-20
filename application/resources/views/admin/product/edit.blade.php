@@ -515,7 +515,7 @@
     <script>
         $(document).ready(function() {
 
-
+            'use strict';
             let index = {{ count($sizes) }}; // index 0 already used in default
             const sizesCount = {{ count($sizes) }} + 1;
 

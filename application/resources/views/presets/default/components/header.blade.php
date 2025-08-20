@@ -240,7 +240,7 @@
             <div id="cartItemsContainer">
                 @if (isset($cartItem))
                     @forelse (array_reverse($cartItem) as $product)
-                        @php $total += @$product['price'] * @$product['quantity'] @endphp
+                        @php $total += $product['price'] * $product['quantity'] @endphp
                         <!-- cart item -->
                         <div class="col-lg-12 itemMainDiv mb-4" data-product_id={{ $product['id'] }}>
                             <div class="cart--item d-flex gap--32">

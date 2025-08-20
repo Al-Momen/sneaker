@@ -42,7 +42,7 @@
         reader.readAsDataURL(input.files[0]);
       }
     }
-    $("#imageUpload").change(function () {
+    $("#imageUpload").on('change',function () {
       readURL(this);
     });
 
@@ -392,7 +392,7 @@
 
 
   // refer dropdown
-  $(".caret").click(function () {
+  $(".caret").on('click',function () {
     $(this).toggleClass("caret-down");
     $(this).next(".nested").toggleClass("active");
   });
@@ -470,6 +470,7 @@
 
   // in details page select color and product view
   $(document).ready(function () {
+    'use strict';
     const mainImg = $("#productImgSrc");
 
     function changeImage(newSrc) {
@@ -518,6 +519,7 @@
 
   // header search toggle
   $(document).ready(function () {
+    'use strict';
     $('.search-toggle--btn').on('click', function (e) {
       e.stopPropagation();
       $('.search--bar__wrap').toggleClass('active');
@@ -538,6 +540,7 @@
 
   // image drag and drop
   $(document).ready(function () {
+    'use strict';
     var images = [];
 
     function selectFiles() {
@@ -610,7 +613,7 @@
       updateImages();
     }
 
-    $("#fileInput").change(onFileSelect);
+    $("#fileInput").on('change',onFileSelect);
     $("#dragArea").on("dragover", onDragOver).on("dragleave", onDragLeave).on("drop", onDrop);
   });
 

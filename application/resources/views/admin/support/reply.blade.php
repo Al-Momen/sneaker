@@ -162,8 +162,8 @@
 
 @push('script')
     <script>
-        "use strict";
         (function($) {
+            "use strict";
             $('.delete-message').on('click', function(e) {
                 $('.message_id').val($(this).data('id'));
             })

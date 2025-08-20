@@ -440,6 +440,7 @@
 
     <script>
         $(document).ready(function() {
+            'use strict';
             $("select[name='type']").on('change', function() {
                 if ($(this).val() == 1) {
                     $('.size_and_quantity').removeClass('d-none');

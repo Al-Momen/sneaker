@@ -1,7 +1,7 @@
 @forelse($withdraws as $withdraw)
     <tr>
         <td data-label="@lang('TRX No')">
-            {{ __(@$withdraw->trx) }}
+            {{ __($withdraw->trx) }}
         </td>
         <td data-label="@lang('Gateway')">
             {{ __($withdraw->method?->name ?? '') }}

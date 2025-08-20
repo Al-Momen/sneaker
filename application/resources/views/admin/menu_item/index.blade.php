@@ -188,7 +188,7 @@
 
             toggleFields();
 
-            $('select[name="link_type"]').change(function () {
+            $('select[name="link_type"]').on('change',function () {
                 toggleFields();
             });
 

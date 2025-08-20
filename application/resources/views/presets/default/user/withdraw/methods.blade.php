@@ -45,7 +45,7 @@
     <script>
         (function($) {
             "use strict";
-            $('select[name=method_code]').change(function() {
+            $('select[name=method_code]').on('change',function() {
                 if (!$('select[name=method_code]').val()) {
                     $('.preview-details').addClass('d-none');
                     return false;

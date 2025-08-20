@@ -53,7 +53,8 @@
                             <label class="form--label mb-2">@lang('Discount')</label>
                             <div class="input-group">
                                 <input type="number" name="discount" min="0" max="100" step="any"
-                                    value="{{ showAmount($product->discount, 2, false) }}" class="form--control form--control form-control bg--white">
+                                    value="{{ showAmount($product->discount, 2, false) }}"
+                                    class="form--control form--control form-control bg--white">
                                 <span class="input-group-text bg--base text-white border-0">%</span>
                             </div>
                         </div>
@@ -177,7 +178,8 @@
                                         <div class="row size_and_quantity_row mb-3">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="size" class="form--label mb-2">@lang('Size')</label>
+                                                    <label for="size"
+                                                        class="form--label mb-2">@lang('Size')</label>
                                                     <select class="form--control size-select form-select"
                                                         name="size_quantity[0][size]" required>
                                                         <option value="0" disabled
@@ -197,7 +199,8 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="quantity" class="form--label mb-2">@lang('Quantity')</label>
+                                                    <label for="quantity"
+                                                        class="form--label mb-2">@lang('Quantity')</label>
                                                     <input type="text" name="size_quantity[0][quantity]"
                                                         id="quantity"
                                                         value="{{ old('size_quantity.0.quantity', $product->sizes[0]->pivot->quantity ?? 1) }}"
@@ -238,7 +241,8 @@
                                                             <label class="form--label mb-2">@lang('Quantity')</label>
                                                             <input type="number"
                                                                 name="size_quantity[{{ $loop->iteration }}][quantity]"
-                                                                class="form--control" value="{{ $item->pivot->quantity }}"
+                                                                class="form--control"
+                                                                value="{{ $item->pivot->quantity }}"
                                                                 placeholder="@lang('Product Size Quantity')" required>
                                                         </div>
                                                     </div>
@@ -281,8 +285,8 @@
                         </div>
 
                         <div class="col-12 text-end">
-       
-                              <button type="submit" class="btn btn--base btn--lg w-100 mt-4">@lang('Update')</button>
+
+                            <button type="submit" class="btn btn--base btn--lg w-100 mt-4">@lang('Update')</button>
                         </div>
                     </div>
                 </form>
@@ -296,30 +300,31 @@
         <div class="size_and_quantity_row size_and_quantity_template" data-index="__index__">
             <div class="row">
 
-         
-            <div class="col-lg-12 text-end mb-2">
-                <button type="button" class="btn btn--danger btn--sm deleteRow">
-                    <i class="fa fa-trash"></i> @lang('Delete')
-                </button>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form--label mb-2">@lang('Size')</label>
-                    <select class="form--control size-select form-select" name="size_quantity[__index__][size]" required>
-                        <option value="" selected disabled>@lang('Select Size')</option>
-                        @foreach ($sizes as $size)
-                            <option value="{{ $size->id }}">{{ __($size->size) }}</option>
-                        @endforeach
-                    </select>
+
+                <div class="col-lg-12 text-end mb-2">
+                    <button type="button" class="btn btn--danger btn--sm deleteRow">
+                        <i class="fa fa-trash"></i> @lang('Delete')
+                    </button>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form--label mb-2">@lang('Quantity')</label>
-                    <input type="number" value="1" name="size_quantity[__index__][quantity]" class="form--control"
-                        placeholder="@lang('Product Size Quantity')" required>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form--label mb-2">@lang('Size')</label>
+                        <select class="form--control size-select form-select" name="size_quantity[__index__][size]"
+                            required>
+                            <option value="" selected disabled>@lang('Select Size')</option>
+                            @foreach ($sizes as $size)
+                                <option value="{{ $size->id }}">{{ __($size->size) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-            </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form--label mb-2">@lang('Quantity')</label>
+                        <input type="number" value="1" name="size_quantity[__index__][quantity]"
+                            class="form--control" placeholder="@lang('Product Size Quantity')" required>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -512,7 +517,7 @@
     <script>
         $(document).ready(function() {
 
-
+            'use strict';
             let index = {{ count($sizes) }}; // index 0 already used in default
             const sizesCount = {{ count($sizes) }} + 1;
 

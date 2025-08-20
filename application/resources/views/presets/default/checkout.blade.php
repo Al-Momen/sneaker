@@ -323,9 +323,7 @@
                 $('.amount').text(parseFloat($(this).val()).toFixed(2));
             });
 
-            // if ($('select[name=gateway]').val()) {
-            //     $('select[name=gateway]').trigger('change');
-            // }
+           
         })(jQuery);
     </script>
     <script>
