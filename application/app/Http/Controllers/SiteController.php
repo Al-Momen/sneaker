@@ -171,17 +171,10 @@ class SiteController extends Controller
     {
         $pageTitle = 'Products';
         $products = Product::with(['category', 'firstImage', 'wishlists'])->when($request->search, function ($query, $search) {
-            $query->where('title', 'like', "%{$search}%");
+            $query->where('name', 'like', "%{$search}%");
         })->where('status', 1)->inRandomOrder()->latest()->paginate(getPaginate());
-        $categories = Category::with('products')
-            ->withCount('products')
-            ->where('status', 1)
-            ->orderByDesc('products_count')
-            ->latest()
-            ->paginate(getPaginate());
-
         $sections = Page::where('tempname', $this->activeTemplate)->where('slug', 'product')->first();
-        return view('Template::products.product', compact('pageTitle', 'categories', 'products', 'sections'));
+        return view('Template::products.product', compact('pageTitle',  'products', 'sections'));
     }
 
     public function productDetails($slug, $id)
