@@ -38,12 +38,21 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-12 col-xs-12">
+                                <div class="col-md-6 col-xs-12">
                                     <label> @lang('Site Base Color')</label>
                                     <div class="form-group color--select position-relative">
                                         <div class="colorInputWrapper">
                                             <input class="form-control colorPicker" type='text' value="{{ gs('base_color') }}">
                                             <input class="form-control colorCode" name="base_color" type="text" value="{{ gs('base_color') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <label> @lang('Site Secondary Color')</label>
+                                    <div class="form-group color--select position-relative">
+                                        <div class="colorInputWrapper">
+                                            <input class="form-control colorPicker" type='text' value="{{ gs('secondary_color') }}">
+                                            <input class="form-control colorCode" name="secondary_color" type="text" value="{{ gs('secondary_color') }}">
                                         </div>
                                     </div>
                                 </div>
