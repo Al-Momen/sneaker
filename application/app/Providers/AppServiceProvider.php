@@ -124,23 +124,5 @@ class AppServiceProvider extends ServiceProvider
             return "<?php endif; ?>";
         });
 
-        // User Directive
-        Blade::directive('userHasPermission', function ($expression) {
-            return "<?php if(auth()->check() && auth()->user()->hasPermission($expression)): ?>";
-        });
-
-        Blade::directive('enduserHasPermission', function () {
-            return "<?php endif; ?>";
-        });
-
-        Blade::directive('userHasAny', function ($expression) {
-            return "<?php if(auth()->check() && collect($expression)->some(fn(\$perm) => auth()->user()->hasPermission(\$perm))): ?>";
-        });
-
-        Blade::directive('enduserHasAny', function () {
-            return "<?php endif; ?>";
-        });
-
-
     }
 }

@@ -131,23 +131,26 @@
                 @endadminHas
 
 
-                @adminHas('product')
-                    <li class="sidebar-menu-item sidebar-dropdown">
-                        <a href="javascript:void(0)"
-                            class="{{ menuActive(['admin.product.*', 'admin.auction.product.*', 'admin.bid.list', 'admin.size.*', 'admin.color.*', 'admin.category.*', 'admin.bid.winner*'], 3) }}">
-                            <i class="menu-icon fa-brands fa-product-hunt"></i>
-                            <span class="menu-title">@lang('Products')</span>
-                        </a>
-                        <div
-                            class="sidebar-submenu {{ menuActive(['admin.product.*', 'admin.auction.product.*', 'admin.bid.list', 'admin.size.*', 'admin.color.*', 'admin.category.*', 'admin.bid.winner*'], 2) }} ">
-                            <ul>
+                @adminHasAny(['product-management', 'auction-management', 'category-management','bid-management','color-management','size-management'])
+                <li class="sidebar-menu-item sidebar-dropdown">
+                    <a href="javascript:void(0)"
+                        class="{{ menuActive(['admin.product.*', 'admin.auction.product.*', 'admin.bid.list', 'admin.size.*', 'admin.color.*', 'admin.category.*', 'admin.bid.winner*'], 3) }}">
+                        <i class="menu-icon fa-brands fa-product-hunt"></i>
+                        <span class="menu-title">@lang('Products')</span>
+                    </a>
+                    <div
+                        class="sidebar-submenu {{ menuActive(['admin.product.*', 'admin.auction.product.*', 'admin.bid.list', 'admin.size.*', 'admin.color.*', 'admin.category.*', 'admin.bid.winner*'], 2) }} ">
+                        <ul>
+                            @adminHas('product-management')
                                 <li class="sidebar-menu-item {{ menuActive('admin.product.*') }}">
                                     <a class="nav-link" href="{{ route('admin.product.index') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('Products')</span>
                                     </a>
                                 </li>
+                            @endadminHas
 
+                            @adminHas('auction-management')
                                 <li
                                     class="sidebar-menu-item {{ menuActive(['admin.auction.product.*', 'admin.bid.list']) }}">
                                     <a class="nav-link" href="{{ route('admin.auction.product.index') }}">
@@ -155,44 +158,55 @@
                                         <span class="menu-title"> @lang('Auctions')</span>
                                     </a>
                                 </li>
+                            @endadminHas
 
+                            @adminHas('category-management')
                                 <li class="sidebar-menu-item {{ menuActive(['admin.category.index']) }}">
                                     <a class="nav-link" href="{{ route('admin.category.index') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('Categories')</span>
                                     </a>
                                 </li>
+                            @endadminHas
 
-                                <li class="sidebar-menu-item {{ menuActive(['admin.size.index']) }}">
-                                    <a class="nav-link" href="{{ route('admin.size.index') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Sizes')</span>
-                                    </a>
-                                </li>
+                            @adminHas('size-management')
+                            <li class="sidebar-menu-item {{ menuActive(['admin.size.index']) }}">
+                                <a class="nav-link" href="{{ route('admin.size.index') }}">
+                                    <i class="menu-icon fa-solid fa-circle"></i>
+                                    <span class="menu-title"> @lang('Sizes')</span>
+                                </a>
+                            </li>
+                            @endadminHas
 
-                                <li class="sidebar-menu-item {{ menuActive(['admin.color.index']) }}">
-                                    <a class="nav-link" href="{{ route('admin.color.index') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Colors')</span>
-                                    </a>
-                                </li>
+                            @adminHas('color-management')
+                            <li class="sidebar-menu-item {{ menuActive(['admin.color.index']) }}">
+                                <a class="nav-link" href="{{ route('admin.color.index') }}">
+                                    <i class="menu-icon fa-solid fa-circle"></i>
+                                    <span class="menu-title"> @lang('Colors')</span>
+                                </a>
+                            </li>
 
-                                <li class="sidebar-menu-item {{ menuActive(['admin.bid.winner']) }}">
-                                    <a class="nav-link" href="{{ route('admin.bid.winner') }}">
-                                        <i class="menu-icon fa-solid fa-circle"></i>
-                                        <span class="menu-title"> @lang('Winners')</span>
-                                    </a>
-                                </li>
+                             @endadminHas
 
-                            </ul>
-                        </div>
-                    </li>
+                            @adminHas('bid-management')
+
+                            <li class="sidebar-menu-item {{ menuActive(['admin.bid.winner']) }}">
+                                <a class="nav-link" href="{{ route('admin.bid.winner') }}">
+                                    <i class="menu-icon fa-solid fa-circle"></i>
+                                    <span class="menu-title"> @lang('Winners')</span>
+                                </a>
+                            </li>
+
+                             @endadminHas
+
+                        </ul>
+                    </div>
+                </li>
                 @endadminHas
 
-                @adminHas('order')
+                @adminHas('order-management')
                     <li class="sidebar-menu-item sidebar-dropdown">
-                        <a href="javascript:void(0)"
-                            class="{{ menuActive(['admin.orders.*'], 3) }}">
+                        <a href="javascript:void(0)" class="{{ menuActive(['admin.orders.*'], 3) }}">
                             <i class="menu-icon fa-solid fa-cart-arrow-down"></i>
                             <span class="menu-title">@lang('Orders')</span>
                         </a>
@@ -223,7 +237,7 @@
                     </li>
                 @endadminHas
 
-                @adminHas('shipping')
+                @adminHas('shipping-management')
                     <li class="sidebar-menu-item {{ menuActive('admin.shipping.*') }}">
                         <a href="{{ route('admin.shipping.index') }}" class="nav-link ">
 

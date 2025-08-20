@@ -8,18 +8,15 @@ trait HasPermissions
     public function hasPermission($slug)
     {
         if ($this->role_id == 0) return true;
-
         return optional($this->role)->permissions->contains('slug', $slug);
-        return $this->role && $this->role->permissions->contains('slug', $slug);
+
     }
 
     // For multiple permissions
     public function hasAnyPermission(array $slugs)
     {
         if ($this->role_id == 0) return true;
-
         return optional($this->role)->permissions->pluck('slug')->intersect($slugs)->isNotEmpty();
-        return $this->role && $this->role->permissions->pluck('slug')->intersect($slugs)->isNotEmpty();
     }
 }
 

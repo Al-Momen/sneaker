@@ -23,7 +23,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 2,
                 'name' => 'Role',
                 'slug' => 'role',
@@ -31,7 +32,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 3,
                 'name' => 'Staff Management',
                 'slug' => 'staff',
@@ -39,7 +41,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 4,
                 'name' => 'User Management',
                 'slug' => 'user-management',
@@ -47,7 +50,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 5,
                 'name' => 'Subscriber Management',
                 'slug' => 'subscriber-management',
@@ -55,7 +59,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 6,
                 'name' => 'Deposit Management',
                 'slug' => 'deposit-management',
@@ -63,7 +68,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 7,
                 'name' => 'Withdraw Management',
                 'slug' => 'withdraw-management',
@@ -71,7 +77,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 8,
                 'name' => 'Payment Method',
                 'slug' => 'payment-method',
@@ -79,7 +86,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 9,
                 'name' => 'Withdraw Method',
                 'slug' => 'withdraw-method',
@@ -87,7 +95,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 10,
                 'name' => 'Support Ticket',
                 'slug' => 'support-ticket',
@@ -95,7 +104,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 11,
                 'name' => 'Reports',
                 'slug' => 'reports',
@@ -103,7 +113,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 12,
                 'name' => 'Settings',
                 'slug' => 'settings',
@@ -111,7 +122,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 13,
                 'name' => 'Page Management',
                 'slug' => 'page-management',
@@ -119,7 +131,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 14,
                 'name' => 'Section Management',
                 'slug' => 'section-management',
@@ -127,7 +140,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 15,
                 'name' => 'Language Management',
                 'slug' => 'language-management',
@@ -135,7 +149,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 16,
                 'name' => 'Plugin Management',
                 'slug' => 'plugin-management',
@@ -143,7 +158,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 17,
                 'name' => 'Kyc',
                 'slug' => 'kyc',
@@ -151,7 +167,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 18,
                 'name' => 'Admin Notification',
                 'slug' => 'admin-notification',
@@ -159,7 +176,8 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],[
+            ],
+            [
                 'id' => 19,
                 'name' => 'Website Menu Management',
                 'slug' => 'website-menu-management',
@@ -167,8 +185,79 @@ class PermissionsTableSeeder extends Seeder
                 'type' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => 20,
+                'name' => 'Category Management',
+                'slug' => 'category-management',
+                'groupby' => 'Category Management',
+                'type' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => 21,
+                'name' => 'Color Management',
+                'slug' => 'color-management',
+                'groupby' => 'Color Management',
+                'type' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => 22,
+                'name' => 'Size Management',
+                'slug' => 'size-management',
+                'groupby' => 'Size Management',
+                'type' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => 23,
+                'name' => 'Auction Management',
+                'slug' => 'auction-management',
+                'groupby' => 'Auction Management',
+                'type' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => 24,
+                'name' => 'Product Management',
+                'slug' => 'product-management',
+                'groupby' => 'Product Management',
+                'type' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => 25,
+                'name' => 'Shipping Management',
+                'slug' => 'shipping-management',
+                'groupby' => 'Shipping Management',
+                'type' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => 26,
+                'name' => 'Bid Management',
+                'slug' => 'bid-management',
+                'groupby' => 'Bid Management',
+                'type' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => 27,
+                'name' => 'Order Management',
+                'slug' => 'order-management',
+                'groupby' => 'Order Management',
+                'type' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]
         ]);
     }
 }
-
