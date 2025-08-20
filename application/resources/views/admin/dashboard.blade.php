@@ -142,7 +142,6 @@
                 </div>
             </div>
 
-
             <div class="col-xl-6">
                 <div class="card bg--white br--solid">
                     <div class="card-body position-relative">
@@ -177,7 +176,7 @@
                             <table class="table align-items-center style--three table--light">
                                 <thead>
                                     <tr>
-                                        <th>@lang('Customer')</th>
+                                        <th>@lang('User')</th>
                                         <th>@lang('Trx')</th>
                                         <th>@lang('Date')</th>
                                         <th>@lang('Amount')</th>

@@ -110,7 +110,7 @@
                         }
                     },
                     error: function(response) {
-                        console.log(response);
+                       
 
                         alert('Failed to load filtered tickets.');
                     }

@@ -16,18 +16,15 @@
 
     @stack('style-lib')
 
-
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/custom-style.css') }}">
-    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/color.php') }}?color={{ $general->base_color }}&secondColor={{ $general->secondary_color }}">
-
+    <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/color.php') }}?color={{ $general->base_color }}">
 
     @stack('style')
 </head>
 
 <body>
     @yield('content')
-
 
     <script src="{{ asset('assets/common/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/common/js/bootstrap.bundle.min.js') }}"></script>

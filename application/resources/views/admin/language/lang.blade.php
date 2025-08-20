@@ -9,7 +9,7 @@
                             <thead>
                                 <tr>
                                     <th>@lang('Name')</th>
-                                    <th>@lang('Icon')</th>
+                                    <th>@lang('Image')</th>
                                     <th>@lang('Code')</th>
                                     <th>@lang('Default')</th>
                                     <th>@lang('Actions')</th>
@@ -91,7 +91,7 @@
                         </div>
 
                         <div class="row form-group">
-                            <label>@lang('Icon')</label>
+                            <label>@lang('Image')</label>
                             <div class="col-sm-12">
                                 <input type="file" class="form-control" name="icon" required>
                             </div>
@@ -117,7 +117,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn--primary btn-global" id="btn-save"
+                        <button type="submit" class="btn btn--primary" id="btn-save"
                             value="add">@lang('Save')</button>
                     </div>
                 </form>
@@ -132,8 +132,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="editModalLabel">@lang('Edit Language')</h4>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i
-                            class="las la-times"></i></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="post" enctype="multipart/form-data">
                     @csrf
@@ -147,7 +146,7 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <label>@lang('Icon')</label>
+                            <label>@lang('Image')</label>
                             <div class="col-sm-12">
                                 <input type="file" class="form-control" name="icon">
                             </div>
@@ -163,7 +162,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-global" id="btn-save"
+                        <button type="submit" class="btn btn--primary" id="btn-save"
                             value="add">@lang('Save')</button>
                     </div>
                 </form>

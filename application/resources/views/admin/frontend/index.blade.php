@@ -453,7 +453,7 @@
                 $(document).off('focusin.modal');
             });
             $('.iconPicker').iconpicker().on('iconpickerSelected', function(e) {
-                console.log('Selected icon: ' + e.iconpickerValue);
+               
                 $(this).closest('.form-group').find('.iconpicker-input').val(`<i class="${e.iconpickerValue}"></i>`);
             });
 
