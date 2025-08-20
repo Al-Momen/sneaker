@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\Frontend;
 use App\Models\Language;
 use App\Models\Shipping;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Models\SupportTicket;
 use App\Models\SupportMessage;
@@ -165,6 +167,23 @@ class SiteController extends Controller
         imagedestroy($image);
     }
 
+    public function product(Request $request)
+    {
+        $pageTitle = 'Products';
+        $products = Product::with(['category', 'firstImage', 'wishlists'])->when($request->search, function ($query, $search) {
+            $query->where('title', 'like', "%{$search}%");
+        })->where('status', 1)->inRandomOrder()->latest()->paginate(getPaginate());
+        $categories = Category::with('products')
+            ->withCount('products')
+            ->where('status', 1)
+            ->orderByDesc('products_count')
+            ->latest()
+            ->paginate(getPaginate());
+
+        $sections = Page::where('tempname', $this->activeTemplate)->where('slug', 'product')->first();
+        return view('Template::products.product', compact('pageTitle', 'categories', 'products', 'sections'));
+    }
+
     public function productDetails($slug, $id)
     {
         $pageTitle = 'Product Details';
@@ -180,6 +199,19 @@ class SiteController extends Controller
             ->get();
         $reviews = $product->reviews()->with('user')->paginate(getPaginate(5));
         return view('Template::products.details', compact('pageTitle', 'product', 'products', 'reviews', 'highestBidPrice'));
+    }
+
+
+    public function subscribe(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|unique:subscribers',
+        ]);
+        $subscribe = new Subscriber();
+        $subscribe->email = $request->email;
+        $subscribe->save();
+        $notify[] = ['success', 'You have successfully subscribed to the Newsletter'];
+        return back()->withNotify($notify);
     }
 
     public function addToCart(Request $request)

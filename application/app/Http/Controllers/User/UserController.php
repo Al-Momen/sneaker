@@ -296,6 +296,8 @@ class UserController extends Controller
     public function reviewStore(Request $request)
     {
 
+
+
         $auth = auth()->user();
         $product_id = $request->product_id;
         $product = Product::find($product_id);
@@ -314,7 +316,7 @@ class UserController extends Controller
             return back()->withNotify($notify);
         }
 
-        $isOrder = Order::whereHas('orderItems', function ($q) use ($product_id) {
+        $isOrder = Order::whereHas('products', function ($q) use ($product_id) {
             $q->where('product_id', $product_id);
         })->where('user_id', $auth->id)
             ->where('status', 2)

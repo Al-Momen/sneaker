@@ -205,8 +205,7 @@
                                             <input type="hidden" name="star" id="rating" value="0">
 
                                             <div class="review-box mb-4" bis_skin_checked="1">
-                                                <input type="hidden" name="tour_package_id" value="18">
-                                                <input type="hidden" name="star" id="rating" value="0">
+                                          
                                                 <div class="d-flex align-items-center star rating-wrap rating-stars mb-3 gap-1"
                                                     bis_skin_checked="1">
                                                     <i class="far fa-star star--color" data-rating="1"></i>

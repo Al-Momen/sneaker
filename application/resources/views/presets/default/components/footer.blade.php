@@ -53,7 +53,7 @@
                         <div class="subscribe-box mb-3">
                             <form action="{{ route('subscribe') }}" method="POST">
                                 @csrf
-                                <input class="form--control footer-input pill w--70" type="text"
+                                <input class="form--control footer-input pill w--70" name="email" type="text"
                                     placeholder="@lang('Email Address')" />
                                 <button class="btn btn--base btn--lg pill" type="submit">
                                     @lang('SUBSCRIBE')
