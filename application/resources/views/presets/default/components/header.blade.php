@@ -9,6 +9,10 @@
     $cartItem = session('cart');
     $total = 0;
 
+    $pages = App\Models\Menu::with(['items', 'menuItems'])
+        ->where('slug', 'header-menu')
+        ->first();
+
 @endphp
 
 <!-- Header Start -->
@@ -35,9 +39,18 @@
                 <div class="menu--wrap d-flex align-items-center gap--72">
                     <div class="menu-list-wrapper">
                         <ul class="main-menu">
-                            @foreach ($pages as $page)
-                                <a class="{{ Request::url() == url($page->slug) ? 'active' : '' }}"
-                                    href="{{ route('pages', [$page->slug]) }}">{{ __($page->name) }}</a>
+                            @foreach ($pages->items as $k => $data)
+                                @if ($data->link_type == 2)
+                                    <li class="nav-item">
+                                        <a href="{{ $data->url ?? '' }}" target="_blank">{{ __($data->title) }}</a>
+                                    </li>
+                                @else
+                                    <li
+                                        class="nav-item {{ route('pages', [$data->url]) == url()->current() ? 'active' : null }}">
+                                        <a href="{{ route('pages', [$data->url]) }}"
+                                            class="{{ Request::url() == url($data->url) ? 'active' : '' }} ">{{ __($data->title) }}</a>
+                                    </li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>
@@ -171,13 +184,19 @@
             </div>
         @endauth
         <ul class="side-Nav">
-            @foreach ($pages as $page)
-                <li>
-                    <a class='{{ Request::url() == url($page->slug) ? 'active' : '' }}'
-                        href="{{ route('pages', [$page->slug]) }}"
-                        aria-current="page">{{ __($page->name ?? '') }}</a>
-                </li>
+            @foreach ($pages->items as $k => $data)
+                @if ($data->link_type == 2)
+                    <li class="nav-item">
+                        <a href="{{ $data->url ?? '' }}" target="_blank">{{ __($data->title) }}</a>
+                    </li>
+                @else
+                    <li class="nav-item {{ route('pages', [$data->url]) == url()->current() ? 'active' : null }}">
+                        <a href="{{ route('pages', [$data->url]) }}"
+                            class="{{ Request::url() == url($data->url) ? 'active' : '' }}" aria-current="page">{{ __($data->title ?? '') }}</a>
+                    </li>
+                @endif
             @endforeach
+
             <li>
                 @auth
                     <a href="{{ route('user.home') }}" class="login-btn">@lang('Dashboard')</a>
