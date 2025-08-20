@@ -115,7 +115,7 @@
                                 <tr>
                                     <td data-label="SI">#{{ $loop->iteration }}</td>
                                     <td data-label="Author Name">{{ $product->author_name }}</td>
-                                    <td data-label="Title"><a class="text--base"
+                                    <td data-label="Product Name"><a class="text--base"
                                             href="{{ route('product.details', ['slug' => slug($product->name), 'id' => $product->id]) }}">{{ $product->name }}</a>
                                     </td>
                                     <td data-label="Quantity">{{ $product->pivot->quantity }}</td>

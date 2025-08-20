@@ -35,8 +35,8 @@
                                 <tr>
                                     <th>@lang('Image')</th>
                                     <th>@lang('Name')</th>
+                                    <th>@lang('Author')</th>
                                     <th>@lang('Type')</th>
-                                    <th>@lang('Category')</th>
                                     <th>@lang('Regular Price')</th>
                                     <th>@lang('Discount')</th>
                                     <th>@lang('Status')</th>

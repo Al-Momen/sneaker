@@ -12,12 +12,7 @@ class BidController extends Controller
     public function productBids($id)
     {
         $pageTitle = 'Auction Bid list';
-        $bids = Bid::with('product', 'user', 'bidWinner')->where('product_id', $id)
-            ->whereHas('product', function ($q) {
-                $q->where('author_id', auth('admin')->id())
-                    ->where('author_type', 1);
-            })
-            ->latest()->paginate(getPaginate());
+        $bids = Bid::with('product', 'user', 'bidWinner')->where('product_id', $id)->latest()->paginate(getPaginate());
         return view('Admin::bid.list', compact('bids', 'pageTitle'));
     }
 

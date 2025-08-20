@@ -19,8 +19,6 @@ class ProductController extends Controller
     {
         $admin = auth('admin')->user();
           $query = Product::with(['category', 'firstImage', 'wishlists'])
-            ->where('author_id', $admin->id)
-            ->where('author_type', 1)
             ->where('type', 1)
             ->searchable(['name'])
             ->latest();
@@ -56,8 +54,6 @@ class ProductController extends Controller
      
         $admin = auth('admin')->user();
         $query = Product::with(['category', 'firstImage', 'wishlists'])
-            ->where('author_id', $admin->id)
-            ->where('author_type', 1)
             ->where('type', 2)
             ->searchable(['name'])
             ->latest();

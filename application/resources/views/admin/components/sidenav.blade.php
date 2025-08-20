@@ -189,16 +189,14 @@
                     </li>
                 @endadminHas
 
-
-
                 @adminHas('order')
                     <li class="sidebar-menu-item sidebar-dropdown">
                         <a href="javascript:void(0)"
-                            class="{{ menuActive(['admin.orders.*', 'admin.auction.product.*'], 3) }}">
+                            class="{{ menuActive(['admin.orders.*'], 3) }}">
                             <i class="menu-icon fa-solid fa-cart-arrow-down"></i>
                             <span class="menu-title">@lang('Orders')</span>
                         </a>
-                        <div class="sidebar-submenu {{ menuActive(['admin.orders.*', 'admin.auction.product.*'], 2) }} ">
+                        <div class="sidebar-submenu {{ menuActive(['admin.orders.*'], 2) }} ">
                             <ul>
                                 <li class="sidebar-menu-item {{ menuActive('admin.orders.*') }}">
                                     <a class="nav-link" href="{{ route('admin.orders.index') }}">
