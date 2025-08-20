@@ -34,6 +34,8 @@
                     </option>
                     <option value="reject" {{ request()->status == 'reject' ? 'selected' : '' }}>@lang('Rejected')
                     </option>
+                     <option value="payment_reject" {{ request()->status == 'payment_reject' ? 'selected' : '' }}>@lang('Payment Rejected')
+                    </option>
                 </select>
             </div>
         </div>

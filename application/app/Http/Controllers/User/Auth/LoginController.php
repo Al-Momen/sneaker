@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\User\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Lib\Intended;
 use App\Models\UserLogin;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
 class LoginController extends Controller
@@ -47,6 +49,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         $pageTitle = "Login";
+        Intended::identifyRoute();
         return view('UserTemplate::auth.login', compact('pageTitle'));
     }
 
@@ -79,7 +82,7 @@ class LoginController extends Controller
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
-
+        Intended::reAssignSession();
 
         return $this->sendFailedLoginResponse($request);
     }
@@ -100,10 +103,14 @@ class LoginController extends Controller
 
     protected function validateLogin(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             $this->username() => 'required|string',
             'password' => 'required|string',
         ]);
+        if ($validator->fails()) {
+            Intended::reAssignSession();
+            $validator->validate();
+        }
     }
 
     public function logout()
@@ -145,14 +152,15 @@ class LoginController extends Controller
         $userLogin->browser = isset($userAgent['browser']) ? $userAgent['browser'] : '';
         $userLogin->os = isset($userAgent['os_platform']) ? $userAgent['os_platform'] : '';
         $userLogin->save();
-     
 
          if($request->another == 1)
         {
-            $notify[]       = ['success', 'Login Success'];
+            $notify[]       = ['success', 'Login Successfully'];
             return back()->withNotify($notify);
         }
 
-        return to_route('user.home');
+        $redirection = Intended::getRedirection();
+
+        return $redirection ? $redirection : to_route('user.home');
     }
 }

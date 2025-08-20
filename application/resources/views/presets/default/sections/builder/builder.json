@@ -82,26 +82,6 @@
         }
     },
 
-    "about": {
-        "builder": true,
-        "name": "About Us",
-        "content": {
-            "images": {
-                "background_image": {
-                    "size": "500x500",
-                    "thumb": "100x100"
-                },
-                "about_image": {
-                    "size": "500x500",
-                    "thumb": "100x100"
-                }
-            },
-            "heading": "text",
-            "subheading": "text",
-            "description": "textarea",
-            "about_icon": "icon"
-        }
-    },
 
     "policy_pages": {
         "builder": false,

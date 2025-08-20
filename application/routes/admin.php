@@ -189,7 +189,7 @@ Route::middleware('admin')->group(function () {
         });
         Route::post('vendor-status-change/{status}/{id}', 'vendorStatusChange')->name('vendor.status.change');
         Route::post('status/{id}', 'statusUpdate')->name('status');
-        Route::get('/{status?}', 'index')->name('index');
+        Route::get('log/{status?}', 'index')->name('index');
     });
 
 

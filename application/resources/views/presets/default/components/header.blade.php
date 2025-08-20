@@ -48,8 +48,7 @@
                         <div class="language-box">
                             <button class="dropdown-toggle text--white p-0" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <img src="{{ getImage(getFilePath('language') . '/' . $currentLang->icon ?? '', getFileSize('language')) }}"
-                                    alt="@lang('Icon')">
+                                <img src="{{ asset('assets/images/frontend/icon/globe.png') }}" alt="@lang('Icon')">
                             </button>
                             <ul class="dropdown-menu lng--dropdown">
                                 @foreach ($languages as $language)
@@ -96,9 +95,8 @@
                         <button
                             class="p-0 position-relative {{ count((array) session('cart')) > 0 ? 'text--base' : 'text--black' }} addToCartHeader"
                             data-bs-toggle="offcanvas" data-bs-target="#cartoffcanvasExample"
-                            aria-controls="cartoffcanvasExample"> 
-                            <img
-                                src="{{ asset('assets/images/frontend/icon/cart.png') }}" alt="@lang('Cart')">
+                            aria-controls="cartoffcanvasExample">
+                            <img src="{{ asset('assets/images/frontend/icon/cart.png') }}" alt="@lang('Cart')">
                             @if (count((array) session('cart')) > 0)
                                 <span class="cart--stump" id="cartItem">{{ count((array) session('cart')) }}</span>
                             @endif
@@ -247,7 +245,8 @@
                                         <div
                                             class="quantity_box border--base d-flex justify-content-between align-items-center">
                                             <button type="button" class="counter-btn decrement"
-                                                data-product_id="{{ $product['id'] }}" {{ $product['quantity'] <= 1 ? 'disabled' : '' }}>
+                                                data-product_id="{{ $product['id'] }}"
+                                                {{ $product['quantity'] <= 1 ? 'disabled' : '' }}>
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                             <input class="count-input count" data-product_id="{{ $product['id'] }}"
@@ -262,7 +261,7 @@
                                             @php
                                                 $amount = $product['quantity'] * $product['price'];
                                             @endphp
-                                            
+
                                             {{ $general->cur_sym . showAmount($amount) }}
                                         </h6>
                                     </div>
@@ -287,7 +286,7 @@
                         <li class="d-flex justify-content-between">
                             <p class="price-details">@lang('Price Details') ({{ count((array) session('cart')) }}
                                 @lang('Items'))</p>
-                            
+
                         </li>
                         <li class="d-flex justify-content-between">
                             <p>@lang('Total Amount')</p>

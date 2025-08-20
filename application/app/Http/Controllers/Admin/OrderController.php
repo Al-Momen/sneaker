@@ -163,8 +163,11 @@ class OrderController extends Controller
             case 'reject':
                 $query->where('status', Status::ORDER_REJECT);
                 break;
+            case 'payment_reject':
+                $query->where('status', Status::ORDER_PAYMENT_REJECT);
+                break;
             case 'all':
-                $query->whereIn('status', [Status::ORDER_PENDING, Status::ORDER_SUCCESS, Status::ORDER_REJECT, Status::ORDER_PROCESSING, Status::ORDER_DELIVERED, Status::ORDER_COMPLETED]);
+                $query->whereIn('status', [Status::ORDER_SUCCESS, Status::ORDER_REJECT, Status::ORDER_PROCESSING, Status::ORDER_DELIVERED, Status::ORDER_COMPLETED, Status::ORDER_REJECT, Status::ORDER_INITIATE, Status::ORDER_PENDING, Status::ORDER_PAYMENT_REJECT]);
                 break;
             default:
                 break;
@@ -173,12 +176,12 @@ class OrderController extends Controller
         $orders = $query->paginate(getPaginate());
         if (request()->ajax()) {
             return response()->json([
-                'html' => view('Admin::components.tables.order_data', compact('orders'))->render(),
+                'html' => view('Admin::components.tables.get_order_data', compact('orders'))->render(),
                 'pagination' => $orders->hasPages() ? view('Admin::components.tables.pagination', ['items' => $orders])->render() : '',
             ]);
         }
         $pageTitle = 'In-house Orders';
-        return view('Admin::orders.index', compact('orders', 'pageTitle'));
+        return view('Admin::orders.get_order', compact('orders', 'pageTitle'));
     }
 
     public function getOrderDetails($id)

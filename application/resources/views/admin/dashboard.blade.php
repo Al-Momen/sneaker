@@ -309,11 +309,11 @@
                     },
                     colors: ['#FFA500', '#00A86B'],
                     series: [{
-                            name: 'Withdrawals',
+                            name: '@lang("Withdrawals")',
                             data: withdrawalsChart.values
                         },
                         {
-                            name: 'Deposits',
+                            name: '@lang("Deposits")',
                             data: depositsChart.values
                         }
                     ],
@@ -324,7 +324,7 @@
                     xaxis: {
                         categories: depositsChart.labels,
                         title: {
-                            text: 'Months',
+                            text: '@lang("Months")',
                             style: {
                                 fontSize: '14px',
                                 fontWeight: 'bold',
@@ -344,7 +344,7 @@
                     yaxis: {
                         min: 0,
                         title: {
-                            text: 'Amount',
+                            text: '@lang("Amount")',
                             style: {
                                 fontSize: '14px',
                                 fontWeight: 'bold',
@@ -406,11 +406,11 @@
                     },
                     colors: ['#FFA500', '#00A86B'],
                     series: [{
-                            name: 'All Orders',
+                            name: '@lang("All Orders")',
                             data: allOrdersChart.values
                         },
                         {
-                            name: 'My Orders',
+                            name: '@lang("My Orders")',
                             data: myOrdersChart.values
                         }
                     ],
@@ -421,7 +421,7 @@
                     xaxis: {
                         categories: myOrdersChart.labels,
                         title: {
-                            text: 'Months',
+                            text: '@lang("Months")',
                             style: {
                                 fontSize: '14px',
                                 fontWeight: 'bold',
@@ -441,7 +441,7 @@
                     yaxis: {
                         min: 0,
                         title: {
-                            text: 'Order Amount',
+                            text: '@lang("Order Amount")',
                             style: {
                                 fontSize: '14px',
                                 fontWeight: 'bold',
