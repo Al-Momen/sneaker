@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Page;
+use App\Models\Size;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Frontend;
@@ -173,9 +174,78 @@ class SiteController extends Controller
         $products = Product::with(['category', 'firstImage', 'wishlists'])->when($request->search, function ($query, $search) {
             $query->where('name', 'like', "%{$search}%");
         })->where('status', 1)->inRandomOrder()->latest()->paginate(getPaginate());
+        $categories = Category::where('status', 1)->latest()->get();
+        $sizes = Size::where('status', 1)->latest()->get();
+        $brands = Product::where('status', 1)
+            ->whereNotNull('brand_name')
+            ->pluck('brand_name')
+            ->unique()
+            ->values();
         $sections = Page::where('tempname', $this->activeTemplate)->where('slug', 'product')->first();
-        return view('Template::products.product', compact('pageTitle',  'products', 'sections'));
+        return view('Template::products.product', compact('pageTitle', 'products', 'sections', 'sizes', 'categories', 'brands'));
     }
+
+    public function productsFilter(Request $request)
+    {
+        $query = Product::query()->where('status', 1);
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        if ($request->filled('brands')) {
+            $brands = $request->brands;
+            $query->where(function ($q) use ($brands) {
+                foreach ($brands as $brand) {
+                    $q->orWhere('brand_name', 'like', "%{$brand}%");
+                }
+            });
+        }
+
+        if ($request->filled('categories')) {
+            $query->whereIn('category_id', $request->categories);
+        }
+
+        if ($request->filled('sizes')) {
+            $query->whereHas('sizes', function ($q) use ($request) {
+                $q->whereIn('sizes.id', $request->sizes);
+            });
+        }
+
+        if ($request->filled('min_price') && $request->filled('max_price')) {
+            $query->whereBetween('price', [$request->min_price, $request->max_price]);
+        }
+
+        if ($request->filled('ordering')) {
+            switch ($request->ordering) {
+                case 'latest':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+                case 'low_price':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'high_price':
+                    $query->orderBy('price', 'desc');
+                    break;
+                default:
+                    $query->latest();
+                    break;
+            }
+        } else {
+            $query->latest();
+        }
+
+        $products = $query->get();
+        $productCounts = $products->count();
+        $html = view('Template::components.filter_product', compact('products'))->render();
+
+        return response()->json([
+            'html' => $html,
+            'pCount' => $productCounts,
+        ]);
+    }
+
 
     public function productDetails($slug, $id)
     {

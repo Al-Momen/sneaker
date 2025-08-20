@@ -123,33 +123,33 @@ Route::middleware('admin')->group(function () {
     });
 
     // Category
-    Route::controller('CategoryController')->name('category.')->prefix('category')->group(function () {
+    Route::middleware('admin.permission:category-management')->controller('CategoryController')->name('category.')->prefix('category')->group(function () {
         Route::get('/{status?}', 'index')->name('index');
         Route::post('store', 'store')->name('store');
         Route::post('update/{id}', 'update')->name('update');
     });
 
     // Color
-    Route::controller('ColorController')->name('color.')->prefix('color')->group(function () {
+    Route::middleware('admin.permission:color-management')->controller('ColorController')->name('color.')->prefix('color')->group(function () {
         Route::get('/{status?}', 'index')->name('index');
         Route::post('store', 'store')->name('store');
         Route::post('update/{id}', 'update')->name('update');
     });
 
     // Size
-    Route::controller('SizeController')->name('size.')->prefix('size')->group(function () {
+    Route::middleware('admin.permission:size-management')->controller('SizeController')->name('size.')->prefix('size')->group(function () {
         Route::get('/{status?}', 'index')->name('index');
         Route::post('store', 'store')->name('store');
         Route::post('update/{id}', 'update')->name('update');
     });
 
-    Route::controller('ProductController')->name('auction.product.')->prefix('product')->group(function () {
+    Route::middleware('admin.permission:auction-management')->controller('ProductController')->name('auction.product.')->prefix('product')->group(function () {
         Route::post('auction/status/{id}', 'statusUpdate')->name('status');
         Route::get('auction/{status?}', 'auctionProduct')->name('index');
     });
 
     //Product
-    Route::controller('ProductController')->name('product.')->prefix('product')->group(function () {
+    Route::middleware('admin.permission:product-management')->controller('ProductController')->name('product.')->prefix('product')->group(function () {
         Route::get('/create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
         Route::get('edit/{id}', 'edit')->name('edit');
@@ -161,14 +161,14 @@ Route::middleware('admin')->group(function () {
 
 
     //Shipping
-    Route::controller('ShippingController')->name('shipping.')->prefix('shipping')->group(function () {
+    Route::middleware('admin.permission:shipping-management')->controller('ShippingController')->name('shipping.')->prefix('shipping')->group(function () {
         Route::get('/{status?}', 'index')->name('index');
         Route::post('store', 'store')->name('store');
         Route::post('update/{id}', 'update')->name('update');
     });
 
 
-    Route::controller('BidController')->name('bid.')->prefix('bid')->group(function () {
+    Route::middleware('admin.permission:bid-management')->controller('BidController')->name('bid.')->prefix('bid')->group(function () {
         Route::get('{id}/bids', 'productBids')->name('list');
         Route::get('winner', 'bidWinner')->name('winner');
         Route::get('purchase', 'purchase')->name('purchase');
@@ -178,7 +178,7 @@ Route::middleware('admin')->group(function () {
 
 
     //orders
-    Route::controller('OrderController')->name('orders.')->prefix('orders')->group(function () {
+    Route::middleware('admin.permission:order-management')->controller('OrderController')->name('orders.')->prefix('orders')->group(function () {
         Route::get('order-detail/{id}', 'orderDetail')->name('details');
         Route::post('order-status-update/{id}', 'orderStatusUpdate')->name('status.update');
         Route::get('vendor/orders/{status?}', 'vendorOrder')->name('vendor');

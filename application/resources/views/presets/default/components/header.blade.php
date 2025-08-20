@@ -209,9 +209,8 @@
                 <li>
                     <a class="dropdown-item lang-change @if (Session::get('lang') === $language->code) selected @endif"
                         href="javascript:void(0)" data-lang="{{ $language->code }}">
-                        <img class="flag--img"
-                            src="{{ getImage(getFilePath('language') . '/' . $language->icon ?? '', getFileSize('language')) }}"
-                            alt="@lang('Icon')">
+                        <img src="{{ asset('assets/images/frontend/icon/globe.png') }}" alt="@lang('Icon')">
+                            
                         {{ __($language->name ?? '') }}
 
                     </a>

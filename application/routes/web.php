@@ -71,6 +71,7 @@ Route::controller('SiteController')->group(function () {
 
 
     Route::get('product', 'product')->name('product');
+    Route::get('products-filter', 'productsFilter')->name('products.filter');
     Route::get('product-details/{slug}/{id}', 'productDetails')->name('product.details');
 
     Route::get('/{slug}', 'pages')->name('pages');

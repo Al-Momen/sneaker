@@ -156,28 +156,28 @@
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item {{ menuActive(['admin.category.*']) }}">
+                                <li class="sidebar-menu-item {{ menuActive(['admin.category.index']) }}">
                                     <a class="nav-link" href="{{ route('admin.category.index') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('Categories')</span>
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item {{ menuActive(['admin.size.*']) }}">
+                                <li class="sidebar-menu-item {{ menuActive(['admin.size.index']) }}">
                                     <a class="nav-link" href="{{ route('admin.size.index') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('Sizes')</span>
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item {{ menuActive(['admin.color.*']) }}">
+                                <li class="sidebar-menu-item {{ menuActive(['admin.color.index']) }}">
                                     <a class="nav-link" href="{{ route('admin.color.index') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('Colors')</span>
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item {{ menuActive(['admin.bid.winner*']) }}">
+                                <li class="sidebar-menu-item {{ menuActive(['admin.bid.winner']) }}">
                                     <a class="nav-link" href="{{ route('admin.bid.winner') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('Winners')</span>
@@ -198,21 +198,21 @@
                         </a>
                         <div class="sidebar-submenu {{ menuActive(['admin.orders.*'], 2) }} ">
                             <ul>
-                                <li class="sidebar-menu-item {{ menuActive('admin.orders.*') }}">
+                                <li class="sidebar-menu-item {{ menuActive('admin.orders.index') }}">
                                     <a class="nav-link" href="{{ route('admin.orders.index') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('All Orders')</span>
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item {{ menuActive('admin.orders.*') }}">
+                                <li class="sidebar-menu-item {{ menuActive('admin.orders.vendor') }}">
                                     <a class="nav-link" href="{{ route('admin.orders.vendor') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('Vendor Orders')</span>
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item {{ menuActive('admin.orders.*') }}">
+                                <li class="sidebar-menu-item {{ menuActive('admin.orders.get') }}">
                                     <a class="nav-link" href="{{ route('admin.orders.get') }}">
                                         <i class="menu-icon fa-solid fa-circle"></i>
                                         <span class="menu-title"> @lang('In-house Orders')</span>
