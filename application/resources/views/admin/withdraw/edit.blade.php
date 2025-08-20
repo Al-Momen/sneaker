@@ -22,13 +22,13 @@
                         <div class="col-lg-8 col-sm-12">
                             <div class="form-group">
                                 <label>@lang('Name')</label>
-                                <input type="text" class="form-control" name="name" value="{{ $method->name }}" required />
+                                <input type="text" class="form-control" name="name" value="{{ $method->name }}" required >
                             </div>
 
                             <div class="form-group">
                                 <label>@lang('Currency')</label>
                                 <div class="input-group">
-                                    <input type="text" name="currency" class="form-control border-radius-5" value="{{ $method->currency }}" required />
+                                    <input type="text" name="currency" class="form-control border-radius-5" value="{{ $method->currency }}" required >
                                 </div>
                             </div>
 
@@ -36,7 +36,7 @@
                                 <label>@lang('Dollar Rate')</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg--primary text--white">1 {{ __($general->cur_text) }} = </span>
-                                    <input type="number" class="form-control" name="rate" value="{{ getAmount($method->rate) }}" min="0" step="any" required />
+                                    <input type="number" class="form-control" name="rate" value="{{ getAmount($method->rate) }}" min="0" step="any" required >
                                     <span class="currency_symbol input-group-text bg--primary text--white"></span>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                                     <label>@lang('Min')</label>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" name="min_limit"
-                                                            value="{{ getAmount($method->min_limit)}}" required />
+                                                            value="{{ getAmount($method->min_limit)}}" required >
                                                         <span class="input-group-text bg--primary"> {{
                                                             __($general->cur_text) }} </span>
                                                     </div>
@@ -66,7 +66,7 @@
                                                     <label>@lang('Max')</label>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" name="max_limit"
-                                                            value="{{getAmount($method->max_limit) }}" required />
+                                                            value="{{getAmount($method->max_limit) }}" required >
                                                         <span class="input-group-text bg--primary"> {{
                                                             __($general->cur_text) }} </span>
                                                     </div>
@@ -82,7 +82,7 @@
                                                     <label>@lang('Fixed')</label>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" name="fixed_charge"
-                                                            value="{{ getAmount($method->fixed_charge) }}" required />
+                                                            value="{{ getAmount($method->fixed_charge) }}" required >
                                                         <span class="input-group-text bg--primary"> {{
                                                             __($general->cur_text) }} </span>
                                                     </div>

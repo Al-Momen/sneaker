@@ -20,13 +20,13 @@
                     <div class="col-lg-8 col-sm-12">
                         <div class="form-group">
                             <label>@lang('Name')</label>
-                            <input type="text" class="form-control" name="name" required />
+                            <input type="text" class="form-control" name="name" required >
                         </div>
 
                         <div class="form-group">
                             <label>@lang('Currency')</label>
                             <div class="input-group">
-                                <input type="text" name="currency" class="form-control border-radius-5" required />
+                                <input type="text" name="currency" class="form-control border-radius-5" required >
                             </div>
                         </div>
 
@@ -34,7 +34,7 @@
                             <label>@lang('Dollar Rate')</label>
                             <div class="input-group">
                                 <span class="input-group-text bg--primary text--white">1 {{ __($general->cur_text) }} = </span>
-                                <input type="text" class="form-control" name="rate" required />
+                                <input type="text" class="form-control" name="rate" required >
                                 <span class="currency_symbol input-group-text bg--primary text--white"></span>
                             </div>
                         </div>
@@ -56,14 +56,14 @@
                                                 <div class="form-group">
                                                     <label>@lang('Min')</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="min_limit" required />
+                                                        <input type="text" class="form-control" name="min_limit" required >
                                                         <span class="input-group-text bg--primary text--white"> {{ __($general->cur_text) }} </span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group mb-0">
                                                     <label>@lang('Max')</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="max_limit" required />
+                                                        <input type="text" class="form-control" name="max_limit" required >
                                                         <span class="input-group-text bg--primary text--white"> {{__($general->cur_text) }} </span>
                                                     </div>
                                                 </div>
@@ -78,7 +78,7 @@
                                                 <div class="form-group">
                                                     <label>@lang('Fixed')</label>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="fixed_charge" required />
+                                                        <input type="text" class="form-control" name="fixed_charge" required >
                                                         <span class="input-group-text bg--primary text--white"> {{ __($general->cur_text) }} </span>
                                                     </div>
                                                 </div>

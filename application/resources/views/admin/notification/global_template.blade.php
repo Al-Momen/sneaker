@@ -45,7 +45,7 @@
                                                     <label class="fw-bold">@lang('Email Sent From') </label>
                                                     <input type="text" class="form-control "
                                                         placeholder="@lang('Email address')" name="email_from"
-                                                        value="{{ $general->email_from }}" required />
+                                                        value="{{ $general->email_from }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 mb-4">

@@ -21,7 +21,7 @@
             <i class="fa-regular fa-image fa-2x text-muted"></i>
         </div>
 
-        <img class="preview-image image--preview" src="{{ $imagePath }}" alt="{{ keyToTitle($name) }} @lang('Image')" />
+        <img class="preview-image image--preview" src="{{ $imagePath }}" alt="{{ keyToTitle($name) }} @lang('Image')" >
 
         <span class="remove-image cross--icon position-absolute d-flex align-items-center justify-content-center cursor-pointer">
             <i class="fa-solid fa-xmark"></i>
@@ -37,7 +37,7 @@
             @lang('Image will be resized into') <span class="text-black">{{ $size }}@lang('px')</span>
         </p>
     </div>
-    <input type="file" accept="{{ $accept }}" name="{{ $name }}" id="{{ $id }}" class="file-input" hidden @required($required)/>
+    <input type="file" accept="{{ $accept }}" name="{{ $name }}" id="{{ $id }}" class="file-input" hidden @required($required)>
 </div>
 
 @push('script')

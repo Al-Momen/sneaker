@@ -17,7 +17,7 @@
             <a href="javascript:void(0)" class="u-info dropdown-toggle d-flex align-items-center gap--12" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 <div class="user-thumb">
-                    <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}" alt="@lang('image')" />
+                    <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}" alt="@lang('image')" >
                 </div>
                 <div class="user--name d-flex align-items-center gap--12">
                     <div>

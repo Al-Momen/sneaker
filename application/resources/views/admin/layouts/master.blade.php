@@ -33,7 +33,7 @@
 
     @include('includes.notify')
     @stack('script-lib')
-
+    
     <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
 
     @stack('script')

@@ -17,7 +17,7 @@
                         <div class="footer-item--logo">
                             <a href="{{ route('home') }}" class="footer-logo-normal" id="footer-logo-normal">
                                 <img src="{{ getImage(getFilePath('logoIcon') . '/logo.png', '?' . time()) }}"
-                                    alt="@lang('logo')" />
+                                    alt="@lang('logo')" >
                             </a>
                         </div>
 
@@ -54,7 +54,7 @@
                             <form action="{{ route('subscribe') }}" method="POST">
                                 @csrf
                                 <input class="form--control footer-input pill w--70" name="email" type="text"
-                                    placeholder="@lang('Email Address')" />
+                                    placeholder="@lang('Email Address')">
                                 <button class="btn btn--base btn--lg pill" type="submit">
                                     @lang('SUBSCRIBE')
                                 </button>

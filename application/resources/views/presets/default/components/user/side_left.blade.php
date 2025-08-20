@@ -7,7 +7,7 @@
     <div class="logo-wrapper px-3">
         <a href="{{ route('home') }}" class="normal-logo" id="normal-logo">
             <img src="{{ getImage(getFilePath('logoIcon') . '/logo.png', '?' . time()) }}"
-                alt="{{ config('app.name') }}" /></a>
+                alt="{{ config('app.name') }}"></a>
     </div>
 
     <ul class="sidebar-menu-list">

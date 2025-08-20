@@ -37,7 +37,7 @@
                                 <label class="form-label">@lang('Attachments')</label> <small
                                     class="text-danger">@lang('Max 5 files can be uploaded'). @lang('Maximum upload size is')
                                     {{ ini_get('upload_max_filesize') }}</small>
-                                <input type="file" name="attachments[]" class="form-control form--control" />
+                                <input type="file" name="attachments[]" class="form-control form--control">
                                 <div id="fileUploadsContainer"></div>
                                 <p class="my-2 ticket-attachments-message text-muted">
                                     @lang('Allowed File Extensions'): .@lang('jpg'), .@lang('jpeg'), .@lang('png'),
@@ -128,7 +128,7 @@
                 fileAdded++;
                 $("#fileUploadsContainer").append(`
                     <div class="input-group my-3">
-                        <input type="file" name="attachments[]" class="form-control form--control" required />
+                        <input type="file" name="attachments[]" class="form-control form--control" required >
                         <button class="input-group-text btn--danger remove-btn"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 `)

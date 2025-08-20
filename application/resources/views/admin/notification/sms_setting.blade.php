@@ -57,7 +57,7 @@
                                     <label class="fw-bold">@lang('API Key') </label>
                                     <input type="text" class="form-control" placeholder="@lang('API Key')"
                                         name="clickatell_api_key"
-                                        value="{{ $general->sms_config?->clickatell?->api_key ?? '' }}" />
+                                        value="{{ $general->sms_config?->clickatell?->api_key ?? '' }}">
                                 </div>
                             </div>
                         </div>
@@ -69,13 +69,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="">@lang('API Key') </label>
-                                    <input type="text" class="form-control" placeholder="@lang('API Key')" name="nexmo_api_key" value="{{ $general->sms_config?->nexmo?->api_key ?? '' }}" />
+                                    <input type="text" class="form-control" placeholder="@lang('API Key')" name="nexmo_api_key" value="{{ $general->sms_config?->nexmo?->api_key ?? '' }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="">@lang('API Secret') </label>
-                                    <input type="text" class="form-control" placeholder="@lang('API Secret')" name="nexmo_api_secret" value="{{ $general->sms_config?->nexmo?->api_secret ?? '' }}" />
+                                    <input type="text" class="form-control" placeholder="@lang('API Secret')" name="nexmo_api_secret" value="{{ $general->sms_config?->nexmo?->api_secret ?? '' }}">
                                 </div>
                             </div>
                         </div>
@@ -87,19 +87,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="">@lang('Account SID') </label>
-                                    <input type="text" class="form-control" placeholder="@lang('Account SID')" name="account_sid" value="{{ $general->sms_config?->twilio?->account_sid ?? '' }}" />
+                                    <input type="text" class="form-control" placeholder="@lang('Account SID')" name="account_sid" value="{{ $general->sms_config?->twilio?->account_sid ?? '' }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="">@lang('Auth Token') </label>
-                                    <input type="text" class="form-control" placeholder="@lang('Auth Token')" name="auth_token" value="{{ $general->sms_config?->twilio?->auth_token ?? '' }}" />
+                                    <input type="text" class="form-control" placeholder="@lang('Auth Token')" name="auth_token" value="{{ $general->sms_config?->twilio?->auth_token ?? '' }}" >
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="">@lang('From Number') </label>
-                                    <input type="text" class="form-control" placeholder="@lang('From Number')" name="from" value="{{ $general->sms_config?->twilio?->from ?? '' }}" />
+                                    <input type="text" class="form-control" placeholder="@lang('From Number')" name="from" value="{{ $general->sms_config?->twilio?->from ?? '' }}" >
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                                                 <option value="post">@lang('POST')</option>
                                             </select>
                                         </span>
-                                        <input type="text" class="form-control" name="custom_api_url" value="{{ $general->sms_config?->custom->url ?? '' }}" placeholder="@lang('API URL')" />
+                                        <input type="text" class="form-control" name="custom_api_url" value="{{ $general->sms_config?->custom->url ?? '' }}" placeholder="@lang('API URL')" >
                                     </div>
                                 </div>
                             </div>

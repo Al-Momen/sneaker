@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label>{{ keyToTitle($k) }}</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control iconPicker icon" name="{{ $k }}" value="{{ $data->data_values->$k ?? '' }}" required />
+                                        <input type="text" class="form-control iconPicker icon" name="{{ $k }}" value="{{ $data->data_values->$k ?? '' }}" required >
 
                                         <span class="input-group-text  input-group-addon" data-icon="las la-home" role="iconpicker">@php echo $data->data_values->$k @endphp </span>
                                     </div>
@@ -88,7 +88,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>{{ __(keyToTitle($k)) }}</label>
-                                    <input type="text" class="form-control" name="{{ $k }}" value="{{ $data->data_values->$k ?? '' }}" required />
+                                    <input type="text" class="form-control" name="{{ $k }}" value="{{ $data->data_values->$k ?? '' }}" required >
                                 </div>
                             </div>
                         @endif

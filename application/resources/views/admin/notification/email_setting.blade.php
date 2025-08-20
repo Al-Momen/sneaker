@@ -67,14 +67,14 @@
                                     <div class="form-group">
                                         <label class="fw-bold">@lang('Host') </label>
                                         <input type="text" class="form-control" placeholder="e.g. @lang('smtp.googlemail.com')"
-                                            name="host" value="{{ $general->mail_config->host ?? '' }}" />
+                                            name="host" value="{{ $general->mail_config->host ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="fw-bold">@lang('Port') </label>
                                         <input type="text" class="form-control" placeholder="@lang('Available port')"
-                                            name="port" value="{{ $general->mail_config->port ?? '' }}" />
+                                            name="port" value="{{ $general->mail_config->port ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -90,14 +90,14 @@
                                     <div class="form-group">
                                         <label class="fw-bold">@lang('Username') </label>
                                         <input type="text" class="form-control" placeholder="@lang('Normally your email') address"
-                                            name="username" value="{{ $general->mail_config->username ?? '' }}" />
+                                            name="username" value="{{ $general->mail_config->username ?? '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="fw-bold">@lang('Password') </label>
                                         <input type="text" class="form-control" placeholder="@lang('Normally your email password')"
-                                            name="password" value="{{ $general->mail_config->password ?? '' }}" />
+                                            name="password" value="{{ $general->mail_config->password ?? '' }}">
                                     </div>
                                 </div>
                             </div>

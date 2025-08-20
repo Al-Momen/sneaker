@@ -58,7 +58,7 @@
                                          </div>
 
                                          <div class="user--thumb flex-shrink-0 position-relative d-flex">
-                                             <img class="fit--img" src="{{getImage(getFilePath('testimonial').$item->data_values->image)}}" alt="@lang('User image')" />
+                                             <img class="fit--img" src="{{getImage(getFilePath('testimonial').$item->data_values->image)}}" alt="@lang('User image')" >
                                          </div>
                                      </div>
                                  </div>

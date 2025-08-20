@@ -87,7 +87,7 @@
                                     <label class="form-label">@lang('Color Code')</label>
                                     <div class="image-group">
                                         <input type="color" name="code" id="inputColorCode" class="form-control mb-2"
-                                            required placeholder="@lang('Color Code')" />
+                                            required placeholder="@lang('Color Code')">
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                                     <label class="form-label">@lang('Color Code')</label>
                                     <div class="image-group">
                                         <input type="color" name="code" id="inputColorCode"
-                                            class="form-control mb-2" required placeholder="@lang('Color Code')" />
+                                            class="form-control mb-2" required placeholder="@lang('Color Code')">
                                     </div>
                                 </div>
                             </div>

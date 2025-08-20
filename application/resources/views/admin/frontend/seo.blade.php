@@ -45,7 +45,7 @@
                                         <div class="form-group">
                                             <label>@lang('Social Title')</label>
                                             <input type="text" class="form-control" name="social_title"
-                                                value="{{ $seo->data_values->social_title }}" required />
+                                                value="{{ $seo->data_values->social_title }}" required >
                                         </div>
                                         <div class="form-group">
                                             <label>@lang('Social Description')</label>

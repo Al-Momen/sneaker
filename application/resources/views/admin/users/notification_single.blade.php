@@ -11,7 +11,7 @@
                         <div class="form-group col-md-12">
                             <label class="fw-bold">@lang('Subject') </label>
                             <input type="text" class="form-control" placeholder="@lang('Email subject')" name="subject"
-                                required />
+                                required >
                         </div>
                         <div class="form-group col-md-12">
                             <label class="fw-bold">@lang('Message') </label>

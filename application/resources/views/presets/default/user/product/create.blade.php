@@ -133,7 +133,7 @@
                                                 <div class="file-upload">
                                                     <label class="form--label mb-2">@lang('Images')</label>
                                                     <input type="file" name="images[]" id="inputImages"
-                                                        class="form-control form--control mb-2" placeholder="Images" />
+                                                        class="form-control form--control mb-2" placeholder="Images" >
                                                 </div>
                                             </div>
                                         </div>
@@ -353,7 +353,7 @@
                     <div class="col-sm-12">
                         <div class="file-upload input-group mb-3">
                             <input type="file" name="images[]" id="inputImages" class="form-control form--control"
-                                 placeholder="@lang('Image')" />     
+                                 placeholder="@lang('Image')" >     
                                 <button class="input-group-text btn--danger remove-btn border-0"><i class="las la-times"></i></button>                                        
                         </div>
                     </div>

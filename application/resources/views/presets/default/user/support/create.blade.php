@@ -59,7 +59,7 @@
                                 <div class="file-upload">
                                     <label class="form--label">@lang('Attachments')</label>
                                     <input type="file" name="attachments[]" id="inputAttachments"
-                                        class="form--control mb-2" />
+                                        class="form--control mb-2" >
                                     <div id="fileUploadsContainer"></div>
                                     <small class="ticket-attachments-message text-muted">
                                         @lang('Allowed File Extensions'): .@lang('jpg'), .@lang('jpeg'), .@lang('png'),
@@ -104,7 +104,7 @@
                 fileAdded++;
                 $("#fileUploadsContainer").append(`
                         <div class="input-group my-3">
-                            <input type="file" name="attachments[]" class="form-control form--control" required />
+                            <input type="file" name="attachments[]" class="form-control form--control" required >
                             <button class="input-group-text btn--danger remove-btn"><i class="las la-times"></i></button>
                         </div>
                     `)

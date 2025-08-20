@@ -18,14 +18,14 @@
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <label>@lang('Name')</label>
-                                            <input type="text" class="form-control" name="name" value="{{ $method->name }}" required />
+                                            <input type="text" class="form-control" name="name" value="{{ $method->name }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <label>@lang('Currency')</label>
                                             <div class="input-group">
-                                                <input type="text" name="currency" class="form-control border-radius-5" value="{{ $method->singleCurrency->currency ?? '' }}" required />
+                                                <input type="text" name="currency" class="form-control border-radius-5" value="{{ $method->singleCurrency->currency ?? '' }}" required >
                                             </div>
                                         </div>
                                     </div>
@@ -34,7 +34,7 @@
                                             <label>@lang('Dollar Rate')</label>
                                             <div class="input-group">
                                                 <span class="input-group-text bg--primary">1 {{ __($general->cur_text) }} =</span>
-                                                <input type="text" class="form-control" name="rate" value="{{ getAmount($method->singleCurrency->rate ?? 0) }}" required />
+                                                <input type="text" class="form-control" name="rate" value="{{ getAmount($method->singleCurrency->rate ?? 0) }}" required >
                                                 <span class="currency_symbol input-group-text bg--primary"></span>
                                             </div>
                                         </div>
@@ -48,14 +48,14 @@
                                                 <div class="form-group">
                                                     <label>@lang('Min')</label>
                                                     <div class="input-group">
-                                                        <input type="number" class="form-control" name="min_limit" value="{{ getAmount($method->singleCurrency->min_amount ?? 0)}}" min="0" step="1" required />
+                                                        <input type="number" class="form-control" name="min_limit" value="{{ getAmount($method->singleCurrency->min_amount ?? 0)}}" min="0" step="1" required >
                                                         <span class="input-group-text bg--primary"> {{ __($general->cur_text) }} </span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>@lang('Max')</label>
                                                     <div class="input-group">
-                                                        <input type="number" class="form-control" name="max_limit" value="{{getAmount($method->singleCurrency->max_amount ?? 0) }}" min="0" step="1" required />
+                                                        <input type="number" class="form-control" name="max_limit" value="{{getAmount($method->singleCurrency->max_amount ?? 0) }}" min="0" step="1" required >
                                                         <span class="input-group-text bg--primary"> {{ __($general->cur_text) }} </span>
                                                     </div>
                                                 </div>
@@ -69,7 +69,7 @@
                                                 <div class="form-group">
                                                     <label>@lang('Fixed')</label>
                                                     <div class="input-group">
-                                                        <input type="number" class="form-control" name="fixed_charge" value="{{ getAmount($method->singleCurrency->fixed_charge ?? 0) }}"  required min="0" step="any" />
+                                                        <input type="number" class="form-control" name="fixed_charge" value="{{ getAmount($method->singleCurrency->fixed_charge ?? 0) }}"  required min="0" step="any">
                                                         <span class="input-group-text bg--primary"> {{  __($general->cur_text) }} </span>
                                                     </div>
                                                 </div>

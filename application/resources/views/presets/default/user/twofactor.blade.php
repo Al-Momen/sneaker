@@ -15,7 +15,7 @@
                         <label class="form--label" for="key">@lang('Setup Key')</label>
                         <div class="input-group">
                             <input type="text" value="{{ $secret }}" class="form-control form--control referralURL"
-                                readonly="" id="key" />
+                                readonly="" id="key" >
                             <button type="button" class="input-group-text btn btn--base copytext" id="copyBoard">
                                 <i class="fa fa-copy"></i>
                             </button>

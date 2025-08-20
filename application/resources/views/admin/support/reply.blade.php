@@ -40,7 +40,7 @@
                                 <div class="col-9">
                                     <div class="file-upload-wrapper" data-text="@lang('Select your file!')">
                                         <input type="file" name="attachments[]" id="inputAttachments"
-                                            class="file-upload-field" />
+                                            class="file-upload-field" >
                                     </div>
                                 </div>
                                 <div class="col-3 d-flex justify-content-start align-items-center">
@@ -177,7 +177,7 @@
                 $("#fileUploadsContainer").append(`
                     <div class="row">
                         <div class="col-9">
-                            <div class="file-upload-wrapper" data-text="@lang('Select your file!')"><input type="file" name="attachments[]" id="inputAttachments" class="file-upload-field"/></div>
+                            <div class="file-upload-wrapper" data-text="@lang('Select your file!')"><input type="file" name="attachments[]" id="inputAttachments" class="file-upload-field"></div>
                         </div>
                         <div class="col-3 d-flex justify-content-start align-items-center">
                             <button type="button" class="btn btn--danger btn-sm extraTicketAttachmentDelete"><i class="fa-solid fa-xmark ms-0"></i></button>

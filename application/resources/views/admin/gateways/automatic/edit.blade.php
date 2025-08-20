@@ -36,7 +36,7 @@
                                                 <label>{{ __($param->title ?? '') }}</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control"
-                                                        value="{{ route($param->value) }}" readonly />
+                                                        value="{{ route($param->value) }}" readonly>
                                                     <button type="button" class="copyInput input-group-text bg--primary"
                                                         title="@lang('Copy')"><i
                                                             class="fa fa-copy text--white"></i></button>
@@ -52,7 +52,7 @@
                                         <div class="form-group col-lg-6">
                                             <label>{{ __($param->title ?? '') }}</label>
                                             <input type="text" class="form-control" name="global[{{ $key }}]"
-                                                value="{{ $param->value ?? '' }}" required />
+                                                value="{{ $param->value ?? '' }}" required>
                                         </div>
                                     @endforeach
                                 </div>
@@ -160,7 +160,7 @@
                                                                             class="form-control"
                                                                             name="currency[{{ $currencyIndex }}][min_amount]"
                                                                             value="{{ getAmount($gatewayCurrency->min_amount) }}"
-                                                                            required />
+                                                                            required >
                                                                         <div class="input-group-text bg--primary text--white">
                                                                             {{ __($general->cur_text) }}</div>
                                                                     </div>
@@ -174,7 +174,7 @@
                                                                             class="form-control"
                                                                             name="currency[{{ $currencyIndex }}][max_amount]"
                                                                             value="{{ getAmount($gatewayCurrency->max_amount) }}"
-                                                                            required />
+                                                                            required >
                                                                         <div class="input-group-text bg--primary text--white">
                                                                             {{ __($general->cur_text) }}</div>
                                                                     </div>
@@ -201,7 +201,7 @@
                                                                             class="form-control"
                                                                             name="currency[{{ $currencyIndex }}][fixed_charge]"
                                                                             value="{{ getAmount($gatewayCurrency->fixed_charge) }}"
-                                                                            required />
+                                                                            required >
                                                                         <div class="input-group-text bg--primary text--white">
                                                                             {{ __($general->cur_text) }}</div>
                                                                     </div>
@@ -215,7 +215,7 @@
                                                                             class="form-control"
                                                                             name="currency[{{ $currencyIndex }}][percent_charge]"
                                                                             value="{{ getAmount($gatewayCurrency->percent_charge) }}"
-                                                                            required />
+                                                                            required >
                                                                         <div class="input-group-text bg--primary text--white">%
                                                                         </div>
                                                                     </div>
@@ -244,7 +244,7 @@
                                                                                 name="currency[{{ $currencyIndex }}][currency]"
                                                                                 class="form-control border-radius-5 "
                                                                                 value="{{ $gatewayCurrency->currency }}"
-                                                                                readonly />
+                                                                                readonly >
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -255,7 +255,7 @@
                                                                                 class="form-control border-radius-5 symbl"
                                                                                 value="{{ $gatewayCurrency->symbol }}"
                                                                                 data-crypto="{{ $gateway->crypto }}"
-                                                                                required />
+                                                                                required >
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -270,13 +270,12 @@
                                                                 <input type="number" step="any" class="form-control"
                                                                     name="currency[{{ $currencyIndex }}][rate]"
                                                                     value="{{ getAmount($gatewayCurrency->rate) }}"
-                                                                    required />
+                                                                    required >
                                                                 <div class="input-group-text bg--primary text--white"><span
                                                                         class="currency_symbol text-white">{{ __($gatewayCurrency->baseSymbol()) }}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                             </div>
                                                         </div>
 
@@ -305,7 +304,7 @@
                                                                             <input type="text" class="form-control"
                                                                                 name="currency[{{ $currencyIndex }}][param][{{ $key }}]"
                                                                                 value="{{ $globalParameters->$key }}"
-                                                                                required />
+                                                                                required >
                                                                         </div>
                                                                     </div>
                                                                 @endforeach
@@ -344,7 +343,7 @@
                                         <h4 id="payment_currency_name">@lang('Name')</h4>
                                         <input disabled type="hidden" class="form-control"
                                             name="currency[{{ $currencyIndex }}][name]" id="payment_currency_name_input"
-                                            required />
+                                            required>
                                     </div>
                                     <div class="remove-btn">
                                         <button title="@lang('Remove')" type="button"
@@ -375,7 +374,7 @@
                                                             <input disabled type="number" step="any"
                                                                 class="form-control"
                                                                 name="currency[{{ $currencyIndex }}][min_amount]"
-                                                                required />
+                                                                required >
                                                             <div class="input-group-text bg--primary text--white">
                                                                 {{ __($general->cur_text) }}
                                                             </div>
@@ -389,7 +388,7 @@
                                                             <input disabled type="number" step="any"
                                                                 class="form-control"
                                                                 name="currency[{{ $currencyIndex }}][max_amount]"
-                                                                required />
+                                                                required >
                                                             <div class="input-group-text bg--primary text--white">
                                                                 {{ __($general->cur_text) }}
                                                             </div>
@@ -416,7 +415,7 @@
                                                             <input disabled type="number" step="any"
                                                                 class="form-control"
                                                                 name="currency[{{ $currencyIndex }}][fixed_charge]"
-                                                                required />
+                                                                required >
                                                             <div class="input-group-text bg--primary text--white">
                                                                 {{ __($general->cur_text) }}
                                                             </div>
@@ -457,7 +456,7 @@
                                                                 <input disabled type="step"
                                                                     class="form-control currencyText border-radius-5"
                                                                     name="currency[{{ $currencyIndex }}][currency]"
-                                                                    readonly />
+                                                                    readonly >
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -466,7 +465,7 @@
                                                                 <input disabled type="text"
                                                                     name="currency[{{ $currencyIndex }}][symbol]"
                                                                     class="form-control border-radius-5 symbl"
-                                                                    ata-crypto="{{ $gateway->crypto }}" disabled />
+                                                                    ata-crypto="{{ $gateway->crypto }}" disabled >
                                                             </div>
                                                         </div>
                                                     </div>
@@ -481,7 +480,7 @@
                                                             </span>
                                                             <input disabled type="number" step="any"
                                                                 class="form-control"
-                                                                name="currency[{{ $currencyIndex }}][rate]" required />
+                                                                name="currency[{{ $currencyIndex }}][rate]" required >
                                                             <div class="input-group-text bg--primary text--white"><span
                                                                     class="currency_symbol text--white"></span>
                                                             </div>
@@ -503,7 +502,7 @@
                                                         <label>{{ __($param->title) }}</label>
                                                         <input disabled type="text" class="form-control"
                                                             name="currency[{{ $currencyIndex }}][param][{{ $key }}]"
-                                                            required />
+                                                            required >
                                                     </div>
                                                 </div>
                                             @endforeach

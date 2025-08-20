@@ -9,10 +9,10 @@
                         <div class="dashboard_profile_wrap">
                             <div class="profile_photo mb-2">
                                 <img src="{{ getImage(getFilePath('userProfile') . '/' . $user->image, getFileSize('userProfile')) }}"
-                                    id="profileImage" alt="@lang('user-image')" />
+                                    id="profileImage" alt="@lang('user-image')">
                                 <div class="photo_upload">
                                     <label for="photo_upload"><i class="fa-regular fa-image"></i></label>
-                                    <input id="photo_upload" type="file" name="image" class="upload_file" />
+                                    <input id="photo_upload" type="file" name="image" class="upload_file">
                                 </div>
                             </div>
                             <div class="profile-details">
@@ -75,14 +75,14 @@
                             <div class="form-group mb-3">
                                 <label for="lastname" class="form--label mb-2">@lang('Last Name')</label>
                                 <input type="text" class="form--control" id="lastname" name="lastname"
-                                    value="{{ $user->lastname }}"placeholder="@lang('Last Name')" required />
+                                    value="{{ $user->lastname }}"placeholder="@lang('Last Name')" required >
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group mb-3">
                                 <label class="form--label mb-2">@lang('Address')</label>
                                 <input type="text" class="form--control" placeholder="@lang('Address')" name="address"
-                                    value="{{ $user->address->address }}" />
+                                    value="{{ $user->address->address }}" >
                             </div>
                         </div>
                         <div class="col-lg-6">
