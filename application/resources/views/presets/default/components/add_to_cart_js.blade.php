@@ -169,6 +169,7 @@
             }
             if (data && !(data.replaceCart)) {
                 notify('error', data.message);
+                return false;
             }
 
             if (message) notify('success', message);
