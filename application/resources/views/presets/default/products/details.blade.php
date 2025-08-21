@@ -111,6 +111,36 @@
                                     {{ $general->cur_sym . showAmount($product->price) }}</hp>
                                 <h6 class="mb-0 text--black fs--16">{{ showAmount($product->discount) }}% @lang('OFF')
                                 </h6>
+
+
+                            </div>
+                            <div>
+                                @if ($product->type == 2 && $product->started_at < now())
+                                    <div class="price-item">
+                                        <p class="price-title">@lang('TIME LEFT')</p>
+                                        <div class="price">
+                                            <span class="icon"><i class="fa-solid fa-clock"></i></span>
+                                            <p>
+                                                @if ($product->end_date > now())
+                                                    <span id="countdown_{{ $product->id }}" class="countdown"
+                                                        data-date="{{ showDateTime($product->end_date, 'm/d/Y H:i:s') }}"></span>
+                                                @else
+                                                    <span>@lang('Closed')</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                @elseif($product->type == 2 && $product->started_at > now())
+                                    <div class="price-item">
+                                        <p class="price-title">@lang('START TIME')</p>
+                                        <div class="price">
+                                            <span class="icon"><i class="fa-solid fa-clock"></i></span>
+                                            <span id="countdown_{{ $product->id }}" class="countdown"
+                                                data-date="{{ showDateTime($product->start_date, 'm/d/Y H:i:s') }}"></span>
+
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                             <div class="btn--wrap d-flex flex-column gap--24">
                                 <div class="product--info__item d-flex gap--12 mb-0">
@@ -205,7 +235,7 @@
                                             <input type="hidden" name="star" id="rating" value="0">
 
                                             <div class="review-box mb-4" bis_skin_checked="1">
-                                          
+
                                                 <div class="d-flex align-items-center star rating-wrap rating-stars mb-3 gap-1"
                                                     bis_skin_checked="1">
                                                     <i class="far fa-star star--color" data-rating="1"></i>
@@ -360,11 +390,11 @@
                                 <div class="form-group mb-3">
                                     <label class="mb-2 form--label">@lang('Bid Amount')</label>
                                     <input type="number" class="form--control" name="price"
-                                        placeholder="@lang('Enter Your Price')" step="any" min="1"
-                                        value="" required>
+                                        placeholder="@lang('Enter Your Price')" step="any" min="1" value=""
+                                        required>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                     <div class="modal-footer">

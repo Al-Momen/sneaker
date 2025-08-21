@@ -26,7 +26,7 @@
 </head>
 
 <body>
-   
+
     @include($activeTemplate . 'components.loader')
 
     @if (!isBreadcrumbRoute())
@@ -91,6 +91,50 @@
             }, 2000);
 
         })(jQuery);
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('.countdown').each(function() {
+                let element = $(this);
+                let endDate = new Date(element.data('date')).getTime();
+
+                function updateCountdown() {
+                    let now = new Date().getTime();
+                    let distance = endDate - now;
+
+                    if (distance <= 0) {
+                        element.text("Closed");
+                        return false; // Stop update
+                    }
+
+                    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    element.text(
+                        (days > 0 ? days + "d " : "") +
+                        ("0" + hours).slice(-2) + "h " +
+                        ("0" + minutes).slice(-2) + "m " +
+                        ("0" + seconds).slice(-2) + "s"
+                    );
+
+                    return true;
+                }
+
+
+                if (updateCountdown()) {
+
+                    let interval = setInterval(function() {
+                        if (!updateCountdown()) {
+                            clearInterval(interval);
+                        }
+                    }, 1000);
+                }
+            });
+        });
     </script>
 
 </body>

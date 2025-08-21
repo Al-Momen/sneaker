@@ -45,7 +45,7 @@
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center gap--8">
             <p class="fs--14 fw--500">@lang('Sizes')</p>
-            
+
             <p class="fs--14 fw--500 text--black">
                 @forelse ($product->sizes as $item)
                     {{ $item->size }}
@@ -56,6 +56,32 @@
                     <h6 class="text-center">@lang('Size not available')</h6>
                 @endforelse
             </p>
+            @if ($product->type == 2 && $product->started_at < now())
+                <div class="price-item">
+                    <p class="price-title">@lang('TIME LEFT')</p>
+                    <div class="price">
+                        <span class="icon"><i class="fa-solid fa-clock"></i></span>
+                        <p>
+                            @if ($product->end_date > now())
+                                <span id="countdown_{{ $product->id }}" class="countdown"
+                                    data-date="{{ showDateTime($product->end_date, 'm/d/Y H:i:s') }}"></span>
+                            @else
+                                <span>@lang('Closed')</span>
+                            @endif
+                        </p>
+                    </div>
+                </div>
+            @elseif($product->type == 2 && $product->started_at > now())
+                <div class="price-item">
+                    <p class="price-title">@lang('START TIME')</p>
+                    <div class="price">
+                        <span class="icon"><i class="fa-solid fa-clock"></i></span>
+                        <span id="countdown_{{ $product->id }}" class="countdown"
+                            data-date="{{ showDateTime($product->start_date, 'm/d/Y H:i:s') }}"></span>
+
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 

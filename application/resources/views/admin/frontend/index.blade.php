@@ -23,7 +23,7 @@
                                                 <input type="hidden" name="has_image" value="1">
                                                 <div class="form-group">
                                                     <label>{{ __(keyToTitle($imgKey)) }}</label>
-                                                    <x-image-uploader name="image_input[{{ $imgKey }}]" :imagePath="getImage('assets/images/frontend/' . $key . '/' . ($content->data_values->$imgKey ?? ''), $section->content->images->$imgKey->size)" :size="$section->content->images->$imgKey->size" :required="false" class="w-100" id="image-upload-input{{ $loop->index }}" >
+                                                    <x-image-uploader name="image_input[{{ $imgKey }}]" :imagePath="getImage('assets/images/frontend/' . $key . '/' . ($content->data_values->$imgKey ?? ''), $section->content->images->$imgKey->size)" :size="$section->content->images->$imgKey->size" :required="false" class="w-100" id="image-upload-input{{ $loop->index }}" />
                                                 </div>
                                             </div>
                                         @endforeach
@@ -75,7 +75,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>{{ __(keyToTitle($k)) }}</label>
-                                                        <input type="text" class="form-control" name="{{ $k }}" value="{{ $content->data_values->$k ?? '' }}" required >
+                                                        <input type="text" class="form-control" name="{{ $k }}" value="{{ $content->data_values->$k ?? '' }}" required />
                                                     </div>
                                                 </div>
                                             @endif
@@ -275,7 +275,7 @@
                                     @else
                                         <div class="form-group">
                                             <label>{{ __(keyToTitle($k)) }}</label>
-                                            <input type="text" class="form-control" name="{{ $k }}" required >
+                                            <input type="text" class="form-control" name="{{ $k }}" required />
                                         </div>
                                     @endif
                                 @endif
@@ -365,7 +365,7 @@
                                     @else
                                         <div class="form-group">
                                             <label>{{ keyToTitle($k) }}</label>
-                                            <input type="text" class="form-control" name="{{ $k }}" required >
+                                            <input type="text" class="form-control" name="{{ $k }}" required />
                                         </div>
                                     @endif
                                 @endif
@@ -453,7 +453,7 @@
                 $(document).off('focusin.modal');
             });
             $('.iconPicker').iconpicker().on('iconpickerSelected', function(e) {
-               
+                console.log('Selected icon: ' + e.iconpickerValue);
                 $(this).closest('.form-group').find('.iconpicker-input').val(`<i class="${e.iconpickerValue}"></i>`);
             });
 
