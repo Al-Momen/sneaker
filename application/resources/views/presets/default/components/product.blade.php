@@ -87,9 +87,18 @@
     <div class="cta--wrap d-flex justify-content-between align-items-center">
         <div class="price--wrap d-flex align-items-center gap--8">
             <h6 class="price fs--24 fw--600 mb-0">
-                {{ $general->cur_sym . discountPrice($product->price, $product->discount) }}</h6>
-            <span
-                class="text-decoration-line-through text--black7">{{ $general->cur_sym . showAmount($product->price) }}</span>
+                @if ($product->type == 1)
+                    {{ $general->cur_sym . discountPrice($product->price, $product->discount) }}
+                @else
+                    {{ $general->cur_sym . discountPrice($product->min_price, $product->discount) }}
+                @endif
+            </h6>
+            <span class="text-decoration-line-through text--black7">
+                @if ($product->type == 1)
+                    {{ $general->cur_sym . showAmount($product->price) }}
+                @endif
+
+            </span>
         </div>
 
         <div class="btn--wrap">
