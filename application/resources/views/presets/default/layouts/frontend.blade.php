@@ -97,40 +97,37 @@
     <script>
         $(document).ready(function() {
             $('.countdown').each(function() {
-                let element = $(this);
-                let endDate = new Date(element.data('date')).getTime();
+                const element = $(this);
+                const endDate = new Date(element.data('date')).getTime();
 
                 function updateCountdown() {
-                    let now = new Date().getTime();
-                    let distance = endDate - now;
+                    const now = Date.now();
+                    const distance = endDate - now;
 
                     if (distance <= 0) {
                         element.text("Closed");
-                        return false; // Stop update
+                        return false;
                     }
 
-                    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                     element.text(
                         (days > 0 ? days + "d " : "") +
-                        ("0" + hours).slice(-2) + "h " +
-                        ("0" + minutes).slice(-2) + "m " +
-                        ("0" + seconds).slice(-2) + "s"
+                        String(hours).padStart(2, "0") + "h " +
+                        String(minutes).padStart(2, "0") + "m " +
+                        String(seconds).padStart(2, "0") + "s"
                     );
 
                     return true;
                 }
 
-
+                // প্রথমবার সাথে সাথেই show করানো হলো
                 if (updateCountdown()) {
-
-                    let interval = setInterval(function() {
-                        if (!updateCountdown()) {
-                            clearInterval(interval);
-                        }
+                    const interval = setInterval(() => {
+                        if (!updateCountdown()) clearInterval(interval);
                     }, 1000);
                 }
             });

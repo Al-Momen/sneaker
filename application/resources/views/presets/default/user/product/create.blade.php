@@ -82,7 +82,7 @@
                                 <div class="col-lg-4 mb-4">
                                     <label for="min-price" class="form--label mb-2">@lang('Starting Price')</label>
                                     <div class="input-group">
-                                        <input type="number" name="min_price" id="min-price" min="0" max="100"
+                                        <input type="number" name="min_price" id="min-price" min="1" max="100"
                                             step="any" value="{{ old('min_price') }}" class="form--control"
                                             placeholder="@lang('Product Min Price')">
 
@@ -244,7 +244,7 @@
                         <div class="form-group">
                             <label for="meta_description" class="form--label mb-2">@lang('Meta Description')</label>
                             <textarea class="form--control" name="meta_description" id="meta_description" rows="10"
-                                placeholder="@lang('Meta Description')">{{ old('shipping_returns') }}</textarea>
+                                placeholder="@lang('Meta Description')">{{ old('meta_description') }}</textarea>
                         </div>
                     </div>
 

@@ -1,6 +1,8 @@
 @php
     $keys = !empty($cartItem) ? array_keys($cartItem) : [];
     $isAdded = in_array($product->id, $keys);
+    $counterEndDate = \Carbon\Carbon::parse($product->end_date);
+    $counterStartDate = \Carbon\Carbon::parse($product->start_date);
 @endphp
 <div class="product--card position-relative radius--12">
     <div class="card--widgets w-100 position-absolute d-flex justify-content-between">
@@ -62,12 +64,9 @@
                     <div class="price">
                         <span class="icon"><i class="fa-solid fa-clock"></i></span>
                         <p>
-                            @if ($product->end_date > now())
-                                <span id="countdown_{{ $product->id }}" class="countdown"
-                                    data-date="{{ showDateTime($product->end_date, 'm/d/Y H:i:s') }}"></span>
-                            @else
-                                <span>@lang('Closed')</span>
-                            @endif
+
+                            <span id="countdown_{{ $product->id }}" class="countdown"
+                                data-date="{{ $counterEndDate->toIsoString() }}"></span>
                         </p>
                     </div>
                 </div>
@@ -77,7 +76,7 @@
                     <div class="price">
                         <span class="icon"><i class="fa-solid fa-clock"></i></span>
                         <span id="countdown_{{ $product->id }}" class="countdown"
-                            data-date="{{ showDateTime($product->start_date, 'm/d/Y H:i:s') }}"></span>
+                            data-date="{{ $counterStartDate->toIsoString() }}"></span>
 
                     </div>
                 </div>

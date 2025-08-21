@@ -585,3 +585,5 @@ function authTypeCheck()
     }
     return $type;
 }
+
+

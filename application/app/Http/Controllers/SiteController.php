@@ -257,6 +257,7 @@ class SiteController extends Controller
 
         $products = Product::with(['category', 'firstImage', 'wishlists',])
             ->where('status', 1)
+            ->where('type', 1)
             ->inRandomOrder()
             ->take(4)
             ->get();
