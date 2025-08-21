@@ -24,6 +24,8 @@
                             </option>
                             <option value="disable" {{ request()->status == 'disable' ? 'selected' : '' }}>@lang('Disable')
                             </option>
+                            <option value="expired_auction_product" {{ request()->status == 'expired_auction_product' ? 'selected' : '' }}>@lang('Expired Auction')
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -47,14 +49,13 @@
                                             <th>@lang('Image')</th>
                                             <th>@lang('Name')</th>
                                             <th>@lang('Category')</th>
-                                            <th>@lang('Regular Price')</th>
-                                            <th>@lang('Discount')</th>
+                                            <th>@lang('Starting Price')</th>
                                             <th>@lang('Status')</th>
                                             <th>@lang('Action')</th>
                                         </tr>
                                     </thead>
                                     <tbody id="items_table__body">
-                                        @include('Template::components.user.tables.product_data')
+                                        @include('Template::components.user.tables.auction_data')
                                     </tbody>
                                 </table>
                             </div>

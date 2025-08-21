@@ -20,17 +20,10 @@
             @endif
         </td>
 
-        <td data-label="@lang('Regular Price')">
-            {{ $general->cur_sym }}{{ showAmount($item->price) }}
+        <td data-label="@lang('Starting Price')">
+            {{ $general->cur_sym }}{{ showAmount($item->min_price) }}
         </td>
 
-        <td data-label="@lang('Discount')">
-            @if (isset($item->discount))
-                {{ showAmount($item->discount) }}%
-            @else
-                <span>@lang('No')</span>
-            @endif
-        </td>
 
         <td data-label="@lang('Status')">
             @php echo $item->statusBadge($item->status); @endphp

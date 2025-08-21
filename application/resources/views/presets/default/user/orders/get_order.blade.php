@@ -32,7 +32,7 @@
                              <option value="completed" {{ request()->status == 'completed' ? 'selected' : '' }}>
                                 @lang('Completed')
                             </option>
-                            <option value="reject" {{ request()->status == 'reject' ? 'selected' : '' }}>@lang('Rejected')
+                            <option value="reject" {{ request()->status == 'reject' ? 'selected' : '' }}>@lang('Canceled')
                             </option>
                         </select>
                     </div>

@@ -13,9 +13,9 @@ use App\Http\Controllers\Controller;
 
 class BidController extends Controller
 {
-
     public function auctionProduct($status = 'all')
     {
+        
         $user = auth()->user();
         $query = Product::with(['category', 'firstImage', 'wishlists'])
             ->where('author_id', $user->id)
@@ -66,7 +66,7 @@ class BidController extends Controller
     public function winningHistory()
     {
         $pageTitle = 'Winning Bid list';
-        $winningBids = BidWinner::with('bid.product')->where('user_id',auth()->id())
+        $winningBids = BidWinner::with('bid.product')->where('user_id', auth()->id())
             ->latest()->paginate(getPaginate());
         return view('UserTemplate::bid.winning_bid', compact('winningBids', 'pageTitle'));
     }
@@ -78,8 +78,20 @@ class BidController extends Controller
             'price'      => ['required', 'numeric', 'min:0']
         ]);
 
+
+
         $product = Product::with('bids')->where('id', $request->product_id)->where('status', 1)->first();
         $highestBid = $product->bids->sortByDesc('price')->first()->price ?? $product->min_price;
+
+
+
+        if (auth('web')->check()) {
+            $user = auth('web')->user();
+            if ($user->id == $product->author_id && $product->author_type == 2) {
+                $notify[] = ['error', 'You cannot bid on your own product'];
+                return redirect()->back()->withNotify($notify);
+            }
+        }
 
 
         $user = auth()->user();

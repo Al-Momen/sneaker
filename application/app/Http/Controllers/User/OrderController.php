@@ -20,7 +20,6 @@ class OrderController extends Controller
             ->searchable(['order_number'])
             ->latest();
 
-
         switch ($status) {
             case 'initial':
                 $query->where('status', Status::ORDER_INITIATE);
@@ -86,7 +85,7 @@ class OrderController extends Controller
                     ->where('author_type', 2)
                     ->with('userAuthor'); // nested relation
             }])
-            ->whereIn('status', [1, 4, 5])
+            ->whereIn('status', [1,3, 4, 5, 6])
             ->searchable(['order_number'])
             ->latest();
 
@@ -150,7 +149,7 @@ class OrderController extends Controller
             ->findOrFail($id);
 
         if ($status == 3) {
-            $this->priceRefund($status, $order);
+            $this->priceRefund($status, $order->id);
         }
         if ($status == 6) {
             $this->distributeAuthorUserBalance($order->id);
@@ -164,8 +163,9 @@ class OrderController extends Controller
         return back()->withNotify($notify);
     }
 
-    public function priceRefund($status, $order)
+    public function priceRefund($status, $orderID)
     {
+        $order = Order::with('shipping')->findOrFail($orderID);
         $user = User::findOrFail($order->user_id);
         $user->balance += $order->total_price;
         $user->save();
@@ -194,16 +194,19 @@ class OrderController extends Controller
 
     public function distributeAuthorUserBalance($orderId)
     {
-        $order = Order::with('products')->find($orderId);
+        $order = Order::with('products', 'shipping')->find($orderId);
+        $productAmount = 0;
+
         foreach ($order->products as $product) {
             if ($product->author_type == 2) {
                 // Product author user
                 $pivotData = $product->pivot;
-                $amount = $pivotData->price * $pivotData->quantity;
+                $productAmount += $pivotData->price * $pivotData->quantity;
                 $author = User::where('id', $product->author_id)->first();
-                $author->increment('balance', $amount);
             }
         }
+        $orderAndShippingPrice = $productAmount + $order->shipping->charge;
+        $author->increment('balance', $orderAndShippingPrice);
         return 0;
     }
 }

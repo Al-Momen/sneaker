@@ -7,6 +7,11 @@ class Status{
     const ENABLE = 1;
     const DISABLE = 0;
 
+
+    const PRODUCT_DISABLE = 0;
+    const PRODUCT_ENABLE = 1;
+    const EXPIRED_AUCTION_PRODUCT = 2;
+
     const YES = 1;
     const NO = 0;
 

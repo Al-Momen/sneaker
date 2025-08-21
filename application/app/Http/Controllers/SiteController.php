@@ -383,7 +383,6 @@ class SiteController extends Controller
 
     public function getCart()
     {
-
         $pageTitle = "Your Cart";
         $cartItem = session('cart');
 
@@ -470,8 +469,14 @@ class SiteController extends Controller
 
     public function directAddToCart(Request $request)
     {
-        $product = Product::with('firstImage', 'category', 'wishlists')->findOrFail($request->productId);
 
+        if (!auth()->check()) {
+            $notify[] = ['error', 'Please login first'];
+            return redirect()->route('user.login')->withNotify($notify);
+        }
+
+
+        $product = Product::with('firstImage', 'category', 'wishlists')->findOrFail($request->productId);
         $cart = session()->get('cart', []);
 
         $productId = $product->id;

@@ -14,7 +14,7 @@ class OrderController extends Controller
 {
     public function index($status = 'all')
     {
-        
+
         $user = auth()->user();
         $query = Order::with(['product', 'deposit'])
             ->searchable(['order_number'])
@@ -208,7 +208,7 @@ class OrderController extends Controller
             ->findOrFail($id);
 
         if ($status == 3) {
-            $this->priceRefund($status, $order);
+            $this->priceRefund($status, $order->id);
         }
 
 
@@ -220,10 +220,14 @@ class OrderController extends Controller
         return back()->withNotify($notify);
     }
 
-    public function priceRefund($status, $order)
+    public function priceRefund($status, $orderID)
     {
+
+        $order = Order::with('shipping')->findOrFail($orderID);
+        $orderAndShippingPrice = $order->total_price;
+
         $user = User::findOrFail($order->user_id);
-        $user->balance += $order->total_price;
+        $user->balance += $orderAndShippingPrice;
         $user->save();
 
         $adminNotification            = new AdminNotification();
@@ -233,13 +237,13 @@ class OrderController extends Controller
         $adminNotification->save();
 
         notify($user, "ORDER_CANCELED", [
-            'price'        => showAmount($order->total_price),
+            'price'        => showAmount($orderAndShippingPrice),
             'order_number' => $order->order_number,
         ]);
 
         $transaction = new Transaction();
         $transaction->user_id = $order->user_id;
-        $transaction->amount = $order->total_price;
+        $transaction->amount = $orderAndShippingPrice;
         $transaction->post_balance = $user->balance;
         $transaction->trx_type = '+';
         $transaction->remark = 'order refund';
