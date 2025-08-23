@@ -33,7 +33,7 @@
                 </a>
                
                 @if ($item->deposit)
-                    <a href="{{ route('user.deposit.details', $item->deposit->id) }}" class="btn btn-sm"
+                    <a href="{{ route('admin.deposit.details', $item->deposit->id) }}" class="btn btn-sm"
                         title="@lang('Payment')">
                        <i class="fa-solid fa-money-bill-wave"></i>
                     </a>

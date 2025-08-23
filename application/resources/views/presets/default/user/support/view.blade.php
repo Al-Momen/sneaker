@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @endforeachl
                 </div>
             </div>
         </div>
