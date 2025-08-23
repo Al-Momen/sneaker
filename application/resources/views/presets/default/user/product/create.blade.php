@@ -82,7 +82,7 @@
                                 <div class="col-lg-4 mb-4">
                                     <label for="min-price" class="form--label mb-2 required">@lang('Starting Price')</label>
                                     <div class="input-group">
-                                        <input type="number" name="min_price" id="min-price" min="1" max="100"
+                                        <input type="number" name="min_price" id="min-price" min="1"
                                             step="any" value="{{ old('min_price') }}" class="form--control"
                                             placeholder="@lang('Product Min Price')">
 
