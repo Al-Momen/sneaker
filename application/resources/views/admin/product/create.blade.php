@@ -57,7 +57,8 @@
                                 </div>
 
 
-                                <div class="col-lg-4 mb-4 productPrice {{ old('type') != null && old('type') == 2 ? 'd-none' : '' }}">
+                                <div
+                                    class="col-lg-4 mb-4 productPrice {{ old('type') != null && old('type') == 2 ? 'd-none' : '' }}">
                                     <label for="price" class="form-label">@lang('Price')</label>
                                     <div class="form-group">
                                         <input type="number" name="price" id="price" value="{{ old('price') }}"
@@ -83,8 +84,8 @@
                                             <label for="min-price" class="form-label">@lang('Starting Price')</label>
                                             <div class="input-group">
                                                 <input type="number" name="min_price" id="min-price" min="0"
-                                                     step="any" value="{{ old('min_price') }}"
-                                                    class="form-control" placeholder="@lang('Product Min Price')">
+                                                    step="any" value="{{ old('min_price') }}" class="form-control"
+                                                    placeholder="@lang('Product Min Price')">
 
                                             </div>
                                         </div>
@@ -134,7 +135,7 @@
                                                             <label class="form-label">@lang('Images')</label>
                                                             <input type="file" name="images[]" id="inputImages"
                                                                 class="form-control form--control mb-2"
-                                                                placeholder="Images" >
+                                                                placeholder="Images">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,48 +164,24 @@
                                     </div>
                                 </div>
 
-
-                                <div class="col-lg-12 size_and_quantity {{ old('type') != null && old('type') == 2 ? 'd-none' : '' }}">
+                                <div
+                                    class="col-lg-12 size_and_quantity {{ old('type') != null && old('type') == 2 ? 'd-none' : '' }}">
                                     <div class="mb-4 p-4 rounded border">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <div class="text-end">
-                                                    <button type="button"
-                                                        class="btn btn--primary btn--sm mb-3 addSizeAndQuantityTemplate">
-                                                        <i class="fa fa-plus"></i> @lang('Add New')
-                                                    </button>
-                                                </div>
-                                                {{-- Default Row --}}
-                                                <div class="row size_and_quantity_row">
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="size"
-                                                                class="form-label">@lang('Size')</label>
-                                                            <select class="form-control size-select form-select"
-                                                                name="size_quantity[0][size]" required>
-                                                                <option value="0" selected disabled>@lang('Select Size')
-                                                                </option>
-                                                                @foreach ($sizes as $size)
-                                                                    <option value="{{ $size->id }}"
-                                                                        data-name="{{ $size->name }}">
-                                                                        {{ __($size->size) }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="quantity"
-                                                                class="form-label">@lang('Quantity')</label>
-                                                            <input type="text" name="size_quantity[0][quantity]"
-                                                                id="quantity" value="{{ old('quantity') ?? 1 }}"
-                                                                class="form-control" placeholder="@lang('Product Size Quantity')"
-                                                                required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="sizeAndQuantityTemplateContainer">
+                                                <div class="size_and_quantity_row">
+                                                    <label>@lang('Sizes')</label>
+                                                    <small class="ms-2 mt-2">@lang('Separate size name by')
+                                                        <code>,</code>(@lang('comma')) @lang('or')
+                                                        <code>@lang('enter')</code>
+                                                        @lang('key')</small>
+                                                    <select name="sizes[]" class="form-control select2-auto-tokenize-size" multiple="multiple">
+                                                        @foreach ($sizes as $size)
+                                                            <option value="{{ $size->size }}">
+                                                                {{ __($size->size) }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -225,7 +202,6 @@
                                         placeholder="@lang('Shipping & Returns')">{{ old('shipping_returns') }}</textarea>
                                 </div>
                             </div>
-
 
                             <div class="col-lg-12">
                                 <div class="form-group">
@@ -249,37 +225,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hidden template row -->
-    <div id="sizeAndQuantityTemplate" class="d-none">
-        <div class="size_and_quantity_row size_and_quantity_template" data-index="__index__">
-            <div class="row">
-            <div class="col-lg-12 text-end mb-2">
-                <button type="button" class="btn btn--danger btn--sm deleteRow">
-                    <i class="fa fa-trash"></i> @lang('Delete')
-                </button>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form-label">@lang('Size')</label>
-                    <select class="form-control size-select form-select" name="size_quantity[__index__][size]" required>
-                        <option value="" selected disabled>@lang('Select Size')</option>
-                        @foreach ($sizes as $size)
-                            <option value="{{ $size->id }}">{{ __($size->size) }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form-label">@lang('Quantity')</label>
-                    <input type="number" value="1" name="size_quantity[__index__][quantity]" class="form-control"
-                        placeholder="@lang('Product Size Quantity')" required>
-                </div>
-            </div>
             </div>
         </div>
     </div>
@@ -380,7 +325,6 @@
             $('.select2-auto-tokenize').on('change', function() {
                 const selectedOptions = $(this).find('option:selected');
                 const container = $('#colorRowsContainer');
-
                 const existingRows = {};
                 container.find('.color-row').each(function() {
                     const colorId = $(this).data('color-id');
@@ -416,6 +360,14 @@
                         existingRows[colorId].remove();
                     }
                 });
+            });
+
+
+            $('.select2-auto-tokenize-size').select2({
+                dropdownParent: $('.card-body'),
+                tags: false,
+                placeholder: "Select Sizes",
+                tokenSeparators: [','],
             });
 
         })(jQuery);
@@ -456,64 +408,8 @@
                     $('.normalImage').removeClass('d-none');
                     $('.colorImage').addClass('d-none');
                     $('.discountInput').addClass('d-none');
-
                 }
             });
-
-
-
-            let index = 1; // index 0 already used in default
-            const sizesCount = {{ count($sizes) }} + 1;
-
-            function getSelectedSizes() {
-                let selected = [];
-                $('select[name^="size_quantity"]').each(function() {
-                    let val = $(this).val();
-                    if (val) selected.push(val);
-                });
-                return selected;
-            }
-
-            function updateOptions() {
-                const selectedSizes = getSelectedSizes();
-
-                $('select.size-select').each(function() {
-                    let currentVal = $(this).val();
-                    $(this).find('option').each(function() {
-                        let optionVal = $(this).val();
-                        if (optionVal && optionVal !== currentVal) {
-                            $(this).prop('disabled', selectedSizes.includes(optionVal));
-                        } else {
-                            $(this).prop('disabled', false);
-                        }
-                    });
-                });
-            }
-
-            $(document).on('change', 'select.size-select', function() {
-                updateOptions();
-            });
-
-            $('.addSizeAndQuantityTemplate').on('click', function() {
-
-                if ($('.size-select').length >= sizesCount) {
-                    notify('error', 'All sizes already selected.');
-                    return;
-                }
-
-                let templateHtml = $('#sizeAndQuantityTemplate').html();
-                let newHtml = templateHtml.replaceAll('__index__', index);
-                $('#sizeAndQuantityTemplateContainer').append(newHtml);
-                ++index;
-                updateOptions();
-            });
-
-            $(document).on('click', '.deleteRow', function() {
-                $(this).closest('.size_and_quantity_row').remove();
-                updateOptions();
-            });
-
-            updateOptions(); // Initial Function Call
         });
     </script>
 @endpush

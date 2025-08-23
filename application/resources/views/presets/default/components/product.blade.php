@@ -49,8 +49,9 @@
             <p class="fs--14 fw--500">@lang('Sizes')</p>
 
             <p class="fs--14 fw--500 text--black">
-                @forelse ($product->sizes as $item)
-                    {{ $item->size }}
+                
+                @forelse ($product->sizes ?? [] as $item)
+                    {{ $item }}
                     @if (!$loop->last)
                         ,
                     @endif

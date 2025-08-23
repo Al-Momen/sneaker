@@ -37,7 +37,6 @@ class ProductController extends Controller
                 break;
         }
         $products = $query->paginate(getPaginate());
-
         if (request()->ajax()) {
             return response()->json([
                 'html' => view('Admin::components.tables.product_data', compact('products'))->render(),
@@ -114,11 +113,11 @@ class ProductController extends Controller
         }
 
         if ($request->type == 2) {
-            $request->merge(['size_quantity' => []]);
+            $request->merge(['sizes' => []]);
         }
 
-        if ($request->type == 1 && !$request->has('size_quantity') && !is_array($request->size_quantity)) {
-            $notify[] = ['error', 'At least one size and quantity must be provided.'];
+        if ($request->type == 1 && !$request->has('sizes') && !is_array($request->sizes)) {
+            $notify[] = ['error', 'At least one sizes and quantity must be provided.'];
             return back()->withInput($request->all())->withNotify($notify);
         }
 
@@ -152,9 +151,8 @@ class ProductController extends Controller
             'min_price'                => $request->type == 2 ? 'numeric|min:1' : 'nullable',
             'start_date'               => $request->type == 2 ? 'date|after:yesterday|before:end_date' : 'nullable',
             'end_date'                 => $request->type == 2 ? 'date|after:start_date' : 'nullable',
-            'size_quantity'            => $request->type == 1 ? 'required|array' : 'nullable',
-            'size_quantity.*.size'     => $request->type == 1 ? 'required|not_in:0|exists:sizes,id' : 'nullable',
-            'size_quantity.*.quantity' => $request->type == 1 ? 'required|numeric' : 'nullable',
+            'sizes'                    => $request->type == 1 ? 'required|array' : 'nullable',
+            'sizes.*'                  => $request->type == 1 ? 'required|not_in:0|exists:sizes,id' : 'nullable',
         ]);
 
         // Validate color_images
@@ -198,7 +196,7 @@ class ProductController extends Controller
             $product->type                 = $request->type;
             $product->name                 = $request->name;
             $product->brand_name           = $request->brand_name;
-            $product->is_size              = (count($request->size_quantity) > 0 && $request->type == 1) ? 1 : 0;
+            $product->is_size              = (count($request->sizes) > 0 && $request->type == 1) ? 1 : 0;
             $product->is_color             = $request->is_color ? 1 : 0;
             $product->category_id          = $request->category;
             $product->price                = $request->type == 1 ? $request->price : 0;
@@ -210,15 +208,10 @@ class ProductController extends Controller
             $product->description          = $purifier->purify($request->description);
             $product->shipping_description = $purifier->purify($request->shipping_returns);
             $product->meta_description     = $purifier->purify($request->meta_description);
+            $product->sizes                = $request->type == 1 ? $request->sizes : null;
             $product->status               = 1;
-            $product->admin_status         = 1;
             $product->save();
 
-            if ($request->type == 1) {
-                foreach ($request->size_quantity as $sizeQuantity) {
-                    $product->sizes()->attach($sizeQuantity['size'], ['quantity' => $sizeQuantity['quantity']]);
-                }
-            }
 
             try {
                 $images = [];
@@ -267,6 +260,7 @@ class ProductController extends Controller
         $categories = Category::where('status', 1)->latest()->get();
         $sizes = Size::where('status', 1)->latest()->get();
         $usedColorIds = $product->images->pluck('color_id')->toArray();
+        
 
         return view('admin.product.edit', compact('pageTitle', 'categories', 'product', 'colors', 'usedColorIds', 'sizes'));
     }
@@ -293,7 +287,7 @@ class ProductController extends Controller
         }
 
         if ($request->type == 2) {
-            $request->merge(['size_quantity' => []]);
+            $request->merge(['sizes' => []]);
         }
 
         // when type is 2, start date is required
@@ -309,26 +303,26 @@ class ProductController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'name'                     => 'required|string|max:255',
-            'brand_name'               => 'required|string',
-            'category'                 => 'required|exists:categories,id',
-            'price'                    => 'required_if:type,1' . ($product->type == 1 ? '|min:1|numeric' : ''),
-            'discount'                 => 'nullable|' . ($product->type == 1 ? '|between:0,99.99|numeric' : ''),
-            'description'              => 'required|string',
-            'shipping_returns'         => 'required|string',
-            'meta_title'               => 'nullable|string',
-            'meta_description'         => 'nullable|string',
-            'code_id'                  => 'nullable|array',
-            'code_id.*'                => 'nullable|numeric',
-            'color_images'             => ($request->is_color ? 'required' : 'nullable') . '|array',
-            'images'                   => 'nullable|array',
-            'images.*'                 => 'nullable|image|mimes:jpeg,png,jpg,webp',
-            'min_price'                => $product->type == 2 ? 'numeric|min:1' : 'nullable',
-            'start_date'               => $product->type == 2 ? 'date|after:yesterday|before:end_date' : 'nullable',
-            'end_date'                 => $product->type == 2 ? 'date|after:start_date' : 'nullable',
-            'size_quantity'            => $product->type == 1 ? 'required|array' : 'nullable|array',
-            'size_quantity.*.size'     => $product->type == 1 ? 'required|not_in:0|exists:sizes,id' : 'nullable',
-            'size_quantity.*.quantity' => $product->type == 1 ? 'required|numeric' : 'nullable',
+            'name'             => 'required|string|max:255',
+            'brand_name'       => 'required|string',
+            'category'         => 'required|exists:categories,id',
+            'price'            => 'required_if:type,1' . ($product->type == 1 ? '|min:1|numeric' : ''),
+            'discount'         => 'nullable|' . ($product->type == 1 ? '|between:0,99.99|numeric' : ''),
+            'description'      => 'required|string',
+            'shipping_returns' => 'required|string',
+            'meta_title'       => 'nullable|string',
+            'meta_description' => 'nullable|string',
+            'code_id'          => 'nullable|array',
+            'code_id.*'        => 'nullable|numeric',
+            'color_images'     => ($request->is_color ? 'required' : 'nullable') . '|array',
+            'images'           => 'nullable|array',
+            'images.*'         => 'nullable|image|mimes:jpeg,png,jpg,webp',
+            'min_price'        => $product->type == 2 ? 'numeric|min:1' : 'nullable',
+            'start_date'       => $product->type == 2 ? 'date|after:yesterday|before:end_date' : 'nullable',
+            'end_date'         => $product->type == 2 ? 'date|after:start_date' : 'nullable',
+            'sizes'            => $product->type == 1 ? 'required|array' : 'nullable|array',
+            'sizes.*'          => $product->type == 1 ? 'required|not_in:0|exists:sizes,id' : 'nullable',
+
         ]);
 
         // Validate color_images
@@ -359,14 +353,15 @@ class ProductController extends Controller
             }
             return redirect()->back()->withNotify($notify)->withInput();
         }
-
+  
+    
         DB::beginTransaction();
         try {
             $purifier                      = new \HTMLPurifier();
             $product->product_code         = getTrx(8);
             $product->name                 = $request->name;
             $product->brand_name           = $request->brand_name;
-            $product->is_size              = (count($request->size_quantity) > 0 &&  $request->type == 1) ? 1 : 0;
+            $product->is_size              = (count($request->sizes) > 0 &&  $request->type == 1) ? 1 : 0;
             $product->category_id          = $request->category;
             $product->price                = $product->type == 1 ? $request->price : 0;
             $product->min_price            = ($product->type == 2 && $product->start_date > now()) ? $request->min_price : $product->min_price;
@@ -377,17 +372,8 @@ class ProductController extends Controller
             $product->description          = $purifier->purify($request->description);
             $product->shipping_description = $purifier->purify($request->shipping_returns);
             $product->meta_description     = $purifier->purify($request->meta_description);
+            $product->sizes                = $product->type == 1 ? $request->sizes : null;
             $product->save();
-
-            if ($product->type == 1 && $request->has('size_quantity')) {
-                $syncData = [];
-                foreach ($request->size_quantity as $sizeQuantity) {
-                    $sizeId = $sizeQuantity['size'];
-                    $quantity = $sizeQuantity['quantity'];
-                    $syncData[$sizeId] = ['quantity' => $quantity];
-                }
-                $product->sizes()->sync($syncData);
-            }
 
             try {
                 $images = [];

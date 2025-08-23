@@ -57,7 +57,7 @@
                                 <div class="input-group">
                                     <input type="number" name="discount" min="0" max="100" step="any"
                                         value="{{ showAmount($product->discount, 2, false) }}" class="form-control">
-                                    <span class="input-group-text">%</span>
+                                    <span class="input-group-text text--base">%</span>
                                 </div>
                             </div>
 
@@ -170,88 +170,30 @@
                                 <div class="mb-4 p-4 rounded border">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <div class="text-end">
-                                                <button type="button"
-                                                    class="btn btn--primary btn--sm mb-3 addSizeAndQuantityTemplate">
-                                                    <i class="fa fa-plus"></i> @lang('Add New')
-                                                </button>
-                                            </div>
                                             {{-- Default Row --}}
                                             <div class="row size_and_quantity_row">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-12">
                                                     <div class="form-group">
-                                                        <label for="size"
-                                                            class="form-label">@lang('Size')</label>
-                                                        <select class="form-control size-select form-select"
-                                                            name="size_quantity[0][size]" required>
-                                                            <option value="0" disabled
-                                                                {{ old('size_quantity.0.size') ? '' : 'selected' }}>
-                                                                @lang('Select Size')</option>
 
-                                                            @foreach ($sizes as $size)
-                                                                <option value="{{ $size->id }}"
-                                                                    data-name="{{ $size->name }}"
-                                                                    {{ isset($product->sizes[0]) && $product->sizes[0]->id == $size->id ? 'selected' : '' }}>
-                                                                    {{ __($size->size) }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="quantity"
-                                                            class="form-label">@lang('Quantity')</label>
-                                                        <input type="text" name="size_quantity[0][quantity]"
-                                                            id="quantity"
-                                                            value="{{ old('size_quantity.0.quantity', $product->sizes[0]->pivot->quantity ?? 1) }}"
-                                                            class="form-control" placeholder="@lang('Product Size Quantity')"
-                                                            required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="sizeAndQuantityTemplateContainer">
-                                                @foreach ($product->sizes->skip(1) as $item)
-                                                    <div class="row size_and_quantity_row size_and_quantity_template"
-                                                        data-index="{{ $loop->iteration }}">
-                                                        <div class="col-lg-12 text-end mb-2">
-                                                            <button type="button"
-                                                                class="btn btn--danger btn--sm deleteRow">
-                                                                <i class="fa fa-trash"></i> @lang('Delete')
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label">@lang('Size')</label>
-                                                                <select class="form-control size-select form-select"
-                                                                    name="size_quantity[{{ $loop->iteration }}][size]"
-                                                                    required>
-                                                                    <option value="" disabled>@lang('Select Size')
+                                                        <div class="size_and_quantity_row">
+                                                            <label>@lang('Sizes')</label>
+                                                            <small class="ms-2 mt-2">@lang('Separate size name by')
+                                                                <code>,</code>(@lang('comma')) @lang('or')
+                                                                <code>@lang('enter')</code>
+                                                                @lang('key')</small>
+                                                            <select name="sizes[]"
+                                                                class="form-control select2-auto-tokenize-size"
+                                                                multiple="multiple">
+                                                                @foreach ($sizes as $size)
+                                                                    <option value="{{ $size->size }}"
+                                                                        {{ in_array($size->id, $product->sizes ?? []) ? 'selected' : '' }}>
+                                                                        {{ __($size->size) }}
                                                                     </option>
-                                                                    @foreach ($sizes as $size)
-                                                                        <option value="{{ $size->id }}"
-                                                                            {{ $item->id == $size->id ? 'selected' : '' }}>
-                                                                            {{ __($size->size) }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label">@lang('Quantity')</label>
-                                                                <input type="number"
-                                                                    name="size_quantity[{{ $loop->iteration }}][quantity]"
-                                                                    class="form-control"
-                                                                    value="{{ $item->pivot->quantity }}"
-                                                                    placeholder="@lang('Product Size Quantity')" required>
-                                                            </div>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -298,35 +240,6 @@
         </div>
     </div>
     <x-confirmation-modal></x-confirmation-modal>
-
-    <!-- Hidden template row -->
-    <div id="sizeAndQuantityTemplate" class="d-none">
-        <div class="row size_and_quantity_row size_and_quantity_template" data-index="__index__">
-            <div class="col-lg-12 text-end mb-2">
-                <button type="button" class="btn btn--danger btn--sm deleteRow">
-                    <i class="fa fa-trash"></i> @lang('Delete')
-                </button>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form-label">@lang('Size')</label>
-                    <select class="form-control size-select form-select" name="size_quantity[__index__][size]" required>
-                        <option value="" selected disabled>@lang('Select Size')</option>
-                        @foreach ($sizes as $size)
-                            <option value="{{ $size->id }}">{{ __($size->size) }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form-label">@lang('Quantity')</label>
-                    <input type="number" value="1" name="size_quantity[__index__][quantity]" class="form-control"
-                        placeholder="@lang('Product Size Quantity')" required>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @push('style-lib')
@@ -516,58 +429,12 @@
         $(document).ready(function() {
 
             'use strict';
-            let index = {{ count($sizes) }}; // index 0 already used in default
-            const sizesCount = {{ count($sizes) }} + 1;
-
-            function getSelectedSizes() {
-                let selected = [];
-                $('select[name^="size_quantity"]').each(function() {
-                    let val = $(this).val();
-                    if (val) selected.push(val);
-                });
-                return selected;
-            }
-
-            function updateOptions() {
-                const selectedSizes = getSelectedSizes();
-
-                $('select.size-select').each(function() {
-                    let currentVal = $(this).val();
-                    $(this).find('option').each(function() {
-                        let optionVal = $(this).val();
-                        if (optionVal && optionVal !== currentVal) {
-                            $(this).prop('disabled', selectedSizes.includes(optionVal));
-                        } else {
-                            $(this).prop('disabled', false);
-                        }
-                    });
-                });
-            }
-
-            $(document).on('change', 'select.size-select', function() {
-                updateOptions();
+            $('.select2-auto-tokenize-size').select2({
+                dropdownParent: $('.base--card'),
+                tags: false,
+                placeholder: "Select Sizes",
+                tokenSeparators: [','],
             });
-
-            $('.addSizeAndQuantityTemplate').on('click', function() {
-
-                if ($('.size-select').length >= sizesCount) {
-                    notify('error', 'All sizes already selected.');
-                    return;
-                }
-
-                let templateHtml = $('#sizeAndQuantityTemplate').html();
-                let newHtml = templateHtml.replaceAll('__index__', index);
-                $('#sizeAndQuantityTemplateContainer').append(newHtml);
-                ++index;
-                updateOptions();
-            });
-
-            $(document).on('click', '.deleteRow', function() {
-                $(this).closest('.size_and_quantity_row').remove();
-                updateOptions();
-            });
-
-            updateOptions(); // Initial Function Call
         });
     </script>
 @endpush

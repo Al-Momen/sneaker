@@ -84,7 +84,7 @@
                                     </div>
                                 @endif
 
-                                @if ($product->sizes->isNotEmpty())
+                                @if (!empty($product->sizes))
                                     <div class="product--variable">
                                         <p class="mb-2 fs--16 text--black">@lang('Size')</p>
                                         <div class="size-select--option d-flex gap--12 align-items-center">
@@ -92,11 +92,11 @@
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="form--radio size--radio">
                                                         <input class="form-radio-input" name="size" type="radio"
-                                                            value="{{ $size->id }}" id="size_{{ $size->id }}"
+                                                            value="{{ $size }}" id="size_{{ $size }}"
                                                             hidden>
                                                         <label class="form-check-label cursor-pointer"
-                                                            for="size_{{ $size->id }}">
-                                                            {{ $size->size }}
+                                                            for="size_{{ $size }}">
+                                                            {{ $size }}
                                                         </label>
                                                     </div>
                                                 </div>

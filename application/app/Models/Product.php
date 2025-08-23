@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $casts = [
-        'features' => 'object',
+        'sizes' => 'object',
     ];
 
     public function userAuthor()

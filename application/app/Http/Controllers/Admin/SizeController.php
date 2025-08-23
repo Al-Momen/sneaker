@@ -11,11 +11,8 @@ class SizeController extends Controller
 {
     public function index($status = 'all')
     {
-        
         $admin = auth()->guard('admin')->user();
-
         $query = Size::searchable(['size'])->latest();
-
         switch ($status) {
             case 'disable':
                 $query->where('status', Status::DISABLE);
