@@ -66,7 +66,7 @@
                         @elseif($order->status == 4)
                             <button class="btn btn--base btn--md mt-3 confirmationBtn text--white"
                                 data-action="{{ route('admin.orders.vendor.status.change', [5, $order->id]) }}"
-                                data-question="@lang('Are you sure you want to change the status of this order to delivered? Once confirmed, this action cannot be undone.')">@lang('Delivered')</button>
+                                data-question="@lang('Are you certain about changing the status of this order to delivered? Once confirmed, the update cannot be reverted.')">@lang('Delivered')</button>
                         @endif
                     </div>
                 @endif

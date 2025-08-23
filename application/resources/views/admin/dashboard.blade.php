@@ -294,7 +294,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @adminHas('dashboard')

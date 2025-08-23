@@ -108,16 +108,23 @@
 
                             <div class="product--info__item d-flex gap--16 align-items-center">
                                 <h6 class="fs--32 fw--600 mb-0">
-                                    {{ $general->cur_sym . discountPrice($product->price, $product->discount) }}</h6>
-                                <hp class="mb-0 text--black7 fs--16 text-decoration-line-through">
-                                    {{ $general->cur_sym . showAmount($product->price) }}</hp>
-                                <h6 class="mb-0 text--black fs--16">{{ showAmount($product->discount) }}% @lang('OFF')
+                                    @if ($product->type == 1)
+                                        {{ $general->cur_sym . discountPrice($product->price, $product->discount) }}
+                                    @else
+                                        {{ $general->cur_sym . showAmount($product->min_price) }}
+                                    @endif
                                 </h6>
-
-
+                                @if ($product->type == 1)
+                                    <h6 class="mb-0 text--black7 fs--16 text-decoration-line-through">
+                                        {{ $general->cur_sym . showAmount($product->price) }}
+                                    </h6>
+                                    <h6 class="mb-0 text--black fs--16">{{ showAmount($product->discount) }}%
+                                        @lang('OFF')
+                                    </h6>
+                                @endif
                             </div>
                             <div>
-                                @if ($product->type == 2 && $product->started_at < now())
+                                @if ($product->type == 2 && $product->start_date < now())
                                     <div class="price-item">
                                         <p class="price-title">@lang('TIME LEFT')</p>
                                         <div class="price">
@@ -132,7 +139,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                @elseif($product->type == 2 && $product->started_at > now())
+                                @elseif($product->type == 2 && $product->start_date > now())
                                     <div class="price-item">
                                         <p class="price-title">@lang('START TIME')</p>
                                         <div class="price">

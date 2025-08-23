@@ -445,8 +445,9 @@ class ProductController extends Controller
 
     public function statusUpdate($id)
     {
+       
         $product = Product::findOrFail($id);
-        $product->status = ($product->admin_status == 1) ? 0 : 1;
+        $product->status = ($product->status == 1) ? 0 : 1;
         $product->save();
         $notify[] = ['success', 'Product status Update successfully'];
         return back()->withNotify($notify);

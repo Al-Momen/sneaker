@@ -40,13 +40,16 @@
                     </a>
                 @endif
 
-                @if ($item->status == 0)
+                @if ($item->type == 2 && $item->start_date > now() && $item->status == 0)
                     <button title="@lang('Status')" type="button"
                         class="btn btn--success confirmationBtn text--white"
                         data-action="{{ route('user.product.status', $item->id) }}" data-question="@lang('Are you sure to change this product status?')">
                         <i class="fa-regular fa-circle-check"></i>
                     </button>
-                @else
+                @endif
+          
+
+                @if ($item->type == 2 && $item->start_date > now() && $item->status == 1)
                     <button title="@lang('Status')" type="button"
                         class="btn btn--danger confirmationBtn text--white"
                         data-action="{{ route('user.product.status', $item->id) }}" data-question="@lang('Are you sure to change this product status?')">

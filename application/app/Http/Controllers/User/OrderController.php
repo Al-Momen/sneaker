@@ -74,7 +74,7 @@ class OrderController extends Controller
 
     public function getOrder($status = 'all')
     {
-       
+
         $pageTitle = 'Get Order';
         $userId = auth()->id();
         $query = Order::whereHas('products', function ($q) {
@@ -86,7 +86,7 @@ class OrderController extends Controller
                     ->where('author_type', 2)
                     ->with('userAuthor'); // nested relation
             }])
-            ->whereIn('status', [1,3, 4, 5, 6])
+            ->whereIn('status', [1, 3, 4, 5, 6])
             ->searchable(['order_number'])
             ->latest();
 
@@ -197,17 +197,25 @@ class OrderController extends Controller
     {
         $order = Order::with('products', 'shipping')->find($orderId);
         $productAmount = 0;
+        $shippingAdded = false;
 
         foreach ($order->products as $product) {
             if ($product->author_type == 2) {
+              
                 // Product author user
                 $pivotData = $product->pivot;
                 $productAmount += $pivotData->price * $pivotData->quantity;
+
+
+                if (!$shippingAdded) {
+                    $productAmount += $order->shipping->charge;
+                    $shippingAdded = true;
+                }
+
                 $author = User::where('id', $product->author_id)->first();
+                $author->increment('balance', $productAmount);
             }
         }
-        $orderAndShippingPrice = $productAmount + $order->shipping->charge;
-        $author->increment('balance', $orderAndShippingPrice);
         return 0;
     }
 }

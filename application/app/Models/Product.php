@@ -85,7 +85,7 @@ class Product extends Model
         $html = '';
         if ($this->status == 1) {
             $html = '<span class="badge badge--success">' . trans('Active') . '</span>';
-        } elseif($this->type == 2 && $this->type == 2) {
+        } elseif($this->type == 2 && $this->status == 2) {
             $html = '<span class="badge badge--danger">' . trans('Expired') . '</span>';
         } else {
             $html = '<span class="badge badge--warning">' . trans('Inactive') . '</span>';

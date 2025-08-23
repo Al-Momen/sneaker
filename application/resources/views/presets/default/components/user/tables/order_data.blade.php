@@ -32,6 +32,7 @@
                     class="btn btn--base btn-md action--btn">
                     <i class="fa fa-eye"></i>
                 </a>
+                
             </div>
         </td>
     </tr>

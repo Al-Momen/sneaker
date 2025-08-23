@@ -27,14 +27,16 @@
        <div class="navbar__right">
 
            <ul class="navbar__action-list">
-               <li>
-                   <span class="badge {{ $cronClass }}">
-                       @lang('Last Cron Run')
-                       <strong>{{ diffForHumans($general->last_cron) }}</strong>
-                   </span>
-                   
-                <i class="fa-solid fa-circle-info" data-bs-toggle="modal" data-bs-target="#cronModal"></i>
-               </li>
+               @if (Route::is('admin.dashboard'))
+                   <li>
+                       <span class="badge {{ $cronClass }}">
+                           @lang('Last Cron Run')
+                           <strong>{{ diffForHumans($general->last_cron) }}</strong>
+                       </span>
+
+                       <i class="fa-solid fa-circle-info" data-bs-toggle="modal" data-bs-target="#cronModal"></i>
+                   </li>
+               @endif
 
                <li><span class="navbar-search-responsive-btn"><i class="fa-solid fa-magnifying-glass"></i></span></li>
                <li>

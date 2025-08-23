@@ -295,9 +295,16 @@
             })
         );
 
-        $('.paymentPrice').val(
-            truncateToTwo(totalFinalAmount)
-        );
+
+        let finalAmount = truncateToTwo(totalFinalAmount);
+
+        if (Number.isInteger(finalAmount)) {
+            $('.paymentPrice').val(finalAmount.toFixed(2));
+        } else {
+            $('.paymentPrice').val(finalAmount);
+        }
+
+
     });
 
     $(document).ready(function() {

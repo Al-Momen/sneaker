@@ -43,18 +43,22 @@
                     </a>
                 @endif
 
-                @if ($item->status == 0)
+                @if ($item->type == 2 && $item->start_date > now() && $item->status == 0)
                     <button title="@lang('Status')" type="button" class="btn btn--success confirmationBtn"
                         data-action="{{ route('admin.product.status', $item->id) }}" data-question="@lang('Are you sure to change this product status?')">
                         <i class="la la-check-circle"></i>
                     </button>
-                @else
+               @endif
+
+                 @if ($item->type == 2 && $item->start_date > now() && $item->status == 1)
                     <button title="@lang('Status')" type="button" class="btn btn--danger confirmationBtn"
                         data-action="{{ route('admin.product.status', $item->id) }}" data-question="@lang('Are you sure to change this product status?')">
                         <i class="la la-ban"></i>
                     </button>
                 @endif
 
+
+    
                 @if ($item->author_type == 1)
                     <a href="{{ route('admin.product.edit', $item->id) }}" class="btn btn--primary"><i
                             class="las la-edit"></i></a>

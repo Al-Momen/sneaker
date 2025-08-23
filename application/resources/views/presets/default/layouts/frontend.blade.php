@@ -96,6 +96,7 @@
 
     <script>
         $(document).ready(function() {
+            'use strict';
             $('.countdown').each(function() {
                 const element = $(this);
                 const endDate = new Date(element.data('date')).getTime();
