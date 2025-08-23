@@ -1,13 +1,4 @@
-   @php
-       $lastCron = Carbon\Carbon::parse($general->last_cron)->diffInSeconds();
 
-       $cronClass = '';
-       if ($lastCron < 300) {
-           $cronClass = 'badge--success';
-       } elseif ($lastCron > 900) {
-           $cronClass = 'badge--warning';
-       }
-   @endphp
 
    <nav class="navbar-wrapper">
        <div class="navbar__left">
@@ -27,17 +18,7 @@
        <div class="navbar__right">
 
            <ul class="navbar__action-list">
-               @if (Route::is('admin.dashboard'))
-                   <li>
-                       <span class="badge {{ $cronClass }}">
-                           @lang('Last Cron Run')
-                           <strong>{{ diffForHumans($general->last_cron) }}</strong>
-                       </span>
-
-                       <i class="fa-solid fa-circle-info" data-bs-toggle="modal" data-bs-target="#cronModal"></i>
-                   </li>
-               @endif
-
+              
                <li><span class="navbar-search-responsive-btn"><i class="fa-solid fa-magnifying-glass"></i></span></li>
                <li>
                    <a title="@lang('Visit Site')" href="{{ route('home') }}" target="_blank" class="btn btn-sm"><i
