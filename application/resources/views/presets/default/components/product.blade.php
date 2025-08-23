@@ -60,7 +60,6 @@
             </p>
 
             @if ($product->type == 2 && $product->start_date < now())
-        
                 <div class="price-item">
                     <p class="price-title">@lang('TIME LEFT')</p>
                     <div class="price">
@@ -73,7 +72,6 @@
                     </div>
                 </div>
             @elseif($product->type == 2 && $product->start_date > now())
-        
                 <div class="price-item">
                     <p class="price-title">@lang('START TIME')</p>
                     <div class="price">
@@ -105,10 +103,27 @@
         </div>
 
         <div class="btn--wrap">
-            <a href="{{ route('product.details', ['slug' => slug($product->name), 'id' => $product->id]) }}"
-                class="btn btn--base btn--md pill">
-                @lang($product->type == 1 ? 'SHOP NOW' : 'BID NOW')
-            </a>
+            @if ($product->type == 1)
+                <a href="{{ route('product.details', ['slug' => slug($product->name), 'id' => $product->id]) }}"
+                    class="btn btn--base btn--md pill"> @lang('SHOP NOW')
+                </a>
+            @else
+                @if ($product->start_date < now())
+                    @php
+                        $highestBid = $product->bids->sortByDesc('price')->first();
+                        $highestBidPrice = $highestBid ? $highestBid->price : $product->min_price;
+                    @endphp
+                    <button type="button" class="btn btn--base btn--md w--100 pills bidNow"
+                        data-product-id="{{ $product->id }}" data-product-title="{{ $product->name }}"
+                        data-product-price="{{ showAmount($highestBidPrice, 2) }}">@lang('BID NOW')</button>
+                @else
+                    <a href="{{ route('product.details', ['slug' => slug($product->name), 'id' => $product->id]) }}"
+                        class="btn btn--base btn--md pill"> @lang('Bid NOW')
+                    </a>
+                @endif
+            @endif
         </div>
     </div>
 </div>
+
+

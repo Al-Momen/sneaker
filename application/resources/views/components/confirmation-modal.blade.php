@@ -3,7 +3,7 @@
     if (auth()->guard('admin')->check()) {
         $activeClass = 'btn--sm btn--primary';
         $canceledClass = 'btn--sm btn--secondary';
-    } elseif (auth()->guard('web')->check()) {
+    } else{
         $activeClass = 'btn--base text--white';
         $canceledClass = 'btn--dark text--white';
     }

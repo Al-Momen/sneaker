@@ -48,6 +48,7 @@
     @endif
 
     @include($activeTemplate . 'components.cookie')
+    @include($activeTemplate . 'components.bid_modal')
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -125,7 +126,6 @@
                     return true;
                 }
 
-                // প্রথমবার সাথে সাথেই show করানো হলো
                 if (updateCountdown()) {
                     const interval = setInterval(() => {
                         if (!updateCountdown()) clearInterval(interval);

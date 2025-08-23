@@ -2,5 +2,5 @@
 
 return [
     'product.details' => false,
-    'villa' => false,
+    'home' => false,
 ];

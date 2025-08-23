@@ -48,8 +48,7 @@
                     </li>
                     <li
                         class="sidebar-submenu-list__item {{ Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
-                        <a href="{{ route('user.orders.get') }}"
-                            class="sidebar-submenu-list__link">@lang('Orders List')
+                        <a href="{{ route('user.orders.get') }}" class="sidebar-submenu-list__link">@lang('Orders List')
                             @if (0 < $vendorPendingOrderCount)
                                 <div class="blob white">
                                 </div>
@@ -69,6 +68,18 @@
                 <span class="text">@lang('My Orders List')</span>
             </a>
         </li>
+
+        
+        <li class="sidebar-menu-list__item">
+            <a href="{{ route('user.my.bid.history') }}"
+                class="sidebar-menu-list__link {{ Route::is('user.my.bid.history') ? 'active' : '' }}">
+                <span class="icon">
+                    <i class="fa-solid fa-gavel"></i>
+                </span>
+                <span class="text">@lang('My Bidding')</span>
+            </a>
+        </li>
+
 
         <li class="sidebar-menu-list__item">
             <a href="{{ route('user.bid.winning.history') }}"

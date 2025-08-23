@@ -15,7 +15,7 @@ class BidController extends Controller
 {
     public function auctionProduct($status = 'all')
     {
-        
+
         $user = auth()->user();
         $query = Product::with(['category', 'firstImage', 'wishlists'])
             ->where('author_id', $user->id)
@@ -60,6 +60,15 @@ class BidController extends Controller
             })
             ->latest()->paginate(getPaginate());
         return view('UserTemplate::bid.list', compact('bids', 'pageTitle'));
+    }
+
+
+    public function myBiddingHistory()
+    {
+        $pageTitle = 'My Bidding History';
+        $myBids = Bid::with('product', 'user')->where('user_id', auth()->id())
+            ->orderByDesc('updated_at')->paginate(getPaginate());
+        return view('UserTemplate::bid.my_bid_history', compact('myBids', 'pageTitle'));
     }
 
 

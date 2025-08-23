@@ -49,8 +49,6 @@ Route::middleware('auth')->name('user.')->group(function () {
         Route::get('user/data', 'User\UserController@userData')->name('data');
         Route::post('user/data/submit', 'User\UserController@userDataSubmit')->name('data.submit');
 
-
-
         Route::middleware('registration.complete')->namespace('User')->group(function () {
 
             Route::controller('UserController')->group(function () {
@@ -103,6 +101,7 @@ Route::middleware('auth')->name('user.')->group(function () {
             Route::controller('BidController')->group(function () {
                 Route::post('bid', 'bid')->name('bid');
                 Route::get('biding/list/{id}', 'list')->name('bid.list');
+                Route::get('my/bidding-history', 'myBiddingHistory')->name('my.bid.history');
                 Route::get('winning/history', 'winningHistory')->name('bid.winning.history');
             });
 

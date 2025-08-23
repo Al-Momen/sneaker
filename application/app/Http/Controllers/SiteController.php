@@ -436,7 +436,7 @@ class SiteController extends Controller
         }
 
         if (count($cart) <= 0) {
-            // session()->forget('coupon');
+            
         }
 
         $cartItemCount = count($cart);
