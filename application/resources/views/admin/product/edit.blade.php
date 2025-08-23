@@ -68,7 +68,7 @@
                                         <label for="min-price" class="form-label">@lang('Min Price')</label>
                                         <div class="input-group">
                                             <input type="number" name="min_price" id="min-price" min="0"
-                                                max="100" step="any" value="{{ showAmount($product->min_price) }}"
+                                                step="any" value="{{ showAmount($product->min_price) }}"
                                                 class="form-control" placeholder="@lang('Product Min Price')">
 
                                         </div>

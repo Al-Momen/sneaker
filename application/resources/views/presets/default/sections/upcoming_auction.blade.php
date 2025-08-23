@@ -1,10 +1,9 @@
     @php
-        $ownerFeatureContent = getContent('owner_feature.content', true);
+        $ownerFeatureContent = getContent('upcoming_auction.content', true);
         $products = App\Models\Product::with(['category', 'firstImage', 'wishlists', 'sizes'])
             ->where('status', 1)
             ->where('type', 2)
-            ->where('start_date','<', now())
-            ->where('end_date','>', now())
+            ->where('start_date','>', now())
             ->orderByDesc('review_count')
             ->take(8)
             ->get();

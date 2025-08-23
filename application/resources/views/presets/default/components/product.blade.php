@@ -58,7 +58,9 @@
                     <h6 class="text-center">@lang('Size not available')</h6>
                 @endforelse
             </p>
-            @if ($product->type == 2 && $product->started_at < now())
+
+            @if ($product->type == 2 && $product->start_date < now())
+        
                 <div class="price-item">
                     <p class="price-title">@lang('TIME LEFT')</p>
                     <div class="price">
@@ -70,7 +72,8 @@
                         </p>
                     </div>
                 </div>
-            @elseif($product->type == 2 && $product->started_at > now())
+            @elseif($product->type == 2 && $product->start_date > now())
+        
                 <div class="price-item">
                     <p class="price-title">@lang('START TIME')</p>
                     <div class="price">

@@ -313,7 +313,7 @@ class ProductController extends Controller
             'brand_name'               => 'required|string',
             'category'                 => 'required|exists:categories,id',
             'price'                    => 'required_if:type,1' . ($product->type == 1 ? '|min:1|numeric' : ''),
-            'discount'                 => 'nullable|' . ($product->type == 1 ? '|min:between:0,99.99|numeric' : ''),
+            'discount'                 => 'nullable|' . ($product->type == 1 ? '|between:0,99.99|numeric' : ''),
             'description'              => 'required|string',
             'shipping_returns'         => 'required|string',
             'meta_title'               => 'nullable|string',

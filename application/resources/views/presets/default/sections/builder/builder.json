@@ -32,7 +32,15 @@
 
     "owner_feature": {
         "builder": true,
-        "name": "Owner Section",
+        "name": "Live Auction Section",
+        "content": {
+            "heading": "text",
+            "short_details": "textarea"
+        }
+    },
+    "upcoming_auction": {
+        "builder": true,
+        "name": "Upcoming Section",
         "content": {
             "heading": "text",
             "short_details": "textarea"
