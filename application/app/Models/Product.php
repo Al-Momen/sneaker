@@ -56,10 +56,6 @@ class Product extends Model
         return $this->hasOne(ProductImage::class)->oldest();
     }
 
-    public function sizes()
-    {
-        return $this->belongsToMany(Size::class)->withPivot('quantity')->withTimestamps(); // optional
-    }
 
 
     public function images()

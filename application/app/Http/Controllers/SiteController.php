@@ -250,12 +250,12 @@ class SiteController extends Controller
     public function productDetails($slug, $id)
     {
         $pageTitle = 'Product Details';
-        $product = Product::with(['category', 'images.color', 'wishlists', 'sizes', 'bids'])->findOrFail($id);
+        $product = Product::with(['category', 'images.color', 'wishlists', 'bids'])->findOrFail($id);
         $highestBid = $product->bids->sortByDesc('price')->first();
 
         $highestBidPrice = $highestBid ? $highestBid->price : $product->min_price;
 
-        $products = Product::with(['category', 'firstImage', 'wishlists',])
+        $products = Product::with(['category', 'firstImage', 'wishlists'])
             ->where('status', 1)
             ->where('type', 1)
             ->inRandomOrder()

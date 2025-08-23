@@ -84,7 +84,7 @@
                                         <div class="input-group with--text mb-4">
                                             <input type="hidden" name="mobile_code">
                                             <input type="hidden" name="country_code">
-                                            <span class="input-group-text mobile-code"></span>
+                                            <span class="input-group-text mobile-code bg--base text--white"></span>
                                             <input type="number" name="mobile" value=""
                                                 class="form-control form--control checkUser text--white placeholder--white border--white7"
                                                 required="" id="inputPhoneNumber" placeholder="@lang('Enter number')">
@@ -195,8 +195,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="existModalLongTitle">@lang('You are with us')</h5>
-                    <span type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="las la-times"></i>
+                    <span type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                
                     </span>
                 </div>
                 <div class="modal-body">

@@ -152,7 +152,7 @@ class ProductController extends Controller
             'start_date'               => $request->type == 2 ? 'date|after:yesterday|before:end_date' : 'nullable',
             'end_date'                 => $request->type == 2 ? 'date|after:start_date' : 'nullable',
             'sizes'                    => $request->type == 1 ? 'required|array' : 'nullable',
-            'sizes.*'                  => $request->type == 1 ? 'required|not_in:0|exists:sizes,id' : 'nullable',
+            'sizes.*'                  => $request->type == 1 ? 'required|not_in:0' : 'nullable',
         ]);
 
         // Validate color_images
@@ -252,7 +252,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $pageTitle = 'Edit Product';
-        $product = Product::with('category', 'images.color', 'wishlists', "sizes")
+        $product = Product::with('category', 'images.color', 'wishlists')
             ->where('author_id', auth('admin')->id())
             ->where('author_type', 1)
             ->findOrFail($id);
@@ -267,7 +267,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::with('images', 'sizes')->findOrFail($id);
+        $product = Product::with('images')->findOrFail($id);
         $purifier = new \HTMLPurifier();
 
         if ($product->is_color) {
@@ -321,7 +321,7 @@ class ProductController extends Controller
             'start_date'       => $product->type == 2 ? 'date|after:yesterday|before:end_date' : 'nullable',
             'end_date'         => $product->type == 2 ? 'date|after:start_date' : 'nullable',
             'sizes'            => $product->type == 1 ? 'required|array' : 'nullable|array',
-            'sizes.*'          => $product->type == 1 ? 'required|not_in:0|exists:sizes,id' : 'nullable',
+            'sizes.*'          => $product->type == 1 ? 'required|not_in:0' : 'nullable',
 
         ]);
 

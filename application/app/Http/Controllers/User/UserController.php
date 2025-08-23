@@ -320,11 +320,12 @@ class UserController extends Controller
             $q->where('product_id', $product_id);
         })->where('user_id', $auth->id)
             ->where('status', 2)
-
             ->exists();
 
 
-        if ($isOrder) {
+
+
+        if (!$isOrder) {
             $notify[] = ['error', 'Please purchase this product first before reviewing it'];
             return back()->withNotify($notify);
         }

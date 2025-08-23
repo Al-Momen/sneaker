@@ -1,10 +1,10 @@
     @php
         $featureContent = getContent('feature.content', true);
-        $products = App\Models\Product::with(['category', 'firstImage', 'wishlists', 'sizes'])
+        $products = App\Models\Product::with(['category', 'firstImage', 'wishlists'])
             ->where('status', 1)
             ->where('type', 1)
             ->orderByDesc('review_count')
-            ->take(8)
+            ->take(16)
             ->get();
         $cartItem = session('cart');
 

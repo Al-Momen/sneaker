@@ -1,12 +1,12 @@
     @php
         $ownerFeatureContent = getContent('owner_feature.content', true);
-        $products = App\Models\Product::with(['category', 'firstImage', 'wishlists', 'sizes'])
+        $products = App\Models\Product::with(['category', 'firstImage', 'wishlists'])
             ->where('status', 1)
             ->where('type', 2)
             ->where('start_date','<', now())
             ->where('end_date','>', now())
             ->orderByDesc('review_count')
-            ->take(8)
+            ->take(16)
             ->get();
            
          $cartItem = session('cart');
