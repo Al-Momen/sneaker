@@ -29,6 +29,10 @@
                     <i class="fa-solid fa-shop"></i>
                 </span>
                 <span class="text">@lang('Vendor Options')</span>
+                @if (0 < $vendorPendingOrderCount)
+                    <div class="blob white">
+                    </div>
+                @endif
             </a>
             <div
                 class="sidebar-submenu {{ Route::is('user.product.index') || Route::is('user.auction.product.index') || Route::is('user.bid.list') || Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'd-block' : '' }} ">
@@ -45,7 +49,12 @@
                     <li
                         class="sidebar-submenu-list__item {{ Route::is('user.orders.get') || Route::is('user.orders.get.details') ? 'active' : '' }}">
                         <a href="{{ route('user.orders.get') }}"
-                            class="sidebar-submenu-list__link">@lang('Orders List')</a>
+                            class="sidebar-submenu-list__link">@lang('Orders List')
+                            @if (0 < $vendorPendingOrderCount)
+                                <div class="blob white">
+                                </div>
+                            @endif
+                        </a>
                     </li>
                 </ul>
             </div>

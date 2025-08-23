@@ -51,7 +51,7 @@
                     @if ($order->status == 5)
                         <button class="btn btn--base btn--md mt-3 confirmationBtn"
                             data-action="{{ route('user.orders.vendor.status.change', [6, $order->id]) }}"
-                            data-question="@lang('Are you sure to change this order completed?')">@lang('Completed')</button>
+                            data-question="@lang('Are you certain you want to mark this order as completed? Once confirmed, the status will be updated permanently.')">@lang('Completed')</button>
                     @endif
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     <li
                         class="list-group-item p-0 border-0 d-flex justify-content-between align-items-center bg--transparent">
                         @lang('Order Number')
-                        <span class="fw--600 badge badge--success">{{ $order->order_number }}</span>
+                        <span class="fw--600">{{ $order->order_number }}</span>
                     </li>
 
                     <li

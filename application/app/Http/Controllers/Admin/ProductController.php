@@ -59,14 +59,17 @@ class ProductController extends Controller
             ->latest();
 
         switch ($status) {
-            case 'disable':
-                $query->where('status', Status::DISABLE);
+             case 'disable':
+                $query->where('status', Status::PRODUCT_DISABLE);
                 break;
             case 'enable':
-                $query->where('status', Status::ENABLE);
+                $query->where('status', Status::PRODUCT_ENABLE);
+                break;
+            case 'expired_auction_product':
+                $query->where('status', Status::EXPIRED_AUCTION_PRODUCT);
                 break;
             case 'all':
-                $query->whereIn('status', [Status::ENABLE, Status::DISABLE]);
+                $query->whereIn('status', [Status::ENABLE, Status::DISABLE, Status::EXPIRED_AUCTION_PRODUCT]);
                 break;
             default:
                 break;
@@ -75,12 +78,12 @@ class ProductController extends Controller
         $products = $query->paginate(getPaginate());
         if (request()->ajax()) {
            return response()->json([
-                'html' => view('Admin::components.tables.product_data', compact('products'))->render(),
+                'html' => view('Admin::components.tables.auction_data', compact('products'))->render(),
                 'pagination' => $products->hasPages() ? view('Admin::components.pagination', ['items' => $products])->render() : '',
             ]);
         }
 
-        $pageTitle = ucfirst($status) . ' Products';
+        $pageTitle = ucfirst($status) . ' Auction Products';
         return view('Admin::product.auction', compact('products', 'pageTitle'));
     }
 

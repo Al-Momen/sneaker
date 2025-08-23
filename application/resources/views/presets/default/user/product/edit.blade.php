@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-lg-6 mb-4">
                             <div class="form-group">
-                                <label for="name" class="form--label mb-2">@lang('Name')</label>
+                                <label for="name" class="form--label mb-2 required">@lang('Name')</label>
                                 <input type="text" name="name" id="name" value="{{ $product->name }}"
                                     class="form--control" placeholder="@lang('Product Name')" required>
                             </div>
@@ -17,7 +17,7 @@
 
                         <div class="col-lg-6 mb-4">
                             <div class="form-group">
-                                <label for="category" class="form--label mb-2">@lang('Category')</label>
+                                <label for="category" class="form--label mb-2 required">@lang('Category')</label>
                                 <select name="category" class="form--control form-select" required>
                                     <option disabled>@lang('Select Category')</option>
                                     @foreach ($categories as $category)
@@ -33,7 +33,7 @@
 
                         <div class="col-lg-4 mb-4">
                             <div class="form-group">
-                                <label for="brand_name" class="form--label mb-2">@lang('Brand')</label>
+                                <label for="brand_name" class="form--label mb-2 required">@lang('Brand')</label>
                                 <input type="text" name="brand_name" id="brand_name" value="{{ $product->brand_name }}"
                                     class="form--control" placeholder="@lang('Brand Name')" required>
                             </div>
@@ -41,7 +41,7 @@
 
 
                         <div class="col-lg-4 mb-4 {{ $product->type == 2 ? 'd-none' : '' }} ">
-                            <label class="form--label mb-2">@lang('Price')</label>
+                            <label class="form--label mb-2 required">@lang('Price')</label>
                             <div class="input-group">
                                 <input type="text" name="price" value="{{ showAmount($product->price, 2, false) }}"
                                     class="form--control form--control form-control bg--white">
@@ -63,17 +63,17 @@
                         <div class="row auctionInput {{ $product->type == 1 ? 'd-none' : '' }}">
                             @if ($product->start_date > now())
                                 <div class="col-lg-4 mb-4">
-                                    <label for="min-price" class="form--label mb-2">@lang('Min Price')</label>
+                                    <label for="min-price" class="form--label mb-2 required">@lang('Starting Price')</label>
                                     <div class="input-group">
                                         <input type="number" name="min_price" id="min-price" min="0" max="100"
                                             step="any" value="{{ showAmount($product->min_price) }}"
-                                            class="form--control" placeholder="@lang('Product Min Price')">
+                                            class="form--control" placeholder="@lang('Product Starting Price')">
 
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 mb-4">
-                                    <label for="start_date" class="form--label mb-2">@lang('Start at')</label>
+                                    <label for="start_date" class="form--label mb-2 required">@lang('Start at')</label>
                                     <div class="form-group">
                                         <input type="datetime-local" name="start_date" id="start_date"
                                             value="{{ $product->start_date }}" class="form--control"
@@ -83,7 +83,7 @@
                             @endif
 
                             <div class="col-lg-4 mb-4">
-                                <label for="end_date" class="form--label mb-2">@lang('End at')</label>
+                                <label for="end_date" class="form--label mb-2 required">@lang('End at')</label>
                                 <div class="form-group">
                                     <input type="datetime-local" name="end_date" id="end_date"
                                         value="{{ $product->end_date }}" class="form--control"
@@ -96,7 +96,7 @@
                             <div class="p-4 rounded border mb-4">
                                 <div class="normalImage {{ old('is_color', $product->is_color) ? 'd-none' : '' }}">
                                     <div class="form-group">
-                                        <label class="form--label mb-2">@lang('Images')</label>
+                                        <label class="form--label mb-2 required">@lang('Images')</label>
                                         <input type="file" name="images[]" class="form--control mb-3">
                                         <div id="fileUploadsContainer"></div>
                                         <button type="button" class="btn btn--base btn--md addFile ">
@@ -121,7 +121,7 @@
                                 </div>
 
                                 <div class="form-group {{ old('is_color', $product->is_color) ? '' : 'd-none' }}">
-                                    <label class="form--label mb-2">@lang('Color Name')</label>
+                                    <label class="form--label mb-2 required">@lang('Color Name')</label>
                                     <select name="code_id[]" class="form--control from-select select2-auto-tokenize"
                                         multiple="multiple">
                                         @foreach ($colors as $color)
@@ -179,7 +179,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label for="size"
-                                                        class="form--label mb-2">@lang('Size')</label>
+                                                        class="form--label mb-2 required">@lang('Size')</label>
                                                     <select class="form--control size-select form-select"
                                                         name="size_quantity[0][size]" required>
                                                         <option value="0" disabled
@@ -200,7 +200,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label for="quantity"
-                                                        class="form--label mb-2">@lang('Quantity')</label>
+                                                        class="form--label mb-2 required">@lang('Quantity')</label>
                                                     <input type="text" name="size_quantity[0][quantity]"
                                                         id="quantity"
                                                         value="{{ old('size_quantity.0.quantity', $product->sizes[0]->pivot->quantity ?? 1) }}"
@@ -220,7 +220,7 @@
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label class="form--label mb-2">@lang('Size')</label>
+                                                            <label class="form--label mb-2 required">@lang('Size')</label>
                                                             <select class="form--control size-select form-select"
                                                                 name="size_quantity[{{ $loop->iteration }}][size]"
                                                                 required>
@@ -238,7 +238,7 @@
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label class="form--label mb-2">@lang('Quantity')</label>
+                                                            <label class="form--label mb-2 required">@lang('Quantity')</label>
                                                             <input type="number"
                                                                 name="size_quantity[{{ $loop->iteration }}][quantity]"
                                                                 class="form--control"
@@ -256,14 +256,14 @@
 
                         <div class="col-lg-12 mb-3">
                             <div class="form-group">
-                                <label class="form--label mb-2">@lang('Description')</label>
+                                <label class="form--label mb-2 required">@lang('Description')</label>
                                 <textarea name="description" class="form--control trumEdit">{{ old('description', $product->description) }}</textarea>
                             </div>
                         </div>
 
                         <div class="col-lg-12 mb-3">
                             <div class="form-group">
-                                <label class="form--label mb-2">@lang('Shipping & Returns')</label>
+                                <label class="form--label mb-2 required">@lang('Shipping & Returns')</label>
                                 <textarea name="shipping_returns" class="form--control trumEdit">{{ old('shipping_returns', $product->shipping_description) }}</textarea>
                             </div>
                         </div>

@@ -20,6 +20,8 @@
                     <option value="enable" {{ request()->status == 'enable' ? 'selected' : '' }}>@lang('Enable')</option>
                     <option value="disable" {{ request()->status == 'disable' ? 'selected' : '' }}>@lang('Disable')
                     </option>
+                    <option value="expired_auction_product" {{ request()->status == 'expired_auction_product' ? 'selected' : '' }}>@lang('Expired Auction')
+                            </option>
                 </select>
             </div>
         </div>
@@ -37,14 +39,13 @@
                                     <th>@lang('Name')</th>
                                     <th>@lang('Type')</th>
                                     <th>@lang('Category')</th>
-                                    <th>@lang('Regular Price')</th>
-                                    <th>@lang('Discount')</th>
+                                    <th>@lang('Starting Price')</th>
                                     <th>@lang('Status')</th>
                                     <th>@lang('Action')</th>
                                 </tr>
                             </thead>
                             <tbody id="items_table__body">
-                                @include('admin.components.tables.product_data')
+                                @include('admin.components.tables.auction_data')
                             </tbody>
                         </table>
                     </div>

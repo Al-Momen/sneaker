@@ -24,33 +24,33 @@
                                 <div class="row gy-4 mb-4">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form--label">@lang('First Name')</label>
+                                            <label class="form--label required">@lang('First Name')</label>
                                             <input type="text" class="form--control" id="firstname" name="firstname"
                                                 placeholder="@lang('First Name')"
                                                 value="{{ old('firstname', optional(auth()->user())->firstname) }}"
-                                                {{ auth()->check() ? '' : 'required' }}>
+                                                {{ auth()->check() ? '' : 'required' }} readonly>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form--label">@lang('Last Name')</label>
+                                            <label class="form--label required">@lang('Last Name')</label>
                                             <input type="text" class="form--control" id="lastname" name="lastname"
                                                 placeholder="@lang('Last Name')"
                                                 value="{{ old('lastname', optional(auth()->user())->lastname) }}"
-                                                {{ auth()->check() ? '' : 'required' }}>
+                                                {{ auth()->check() ? '' : 'required' }} readonly>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="input-form mb-3">
-                                            <label class="form--label">@lang('Country')</label>
+                                            <label class="form--label required">@lang('Country')</label>
                                             <select id="country" name="country"
-                                                class="form-select form--select form--control">
+                                                class="form-select form--select form--control" readonly>
                                                 @foreach ($countries as $key => $country)
                                                     <option data-mobile_code="{{ $country->dial_code }}"
-                                                        value="{{ $country->country }}" 
-                                                        {{$key == auth()->user()->country_code ? 'selected':''}} 
+                                                        value="{{ $country->country }}"
+                                                        {{ $key == auth()->user()->country_code ? 'selected' : '' }}
                                                         data-code="{{ $key }}">
                                                         {{ __($country->country) }}</option>
                                                 @endforeach
@@ -60,16 +60,16 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <div class="input-form mb-3">
-                                                <label class="form--label">@lang('Country Code')</label>
+                                                <label class="form--label required">@lang('Country Code')</label>
                                                 <div class="input-group country-code">
                                                     <span class="input-group-text mobile-code bg--base text--white">
                                                     </span>
                                                     <input type="hidden" name="mobile_code">
                                                     <input type="hidden" name="country_code">
 
-                                                    <input type="number" class=" checkUser form--control" name="mobile"
+                                                    <input type="number" class="checkUser form--control " name="mobile"
                                                         value="{{ old('mobile', optional(auth()->user())->mobile) }}"
-                                                        required>
+                                                        required readonly>
                                                 </div>
                                                 <small class="text-danger mobileExist"></small>
                                             </div>
@@ -78,17 +78,17 @@
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form--label">@lang('Email')</label>
+                                            <label class="form--label required">@lang('Email')</label>
                                             <input type="email" class="form--control" id="your-email" name="email"
                                                 placeholder="@lang('Email Address')"
                                                 value="{{ old('email', optional(auth()->user())->email) }}"
-                                                {{ auth()->check() ? '' : 'required' }}>
+                                                {{ auth()->check() ? '' : 'required' }} readonly>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="input-form mb-3">
-                                            <label class="form--label">@lang('Shipping Charge')</label>
+                                            <label class="form--label required">@lang('Shipping Charge')</label>
                                             <select name="shipping" class="form-select form--control shippingCharge">
                                                 <option value="">@lang('Select Shipping')</option>
                                                 @foreach ($shippings as $key => $shipping)
@@ -116,8 +116,8 @@
                                                     ->filter()
                                                     ->implode(', ');
                                             @endphp
-                                            <label class="form--label">@lang('Address')</label>
-                                            <textarea class="form--control w-100" id="your-address" placeholder="@lang('Address')" name="address">{{ $fullAddress }}</textarea>
+                                            <label class="form--label required">@lang('Address')</label>
+                                            <textarea class="form--control w-100" id="your-address" placeholder="@lang('Address')" name="address" readonly>{{ $fullAddress }}</textarea>
                                         </div>
                                     </div>
 
@@ -128,11 +128,13 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout__single">
-                                            <select class="form-select form--control" name="gateway" required>
+                                            <select class="form-select form--control required" name="gateway" required>
                                                 <option value="">@lang('Select One')</option>
-                                                <option value="balance">@lang("Account Balance") ({{showAmount(auth()->user()->balance)}})</option>
+                                                <option value="balance">@lang('Account Balance')
+                                                    ({{ showAmount(auth()->user()->balance) }})</option>
                                                 @foreach ($gatewayCurrency as $data)
-                                                    <option value="{{ $data->method_code }}" data-gateway="{{ $data }}">{{ $data->name }}
+                                                    <option value="{{ $data->method_code }}"
+                                                        data-gateway="{{ $data }}">{{ $data->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -263,7 +265,6 @@
         (function($) {
             "use strict";
             $('select[name=gateway]').on('change', function() {
-               
                 if (!$('select[name=gateway]').val()) {
                     $('.preview-details').addClass('d-none');
                     return false;
@@ -323,7 +324,7 @@
                 $('.amount').text(parseFloat($(this).val()).toFixed(2));
             });
 
-           
+
         })(jQuery);
     </script>
     <script>
@@ -340,5 +341,27 @@
             $('.mobile-code').text('+' + $('select[name=country] :selected').data('mobile_code'));
 
         })(jQuery);
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            'use strict';
+            let oldShipping = "{{ old('shipping') }}";
+
+            if (oldShipping) {
+                let $shippingSelect = $('.shippingCharge');
+                $shippingSelect.val(oldShipping);
+                $shippingSelect.trigger('change');
+            }
+
+
+            let oldGateway = "{{ old('gateway') }}";
+            if (oldGateway) {
+                let $gatewaySelect = $('select[name=gateway]');
+                $gatewaySelect.val(oldGateway);
+                $gatewaySelect.trigger('change');
+            }
+
+        });
     </script>
 @endpush

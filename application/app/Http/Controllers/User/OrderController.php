@@ -74,6 +74,7 @@ class OrderController extends Controller
 
     public function getOrder($status = 'all')
     {
+       
         $pageTitle = 'Get Order';
         $userId = auth()->id();
         $query = Order::whereHas('products', function ($q) {

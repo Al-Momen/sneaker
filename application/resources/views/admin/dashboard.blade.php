@@ -23,7 +23,6 @@
             <div class="col-xl-12">
                 <div class="row gy-4">
 
-
                     <div class="col-xxl-3 col-xl-4 col-md-6">
                         <a class="dashboard-widget--card position-relative" href="{{ route('admin.product.index') }}">
                             <div class="dashboard-widget__icon">
@@ -228,7 +227,7 @@
                     </div>
                 </div>
             </div>
-           <div class="col-xl-6 col-md-4">
+            <div class="col-xl-6 col-md-4">
                 <div class="card bg--white br--solid">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
@@ -238,13 +237,15 @@
                         <div class="d-flex justify-content-center align-items-center gap-5 py-4">
                             <div class="order-info--item d-flex gap-4 flex-column justify-content-center align-items-center">
                                 <div class="d-flex flex-column justify-content-center align-items-center gap-2">
-                                    <div class="number--wrap one d-flex justify-content-center align-items-center flex-shrink-0">
+                                    <div
+                                        class="number--wrap one d-flex justify-content-center align-items-center flex-shrink-0">
                                         <h2 class="m-0 text--white">{{ getAmount($widget['plus_transactions']) }}</h2>
                                     </div>
                                     <p class="fs-6">@lang('Plus Transactions')</p>
                                 </div>
                                 <div class="d-flex flex-column justify-content-center align-items-center gap-2">
-                                    <div class="number--wrap two d-flex justify-content-center align-items-center flex-shrink-0">
+                                    <div
+                                        class="number--wrap two d-flex justify-content-center align-items-center flex-shrink-0">
                                         <h2 class="m-0 text--white">{{ getAmount($widget['minus_transactions']) }}</h2>
                                     </div>
                                     <p class="fs-6">@lang('Minus Transactions')</p>
@@ -263,6 +264,36 @@
             </div>
         </div>
     @endadminHas
+
+
+    {{-- cron modal --}}
+    <div class="modal fade" id="cronModal" role="dialog" aria-labelledby="exampleModalLongTitle"  aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">@lang('Cron Job Setting Instruction')</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" type="button"
+                        aria-label="Close">
+                        
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="text--danger text-center">@lang('Please Set Cron Job Now')</h3>
+                    <p class="lead">
+                        @lang('To automate the api order placement, we need to set the cron job and make sure the cron job is running properly. Set the Cron time as minimum as possible. Once per 15-30 minutes is ideal while once every minute is the best option.') </p>
+                    <label class="font-weight-bold">@lang('Cron Command')</label>
+
+                    <div class="input-group">
+                        <input class="form-control" id="referralURL" name="text" type="text"
+                            value="curl -s {{ route('auction.product.winners') }}" readonly>
+                        <span class="input-group-text copytext btn btn--primary copyBoard pt-2" id="copyBoard">
+                            @lang('Copy')
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -308,11 +339,11 @@
                     },
                     colors: ['#FFA500', '#00A86B'],
                     series: [{
-                            name: '@lang("Withdrawals")',
+                            name: '@lang('Withdrawals')',
                             data: withdrawalsChart.values
                         },
                         {
-                            name: '@lang("Deposits")',
+                            name: '@lang('Deposits')',
                             data: depositsChart.values
                         }
                     ],
@@ -323,7 +354,7 @@
                     xaxis: {
                         categories: depositsChart.labels,
                         title: {
-                            text: '@lang("Months")',
+                            text: '@lang('Months')',
                             style: {
                                 fontSize: '14px',
                                 fontWeight: 'bold',
@@ -343,7 +374,7 @@
                     yaxis: {
                         min: 0,
                         title: {
-                            text: '@lang("Amount")',
+                            text: '@lang('Amount')',
                             style: {
                                 fontSize: '14px',
                                 fontWeight: 'bold',
@@ -405,11 +436,11 @@
                     },
                     colors: ['#FFA500', '#00A86B'],
                     series: [{
-                            name: '@lang("All Orders")',
+                            name: '@lang('All Orders')',
                             data: allOrdersChart.values
                         },
                         {
-                            name: '@lang("My Orders")',
+                            name: '@lang('My Orders')',
                             data: myOrdersChart.values
                         }
                     ],
@@ -420,7 +451,7 @@
                     xaxis: {
                         categories: myOrdersChart.labels,
                         title: {
-                            text: '@lang("Months")',
+                            text: '@lang('Months')',
                             style: {
                                 fontSize: '14px',
                                 fontWeight: 'bold',
@@ -440,7 +471,7 @@
                     yaxis: {
                         min: 0,
                         title: {
-                            text: '@lang("Order Amount")',
+                            text: '@lang('Order Amount')',
                             style: {
                                 fontSize: '14px',
                                 fontWeight: 'bold',
@@ -469,80 +500,23 @@
 
 
 
-
-                // ==========================customer chart=====================
-                const userDataElement = document.getElementById('customersChart');
-                const series = JSON.parse(userDataElement.dataset.series);
-                const labels = JSON.parse(userDataElement.dataset.labels);
-
-                const customerChart = {
-                    series: series,
-                    chart: {
-                        height: '350px',
-                        type: 'polarArea'
-                    },
-                    labels: labels,
-                    colors: ['#FF4560', '#00E396', '#FEB019', '#775DD0'],
-                    fill: {
-                        opacity: 1
-                    },
-                    stroke: {
-                        width: 1
-                    },
-                    yaxis: {
-                        show: false
-                    },
-                    legend: {
-                        show: true
-                    },
-                    dataLabels: {
-                        enabled: true,
-                        formatter: function(val, opts) {
-                            const total = opts.w.config.series.reduce((a, b) => a + b, 0);
-                            const value = opts.w.config.series[opts.seriesIndex];
-                            return ((value / total) * 100).toFixed(1) + '%';
-                        },
-                        style: {
-                            fontSize: '14px',
-                            fontWeight: 'bold',
-                            colors: ['#fff'],
-                        },
-                        dropShadow: {
-                            enabled: true,
-                            top: 1,
-                            left: 1,
-                            blur: 5,
-                            opacity: 0.7,
-                            color: '#888888'
-                        },
-                        background: {
-                            enabled: false
-                        }
-                    },
-                    plotOptions: {
-                        polarArea: {
-                            rings: {
-                                strokeWidth: 0
-                            },
-                            spokes: {
-                                strokeWidth: 0
-                            }
-                        }
-                    },
-                    theme: {
-                        monochrome: {
-                            enabled: false
-                        }
-                    },
-                    tooltip: {
-                        enabled: true
-                    }
-                };
-
-                const chartCustomer = new ApexCharts(document.querySelector("#customersChart"), customerChart);
-                chartCustomer.render();
-
             })(jQuery)
+        </script>
+
+        <script>
+            (function($) {
+                "use strict";
+                
+
+                $('.copyBoard').on('click', function() {
+                    var copyText = document.getElementById("referralURL");
+                    copyText.select();
+                    copyText.setSelectionRange(0, 99999);
+                    document.execCommand("copy");
+                    notify('success', "Copied: " + copyText.value);
+                  
+                });
+            })(jQuery);
         </script>
     @endpush
 @endadminHas

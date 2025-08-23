@@ -59,14 +59,14 @@
                         @if ($order->status == 1)
                             <button class="btn btn--base btn--md mt-3 confirmationBtn text--white"
                                 data-action="{{ route('admin.orders.vendor.status.change', [4, $order->id]) }}"
-                                data-question="@lang('Are you sure to change this order processing?')">@lang('Processing')</button>
+                                data-question="@lang('Are you sure you want to change the processing status of this order? This action is permanent and cannot be undone.')">@lang('Processing')</button>
                             <button class="btn btn--base btn--md mt-3 confirmationBtn text--white"
                                 data-action="{{ route('admin.orders.vendor.status.change', [3, $order->id]) }}"
-                                data-question="@lang('Are you sure to change this order canceled?')">@lang('Canceled')</button>
+                                data-question="@lang('Are you sure you want to update this order status to canceled? Please confirm, as this change is permanent and irreversible.')">@lang('Canceled')</button>
                         @elseif($order->status == 4)
                             <button class="btn btn--base btn--md mt-3 confirmationBtn text--white"
                                 data-action="{{ route('admin.orders.vendor.status.change', [5, $order->id]) }}"
-                                data-question="@lang('Are you sure to change this order delivered?')">@lang('Delivered')</button>
+                                data-question="@lang('Are you sure you want to change the status of this order to delivered? Once confirmed, this action cannot be undone.')">@lang('Delivered')</button>
                         @endif
                     </div>
                 @endif
@@ -80,7 +80,7 @@
                 <ul class="list-group pt-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Order Number')
-                        <span class="fw--600 badge badge--success">{{ $order->order_number }}</span>
+                        <span class="fw--800">{{ $order->order_number }}</span>
                     </li>
 
                     <li class="list-group-item d-flex justify-content-between align-items-center">

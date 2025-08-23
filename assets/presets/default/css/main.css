@@ -9908,3 +9908,41 @@ ul.list--disc {
   padding: 15px 0 0px 0;
   border-top: 1px solid hsl(var(--black) / 0.3);
 }
+label.required:after {
+    content: "*";
+    color: #dc3545 !important;
+    margin-left: 2px;
+}
+
+
+.blob {
+  border-radius: 50%;
+  margin: 10px;
+  height: 9px;
+  width: 9px;
+  position: relative;
+  right: -8px;
+}
+
+.blob.white {
+  background: hsl(var(--primary));
+  box-shadow: 0 0 0 0 rgb(255 255 255);
+  animation: pulse-white 1.5s infinite;
+}
+
+@keyframes pulse-white {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 hsl(var(--primary)/0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px hsl(var(--primary)/0.05);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 hsl(var(--primary)/0.01);
+  }
+}

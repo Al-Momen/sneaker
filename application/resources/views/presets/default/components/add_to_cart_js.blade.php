@@ -260,6 +260,15 @@
                 $(`.itemMainDiv[data-product_id="${productId}"]`).remove();
                 updateTotalPrice(response.checkCoupon);
                 updateCartItemCount(response);
+
+                @if (url()->current() == route('get.checkout'))
+
+                    if ($('.itemMainDiv').length === 0) {
+                        setTimeout(() => {
+                            window.location.href = "{{ route('home') }}";
+                        }, 1000);
+                    }
+                @endif
             }
         });
     });
@@ -289,7 +298,6 @@
         $('.paymentPrice').val(
             truncateToTwo(totalFinalAmount)
         );
-
     });
 
     $(document).ready(function() {

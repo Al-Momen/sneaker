@@ -83,7 +83,7 @@
                     <div class="feedback"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn--danger btn--lg pills"
+                    <button type="button" class="btn btn--base text--white"
                         data-bs-dismiss="modal">@lang('Close')</button>
                 </div>
             </div>

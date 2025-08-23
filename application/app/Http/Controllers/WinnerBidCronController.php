@@ -3,26 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bid;
-use App\Models\BidWinner;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\BidWinner;
 use Illuminate\Support\Str;
+use App\Models\GeneralSetting;
 
 class WinnerBidCronController extends Controller
 {
     public function winners()
     {
         $products = Product::where('type', 2)->where('status', 1)->where('end_date', '<', now())->get();
+        $general = GeneralSetting::first();
+        $general->last_cron = now();
+        $general->save();
         foreach ($products as $product) {
             $highestBid = Bid::with('user')->where('product_id', $product->id)->orderBy('price', 'desc')->first();
             $winner   = $highestBid ? $highestBid->user : '';
             $allBids = Bid::whereNot('id', $highestBid->id)->where('product_id', $product->id)->get();
-            
+
             if ($product->author_type == 2) {
                 $owner = User::find($product->author_id);
                 $owner->balance += $highestBid->price;
                 $owner->save();
-                
+
                 notify($owner, 'AUCTION_ENDED_OWNER_NOTIFICATION', [
                     'auction_owner' => $owner->fullname,
                     'auction_product_name' => $product->name,
@@ -33,7 +37,7 @@ class WinnerBidCronController extends Controller
                     'link' => route('product.details', ['slug' => Str::slug($product->name), 'id' => $product->id])
                 ]);
             }
-            
+
             if ($winner) {
                 notify($winner, 'AUCTION_WINNER_NOTIFICATION', [
                     'auction_product_name' => $product->name,
@@ -71,7 +75,4 @@ class WinnerBidCronController extends Controller
             $product->save();
         }
     }
-
-
-
 }
