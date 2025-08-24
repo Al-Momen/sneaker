@@ -2,13 +2,8 @@
     $languages = App\Models\Language::all();
     $pages = App\Models\Page::where('tempname', $activeTemplate)->get();
     $currentLang = $languages->firstWhere('code', session('lang', 'en'));
-    $randomProduct = App\Models\Product::with(['category', 'firstImage', 'wishlists'])
-        ->where('status', 1)
-        ->inRandomOrder()
-        ->first();
     $cartItem = session('cart');
     $total = 0;
-
     $pages = App\Models\Menu::with(['items', 'menuItems'])
         ->where('slug', 'header-menu')
         ->first();

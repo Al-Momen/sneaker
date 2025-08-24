@@ -1,7 +1,9 @@
 @php
     $contactSection = getContent('contact_us.content', true);
     $socialIcons = getContent('social_icon.element', false);
-    $pages = App\Models\Page::where('tempname', $activeTemplate)->get();
+    $pages = App\Models\Menu::with(['items', 'menuItems'])
+        ->where('slug', 'footer-menu')
+        ->first();
     $policyLinks = getContent('footer_policy_term_links.element', false, null, true);
     $subscriptionSectionContent = getContent('subscribe.content', true);
 @endphp
@@ -17,29 +19,27 @@
                         <div class="footer-item--logo">
                             <a href="{{ route('home') }}" class="footer-logo-normal" id="footer-logo-normal">
                                 <img src="{{ getImage(getFilePath('logoIcon') . '/logo.png', '?' . time()) }}"
-                                    alt="@lang('logo')" >
+                                    alt="@lang('logo')">
                             </a>
                         </div>
 
                         <ul class="footer-menu d-flex flex-wrap gap--28">
-                            @foreach ($pages as $page)
-                                @if ($page->slug != 'blog')
-                                    <li class="menu--item">
-                                        <a class="menu--link fs--16 fw--500"
-                                            href="{{ route('pages', [$page->slug]) }}">
-                                            <i class="fa-solid fa-arrow-right-long"></i> {{ __($page->name) }}</a>
+                           
+                            @foreach ($pages->items as $k => $data)
+                                @if ($data->link_type == 2)
+                                    <li class="nav-item">
+                                        <a href="{{ $data->url ?? '' }}" target="_blank">{{ __($data->title) }}</a>
+                                    </li>
+                                @else
+                                    <li
+                                        class="menu--item">
+                                        <a href="{{ route('pages', [$data->url]) }}"
+                                            class="menu--link fs--16 fw--500"><i class="fa-solid fa-arrow-right-long"></i>{{ __($data->title) }}</a>
                                     </li>
                                 @endif
                             @endforeach
 
-                            @foreach ($policyLinks as $key => $item)
-                                <li class="menu--item">
-                                    <a href="{{ url('/') . $item->data_values->url }}"
-                                        class="menu--link fs--16 fw--500">
-                                        <i class="fa-solid fa-arrow-right-long"></i>
-                                        {{ __($item->data_values->title) }}</a>
-                                </li>
-                            @endforeach
+                         
                         </ul>
                     </div>
                 </div>
@@ -86,8 +86,9 @@
                 <div
                     class="col-md-6 d-flex justify-content-md-end justify-content-center align-items-center pb-3 pd-md-0">
                     <ul class="social-list position-relative d-flex gap--12">
-                        @foreach ($socialIcons as $index=> $item)
-                            <a href="{{ $item->data_values->url }}" class="social-list__link icon-wrapper {{$index == 1 ? 'active' : ''}}">
+                        @foreach ($socialIcons as $index => $item)
+                            <a href="{{ $item->data_values->url }}"
+                                class="social-list__link icon-wrapper {{ $index == 1 ? 'active' : '' }}">
                                 <div class="icon">
                                     @php echo $item->data_values->social_icon; @endphp
                                 </div>

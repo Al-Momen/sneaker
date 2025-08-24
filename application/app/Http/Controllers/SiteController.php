@@ -173,7 +173,7 @@ class SiteController extends Controller
         $pageTitle = 'Products';
         $products = Product::with(['category', 'firstImage', 'wishlists'])->when($request->search, function ($query, $search) {
             $query->where('name', 'like', "%{$search}%");
-        })->where('status', 1)->inRandomOrder()->latest()->paginate(getPaginate());
+        })->where('status', 1)->latest()->paginate(getPaginate());
         $categories = Category::where('status', 1)->latest()->get();
         $sizes = Size::where('status', 1)->latest()->get();
         $brands = Product::where('status', 1)
