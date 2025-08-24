@@ -18,30 +18,20 @@
 
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Phone'):
-                        <span class="fw--600">{{ $order->mobile }}</span>
+                       
+                        <span class="fw--600">{{ $order->user?->mobile }}</span>
                     </li>
 
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @lang('Country'):
-                        <span class="fw--600">{{ $order->user?->address->country }}</span>
+                        <span class="fw--600">{{ $order->user?->address?->country }}</span>
                     </li>
 
 
                     <li class="list-group-item d-flex justify-content-between align-items-center border-0">
                         @lang('Address'):
-                        @php
-                            $address = $order->user?->address;
-                            $fullAddress = collect([
-                                $address?->address,
-                                $address?->state,
-                                $address?->zip,
-                                $address?->city,
-                                $address?->country,
-                            ])
-                                ->filter()
-                                ->implode(', ');
-                        @endphp
-                        <span class="fw--600"> {{ $fullAddress }}</span>
+                
+                        <span class="fw--600"> {{ $order->address }}</span>
                     </li>
 
                 </ul>

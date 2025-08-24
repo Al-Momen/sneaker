@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Review;
 use App\Models\Deposit;
 use App\Models\Product;
+use App\Models\Shipping;
 use App\Models\Wishlist;
 use App\Constants\Status;
 use App\Models\BidWinner;
@@ -15,6 +16,7 @@ use App\Models\Withdrawal;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\SupportTicket;
+use App\Models\GatewayCurrency;
 use App\Lib\GoogleAuthenticator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -404,5 +406,25 @@ class UserController extends Controller
 
         $notify[] = ['success', 'Wishlist has been removed'];
         return back()->withNotify($notify);
+    }
+
+        public function getCheckOut()
+    {
+        
+        if (empty(session('cart'))) {
+            $notify[] = ['error', 'At least one product add to cart'];
+            return back()->withNotify($notify);
+        }
+
+        $pageTitle = "Checkout";
+        $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
+            $gate->where('status', 1);
+        })->with('method')->orderby('method_code')->get();
+        $info = json_decode(json_encode(getIpInfo()), true);
+        $mobileCode = @implode(',', $info['code']);
+        $countries = json_decode(file_get_contents(resource_path('views/includes/country.json')));
+        $cartItems = session('cart');
+        $shippings = Shipping::where('status', 1)->get();
+        return view('Template::checkout', compact('gatewayCurrency', 'mobileCode', 'countries', 'pageTitle', 'cartItems', 'shippings'));
     }
 }

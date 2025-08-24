@@ -44,6 +44,8 @@ Route::middleware('auth')->name('user.')->group(function () {
         Route::post('verify/g2fa', 'g2faVerification')->name('go2fa.verify');
     });
 
+
+
     Route::middleware(['check.status'])->group(function () {
 
         Route::get('user/data', 'User\UserController@userData')->name('data');
@@ -53,6 +55,8 @@ Route::middleware('auth')->name('user.')->group(function () {
 
             Route::controller('UserController')->group(function () {
                 Route::get('dashboard', 'home')->name('home');
+
+                 Route::get('/checkout', 'getCheckOut')->name('get.checkout');
 
                 //2FA
                 Route::get('twofactor', 'show2faForm')->name('twofactor');

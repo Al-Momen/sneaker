@@ -261,7 +261,7 @@
                 updateTotalPrice(response.checkCoupon);
                 updateCartItemCount(response);
 
-                @if (url()->current() == route('get.checkout'))
+                @if (url()->current() == route('user.get.checkout'))
 
                     if ($('.itemMainDiv').length === 0) {
                         setTimeout(() => {

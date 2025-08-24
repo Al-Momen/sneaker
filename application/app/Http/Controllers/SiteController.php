@@ -448,24 +448,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function getCheckOut()
-    {
-        if (empty(session('cart'))) {
-            $notify[] = ['error', 'At least one product add to cart'];
-            return back()->withNotify($notify);
-        }
 
-        $pageTitle = "Checkout";
-        $gatewayCurrency = GatewayCurrency::whereHas('method', function ($gate) {
-            $gate->where('status', 1);
-        })->with('method')->orderby('method_code')->get();
-        $info = json_decode(json_encode(getIpInfo()), true);
-        $mobileCode = @implode(',', $info['code']);
-        $countries = json_decode(file_get_contents(resource_path('views/includes/country.json')));
-        $cartItems = session('cart');
-        $shippings = Shipping::where('status', 1)->get();
-        return view('Template::checkout', compact('gatewayCurrency', 'mobileCode', 'countries', 'pageTitle', 'cartItems', 'shippings'));
-    }
 
     public function directAddToCart(Request $request)
     {
@@ -498,6 +481,6 @@ class SiteController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()->route('get.checkout');
+        return redirect()->route('user.get.checkout');
     }
 }

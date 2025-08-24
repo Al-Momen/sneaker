@@ -46,7 +46,7 @@
                                         <div class="input-form mb-3">
                                             <label class="form--label required">@lang('Country')</label>
                                             <select id="country" name="country"
-                                                class="form-select form--select form--control" readonly>
+                                                class="form-select form--select form--control" disabled>
                                                 @foreach ($countries as $key => $country)
                                                     <option data-mobile_code="{{ $country->dial_code }}"
                                                         value="{{ $country->country }}"

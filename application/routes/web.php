@@ -62,7 +62,6 @@ Route::controller('SiteController')->group(function () {
     // ------------------checkout------------------
     Route::get('/cart/direct-add', 'directAddToCart')->name('cart.add.direct');
 
-    Route::get('/checkout', 'getCheckOut')->name('get.checkout');
 
     Route::post('/subscribe', 'subscribe')->name('subscribe');
 

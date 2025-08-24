@@ -78,14 +78,7 @@ class PaymentController extends Controller
     {
         $request->validate([
             'method_code' => 'nullable|required_unless:gateway,balance',
-            'method_code' => 'nullable|required_unless:gateway,balance',
-            'firstname'   => 'required|string|max:100',
-            'lastname'    => 'required|string|max:100',
-            'country'      => 'required|string',
             'mobile_code'  => 'required|numeric',
-            'country_code' => 'required|string',
-            'email'        => 'required|email|max:150',
-            'mobile'       => 'required|numeric',
             'address'      => 'required|string',
             'shipping'     => 'required|numeric',
             'gateway'      => 'required',
@@ -152,11 +145,6 @@ class PaymentController extends Controller
         $order->order_number = getTrx(4);
         $order->total_price = $totalPice;
         $order->shipping_id = $shipping->id;
-        $order->first_name = $request->firstname;
-        $order->last_name = $request->lastname;
-        $order->email = $request->email;
-        $order->country = $request->country;
-        $order->mobile = $request->mobile;
         $order->address = $request->address;
         $order->status = Status::ORDER_INITIATE; //its Initiated
         $order->save();

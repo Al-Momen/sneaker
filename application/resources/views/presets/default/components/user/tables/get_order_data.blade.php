@@ -8,18 +8,18 @@
             {{ $item->order_number }}
         </td>
 
-        <td data-label="@lang('Full Name')">{{ $item->first_name, $item->last_name }}</td>
+        <td data-label="@lang('Full Name')">{{ $item->user?->fullname }}</td>
 
         <td data-label="@lang('Total Price')">
             {{ $general->cur_sym . showAmount($item->total_price) }}
         </td>
 
         <td data-label="@lang('Email')">
-            {{ $item->email ?? '' }}
+           {{ $item->user?->email ?? '' }}
         </td>
 
         <td data-label="@lang('Mobile')">
-            {{ $item->mobile ?? '' }}
+             {{ $item->user?->mobile ?? '' }}
         </td>
 
         <td data-label="@lang('Status')">

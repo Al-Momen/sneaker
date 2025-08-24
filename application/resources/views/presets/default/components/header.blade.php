@@ -312,7 +312,7 @@
 
             <div class="col-lg-12">
                 <div class="btn--wrap">
-                    <a href="{{ route('get.checkout') }}"
+                    <a href="{{ route('user.get.checkout') }}"
                         class="btn btn--base btn--lg pill w--100 checkoutUrlBtn {{ count((array) session('cart')) <= 0 ? 'disabled' : '' }}">
                         @lang('Proceed to checkout')
                     </a>
