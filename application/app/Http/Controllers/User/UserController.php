@@ -32,7 +32,7 @@ class UserController extends Controller
         $data['total_products']        = (clone $productQuery)->where('type', 1)->count();
         $data['total_auctions']        = (clone $productQuery)->where('type', 2)->count();
         $data['total_winner_bids']     = BidWinner::where('user_id', $user->id)->count();
-        $data['bookmarks']             = Wishlist::where('user_id', $user->id)->count();
+        $data['wishlists']             = Wishlist::where('user_id', $user->id)->count();
         $data['totalDepositMoney']     = (clone $transactionQuery)->where('remark', 'balance_add')->sum('amount');
         $latestTransaction             = (clone $transactionQuery)->take(5)->latest()->get();
 
@@ -323,8 +323,6 @@ class UserController extends Controller
             ->exists();
 
 
-
-
         if (!$isOrder) {
             $notify[] = ['error', 'Please purchase this product first before reviewing it'];
             return back()->withNotify($notify);
@@ -371,7 +369,7 @@ class UserController extends Controller
             if ($wishlist) {
                 $wishlist->delete();
                 return response()->json([
-                    'message' => 'Removed from Bookmark'
+                    'message' => 'Removed from Wishlist'
                 ], 200);
             } else {
                 $wishlist = new Wishlist();
@@ -379,19 +377,19 @@ class UserController extends Controller
                 $wishlist->product_id = $productId;
                 $wishlist->save();
                 return response()->json([
-                    'message' => 'Added to Bookmark'
+                    'message' => 'Added to Wishlist'
                 ], 200);
             }
         }
 
-        return response()->json(['error' => 'No valid item to add or remove from Bookmark']);
+        return response()->json(['error' => 'No valid item to add or remove from Wishlist']);
     }
 
     public function getWishlist(Request $request)
     {
-        $pageTitle = 'Bookmarks';
+        $pageTitle = 'Wishlist';
         $wishlists = Wishlist::with(['product.firstImage'])->where('user_id', auth()->id())->searchable(['product:name'])->latest()->paginate(getPaginate());
-        return view('UserTemplate::bookmark.index', compact('pageTitle', 'wishlists'));
+        return view('UserTemplate::wishlist.index', compact('pageTitle', 'wishlists'));
     }
 
     public function removeWishlist(Request $request)
@@ -399,7 +397,7 @@ class UserController extends Controller
         $wishlist = Wishlist::where('user_id', auth()->id())->where('id', $request->id)->first();
         $wishlist->delete();
 
-        $notify[] = ['success', 'Bookmark has been removed'];
+        $notify[] = ['success', 'Wishlist has been removed'];
         return back()->withNotify($notify);
     }
 }

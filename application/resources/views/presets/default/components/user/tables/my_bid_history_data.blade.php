@@ -5,12 +5,15 @@
         </td>
 
         <td data-label="@lang('Author Name')">
-            
-                <span class="text--primary">{{ $item->product->author_name }}</span>
-           
+            <span>{{ $item->product?->author_name }}</span>
         </td>
 
-        <td data-label="@lang('Product Name')">{{ $item?->product?->name }}</td>
+        <td data-label="@lang('Product Name')">
+            <a class="text--base"
+                href="{{ route('product.details', ['slug' => slug($item->product?->name), 'id' => $item->product->id]) }}">
+                {{ __($item?->product?->name) }}
+            </a>
+        </td>
         <td data-label="@lang('Bidding Price')">
             {{ $general->cur_sym . showAmount($item->price) }}
         </td>

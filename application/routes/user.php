@@ -76,7 +76,7 @@ Route::middleware('auth')->name('user.')->group(function () {
 
                 //Product
                 Route::controller('ProductController')->name('product.')->prefix('product')->group(function () {
-                    Route::get('/create', 'create')->name('create');
+                    Route::get('/create', 'create')->name('create')->middleware('client_kyc');
                     Route::post('store', 'store')->name('store')->middleware('client_kyc');
                     Route::get('edit/{id}', 'edit')->name('edit')->middleware('client_kyc');
                     Route::post('update/{id}', 'update')->name('update')->middleware('client_kyc');

@@ -5,7 +5,12 @@
                 alt="@lang('Image')" class="rounded img-thumbnail" style="width:60px;">
         </td>
 
-        <td>{{ __(strLimit($item->name, 30)) }}</td>
+        <td>
+            <a class="text--base"
+                href="{{ route('product.details', ['slug' => slug($product->name), 'id' => $product->id]) }}">{{ __(strLimit($item->name, 30)) }}</a>
+        </td>
+
+        </td>
 
         <td>
             @if ($item->author_type == 1)
@@ -28,7 +33,7 @@
             {{ $general->cur_sym }}{{ showAmount($item->min_price) }}
         </td>
 
- 
+
 
         <td>
             @php echo $item->statusBadge($item->status); @endphp
@@ -48,9 +53,9 @@
                         data-action="{{ route('admin.product.status', $item->id) }}" data-question="@lang('Are you sure to change this product status?')">
                         <i class="la la-check-circle"></i>
                     </button>
-               @endif
+                @endif
 
-                 @if ($item->type == 2 && $item->start_date > now() && $item->status == 1)
+                @if ($item->type == 2 && $item->start_date > now() && $item->status == 1)
                     <button title="@lang('Status')" type="button" class="btn btn--danger confirmationBtn"
                         data-action="{{ route('admin.product.status', $item->id) }}" data-question="@lang('Are you sure to change this product status?')">
                         <i class="la la-ban"></i>
@@ -58,13 +63,13 @@
                 @endif
 
 
-    
+
                 @if ($item->author_type == 1)
                     <a href="{{ route('admin.product.edit', $item->id) }}" class="btn btn--primary"><i
                             class="las la-edit"></i></a>
                 @endif
 
-                 <a href="{{ route('product.details', ['slug' => slug($item->name), 'id' => $item->id]) }}"
+                <a href="{{ route('product.details', ['slug' => slug($item->name), 'id' => $item->id]) }}"
                     class="btn btn--primary">
                     <i class="fa fa-eye"></i>
                 </a>

@@ -138,7 +138,7 @@
                 <div class="wizard-card d-flex flex-column">
                     <div class="content-wrap d-flex align-items-center justify-content-between gap--12">
                         <h6 class="title fw--600 fs--20 mb-0 text--black">
-                            @lang('Bookmarks')
+                            @lang('Wishlist')
                         </h6>
 
                         <div
@@ -147,7 +147,7 @@
                         </div>
                     </div>
                     <div class="amount-wrap">
-                        <h6 class="amount mb-2 text--black7">{{ $data['bookmarks'] }}</h6>
+                        <h6 class="amount mb-2 text--black7">{{ $data['wishlists'] }}</h6>
                     </div>
                 </div>
             </a>
