@@ -28,11 +28,16 @@ class UserController extends Controller
         $productQuery                  = Product::where('author_id', $user->id)->where('author_type', 2);
         $transactionQuery              = Transaction::where('user_id', $user->id);
         $data['totalWithdrawalsMoney'] = Withdrawal::where('user_id', $user->id)->sum('final_amount');
-        $data['totalTickets']          = SupportTicket::where('user_id', $user->id)->count();
+        $data['totalOrders']           =  Order::whereHas('products', function ($q) {
+            $q->where('author_id', auth()->id())
+                ->where('author_type', 2);
+        })
+            ->whereIn('status', [1, 3, 4, 5, 6])
+            ->count();
         $data['total_products']        = (clone $productQuery)->where('type', 1)->count();
         $data['total_auctions']        = (clone $productQuery)->where('type', 2)->count();
         $data['total_winner_bids']     = BidWinner::where('user_id', $user->id)->count();
-        $data['wishlists']             = Wishlist::where('user_id', $user->id)->count();
+        $data['myOrders']              = Order::where('user_id', $user->id)->count();
         $data['totalDepositMoney']     = (clone $transactionQuery)->where('remark', 'balance_add')->sum('amount');
         $latestTransaction             = (clone $transactionQuery)->take(5)->latest()->get();
 
@@ -72,7 +77,7 @@ class UserController extends Controller
             ->orderBy('month')
             ->pluck('total_orders', 'month');
 
-           
+
 
         $months     = [];
         $quantities = [];

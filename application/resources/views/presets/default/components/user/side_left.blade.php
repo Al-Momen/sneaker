@@ -170,7 +170,7 @@
                 <span class="icon">
                     <i class="fa-solid fa-bookmark"></i>
                 </span>
-                <span class="text">@lang('Wishlist')</span>
+                <span class="text">@lang('Wishlists')</span>
             </a>
         </li>
 

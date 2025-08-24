@@ -117,7 +117,7 @@
                                                     ->implode(', ');
                                             @endphp
                                             <label class="form--label required">@lang('Address')</label>
-                                            <textarea class="form--control w-100" id="your-address" placeholder="@lang('Address')" name="address" readonly>{{ $fullAddress }}</textarea>
+                                            <textarea class="form--control w-100" id="your-address" placeholder="@lang('Address')" name="address">{{ $fullAddress }}</textarea>
                                         </div>
                                     </div>
 

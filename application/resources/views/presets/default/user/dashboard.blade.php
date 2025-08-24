@@ -2,7 +2,7 @@
 @section('content')
     <div class="row gy-4 pb-4">
         <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6">
-            <a class="d-block" href="{{route('user.deposit')}}">
+            <a class="d-block" href="{{ route('user.deposit') }}">
                 <div class="wizard-card d-flex flex-column">
                     <div class="content-wrap d-flex align-items-center justify-content-between gap--12">
                         <h6 class="title fw--600 fs--20 mb-0 text--black">
@@ -60,20 +60,38 @@
             </a>
         </div>
         <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6">
-            <a class="d-block" href="{{ route('ticket') }}">
+            <a class="d-block" href="{{ route('user.orders.get') }}">
                 <div class="wizard-card d-flex flex-column">
                     <div class="content-wrap d-flex align-items-center justify-content-between gap--12">
                         <h6 class="title fw--600 fs--20 mb-0 text--black">
-                            @lang('Support Ticket')
+                            @lang('Total Orders')
                         </h6>
 
                         <div
                             class="icon-wrap d-flex justify-content-center align-items-center position-relative overflow-hidden z--1">
-                            <i class="fas fa-ticket-alt"></i>
+                            <i class="fa-solid fa-cart-shopping"></i>
                         </div>
                     </div>
                     <div class="amount-wrap">
-                        <h6 class="amount mb-2 text--black7">{{ $data['totalTickets'] }}</h6>
+                        <h6 class="amount mb-2 text--black7">{{ $data['totalOrders'] }}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6">
+            <a class="d-block" href="{{ route('user.orders.index') }}">
+                <div class="wizard-card d-flex flex-column">
+                    <div class="content-wrap d-flex align-items-center justify-content-between gap--12">
+                        <h6 class="title fw--600 fs--20 mb-0 text--black">
+                            @lang('My Orders')
+                        </h6>
+                        <div
+                            class="icon-wrap d-flex justify-content-center align-items-center position-relative overflow-hidden z--1">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </div>
+                    </div>
+                    <div class="amount-wrap">
+                        <h6 class="amount mb-2 text--black7">{{ $data['myOrders'] }}</h6>
                     </div>
                 </div>
             </a>
@@ -101,7 +119,7 @@
                 <div class="wizard-card d-flex flex-column">
                     <div class="content-wrap d-flex align-items-center justify-content-between gap--12">
                         <h6 class="title fw--600 fs--20 mb-0 text--black">
-                            @lang('Total Auctions')
+                            @lang('Total Auction Products')
                         </h6>
 
                         <div
@@ -116,7 +134,7 @@
             </a>
         </div>
         <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6">
-            <a class="d-block" href="{{route('user.bid.winning.history')}}">
+            <a class="d-block" href="{{ route('user.bid.winning.history') }}">
                 <div class="wizard-card d-flex flex-column">
                     <div class="content-wrap d-flex align-items-center justify-content-between gap--12">
                         <h6 class="title fw--600 fs--20 mb-0 text--black">
@@ -133,25 +151,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-xxl-3 col-xl-4 col-lg-6 col-sm-6">
-            <a class="d-block" href="{{ route('user.get.wishlist') }}">
-                <div class="wizard-card d-flex flex-column">
-                    <div class="content-wrap d-flex align-items-center justify-content-between gap--12">
-                        <h6 class="title fw--600 fs--20 mb-0 text--black">
-                            @lang('Wishlist')
-                        </h6>
 
-                        <div
-                            class="icon-wrap d-flex justify-content-center align-items-center position-relative overflow-hidden z--1">
-                            <i class="fa-solid fa-bookmark"></i>
-                        </div>
-                    </div>
-                    <div class="amount-wrap">
-                        <h6 class="amount mb-2 text--black7">{{ $data['wishlists'] }}</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
     </div>
     <div class="row gy-4 pb-4">
         <div class="col-lg-6">
@@ -165,7 +165,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <div class="row gy-4 pb-4">
 
