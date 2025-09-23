@@ -61,7 +61,7 @@
                     @foreach ($faqSectionElements ?? [] as $index => $item)
                         @if ($index % 2 == 0)
                             <div class="accordion-item wow animate__fadeInUp animate__animated"
-                                data-wow-delay="{{ 0.1 * $loop->iteration }}ss">
+                                data-wow-delay="{{ 0.1 * $loop->iteration }}s">
                                 <div class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#flush-collapse{{ $item->id }}" aria-expanded="false"

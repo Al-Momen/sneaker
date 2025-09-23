@@ -53,7 +53,7 @@
                                          <input
                                              class="form--control text--white placeholder--white border--white7 checkUser"
                                              name="username" id="inputUserName" value="{{ old('username') }}"
-                                             placeholder="@lang('User name')">
+                                             placeholder="@lang('Username')">
                                          <p class="text--danger mt-1 usernameExist"></p>
                                      </div>
                                  </div>
@@ -105,15 +105,15 @@
                                                  data-target="password"></div>
                                          </div>
                                      </div>
-                                     @if($general->secure_password)
-                                            <div class="input-popup">
-                                                <p class="error lower text--white">@lang('1 small letter minimum')</p>
-                                                <p class="error capital text--white">@lang('1 capital letter minimum')</p>
-                                                <p class="error number text--white">@lang('1 number minimum')</p>
-                                                <p class="error special text--white">@lang('1 special character minimum')</p>
-                                                <p class="error minimum text--white">@lang('6 character password')</p>
-                                            </div>
-                                        @endif
+                                     @if ($general->secure_password)
+                                         <div class="input-popup">
+                                             <p class="error lower text--white">@lang('1 small letter minimum')</p>
+                                             <p class="error capital text--white">@lang('1 capital letter minimum')</p>
+                                             <p class="error number text--white">@lang('1 number minimum')</p>
+                                             <p class="error special text--white">@lang('1 special character minimum')</p>
+                                             <p class="error minimum text--white">@lang('6 character password')</p>
+                                         </div>
+                                     @endif
                                  </div>
                                  <div class="col-lg-6">
                                      <div class="mb-4 form-group">
@@ -136,8 +136,8 @@
                                      data-wow-delay="0.5s">
                                      <div class="d-flex flex-nowrap align-items-center">
                                          <div class="form--check">
-                                             <input class="form-check-input border--white7" type="checkbox" name="agree"
-                                                 @checked(old('agree')) id="checkDefault" required>
+                                             <input class="form-check-input border--white7" type="checkbox"
+                                                 name="agree" @checked(old('agree')) id="checkDefault" required>
                                              <label class="form-check-label text--white" for="checkDefault">
                                                  @lang('I agree with')
                                                  @foreach ($policyPages as $policy)
@@ -258,7 +258,7 @@
                      secure_password($(this));
                  });
 
-                 $('[name=password]').on('focus',function() {
+                 $('[name=password]').on('focus', function() {
                      $(this).closest('.form-group').addClass('hover-input-popup');
                  });
 

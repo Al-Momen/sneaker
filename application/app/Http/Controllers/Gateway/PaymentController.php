@@ -76,6 +76,7 @@ class PaymentController extends Controller
 
     public function productPayment(Request $request)
     {
+       
         $request->validate([
             'method_code' => 'nullable|required_unless:gateway,balance',
             'mobile_code'  => 'required|numeric',

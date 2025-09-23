@@ -113,7 +113,6 @@ trait FileInfo
             'path'      =>'assets/images/errors/',
         ];
 
-      
         return $data;
     }
 }

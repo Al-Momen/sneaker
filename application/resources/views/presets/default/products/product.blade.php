@@ -30,7 +30,6 @@
                             <h4 class="text-center">@lang('No product found')</h4>
                         @endforelse
                     </div>
-
                 </div>
             </div>
         </div>

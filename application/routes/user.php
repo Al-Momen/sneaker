@@ -32,6 +32,7 @@ Route::middleware('guest')->namespace('User\Auth')->name('user.')->group(functio
         Route::get('login/{provider}', 'socialLogin')->name('social.login');
         Route::get('login/callback/{provider}', 'callback')->name('social.login.callback');
     });
+    
 });
 
 Route::middleware('auth')->name('user.')->group(function () {

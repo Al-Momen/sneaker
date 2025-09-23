@@ -275,6 +275,7 @@
             var chart = new ApexCharts(document.querySelector("#dashboard--chart"), options);
             chart.render();
         })(jQuery);
+        
         (function() {
             "use strict";
             var options = {

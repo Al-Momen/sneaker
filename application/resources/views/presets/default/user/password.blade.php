@@ -1,5 +1,4 @@
 @extends($activeTemplate . 'layouts.master')
-
 @section('content')
     <div class="row gy-4 justify-content-center">
         <div class="col-md-8 justify-content-center">

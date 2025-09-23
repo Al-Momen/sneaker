@@ -303,8 +303,6 @@ class UserController extends Controller
     public function reviewStore(Request $request)
     {
 
-
-
         $auth = auth()->user();
         $product_id = $request->product_id;
         $product = Product::find($product_id);
@@ -326,9 +324,8 @@ class UserController extends Controller
         $isOrder = Order::whereHas('products', function ($q) use ($product_id) {
             $q->where('product_id', $product_id);
         })->where('user_id', $auth->id)
-            ->where('status', 2)
+            ->where('status', 6)
             ->exists();
-
 
         if (!$isOrder) {
             $notify[] = ['error', 'Please purchase this product first before reviewing it'];
@@ -408,9 +405,9 @@ class UserController extends Controller
         return back()->withNotify($notify);
     }
 
-        public function getCheckOut()
+    public function getCheckOut()
     {
-        
+
         if (empty(session('cart'))) {
             $notify[] = ['error', 'At least one product add to cart'];
             return back()->withNotify($notify);

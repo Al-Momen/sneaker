@@ -27,7 +27,7 @@
 
 <body>
 
-    {{-- @include($activeTemplate . 'components.loader') --}}
+    @include($activeTemplate . 'components.loader')
 
     <section class="dashboard-section">
         <div class="dashboard">

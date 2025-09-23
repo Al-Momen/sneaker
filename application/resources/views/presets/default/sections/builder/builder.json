@@ -114,6 +114,7 @@
             "modal": false
         }
     },
+    
     "blog": {
         "builder": true,
         "name": "Blog Section",
